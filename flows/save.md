@@ -44,6 +44,7 @@ platform: threads
 style: twist-poem
 topic: alarm
 audience: developer
+author_persona: developer
 language: ko
 created_at: 2026-04-09T14:30:22
 published: false

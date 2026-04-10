@@ -15,6 +15,7 @@
 | | `platforms/{platform}.md` | Selected platform |
 | | `styles/{style}.md` | Selected style |
 | | `audiences/{audience}.md` | Selected target audience |
+| | `preferences.json → profiles.{platform}` | Author profile (persona + description) |
 | Save | `flows/save.md` | After generation completes |
 | Publish | `flows/publish.md` | When publish is selected |
 
@@ -95,9 +96,23 @@ Create the following directories and default files when `~/.config/feed/` does n
 {
   "default_language": "ko",
   "default_platforms": {},
+  "profiles": {},
   "interview": {
     "skip_language": false,
     "skip_style": false
+  }
+}
+```
+
+The `profiles` field stores per-platform author profiles. Initially empty. Populated via interview on first use of each platform:
+
+```json
+{
+  "profiles": {
+    "threads": {
+      "persona": "developer",
+      "description": "Full-stack developer interested in AI tools and automation."
+    }
   }
 }
 ```

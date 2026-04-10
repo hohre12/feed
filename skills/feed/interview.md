@@ -62,6 +62,65 @@ The actual list is dynamically constructed from the Glob results. The above is a
 
 ---
 
+## Step 2.5. Author Profile Check
+
+This step runs automatically after platform selection. **No step number is shown to the user** — it's a background check.
+
+### Logic
+1. Read `~/.config/feed/config/preferences.json`.
+2. Check if `profiles.{platform}` exists and has a non-empty `persona` field.
+3. **If profile exists** → load it silently and continue to Step 3.
+4. **If profile does NOT exist** → run the author profile interview below.
+
+### First-Time Interview (only runs once per platform)
+
+```
+AskUserQuestion:
+  "{platform}에서 사용할 프로필을 설정합니다. (최초 1회만)
+
+  당신의 역할/직업은 무엇인가요?
+  (예: 개발자, 디자이너, 마케터, 학생, 프리랜서 등)"
+```
+
+After receiving the persona:
+
+```
+AskUserQuestion:
+  "간단한 자기소개를 입력해주세요. (1-2줄)
+  (예: 풀스택 개발자. AI 도구와 자동화에 관심 많음.)"
+```
+
+### Save to preferences.json
+
+Save the profile under `profiles.{platform}`:
+
+```json
+{
+  "profiles": {
+    "threads": {
+      "persona": "developer",
+      "description": "풀스택 개발자. AI 도구와 자동화에 관심 많음."
+    }
+  }
+}
+```
+
+### How the Profile Affects Content Generation
+
+The author profile determines the **voice and credibility angle** of the content:
+- The post is written FROM the author's perspective, not the target audience's perspective
+- Example: author=developer, target=designer, topic=vibe coding
+  - Correct: "개발자인데 디자이너 친구들한테 바이브코딩 도구 추천해봄"
+  - Wrong: "코드 1도 모르는데 앱 만든 도구편" (this sounds like the author IS a designer)
+- The author's persona adds authenticity. A developer recommending tools to designers is more credible than pretending to be a designer.
+
+### Profile Persistence
+- Once saved, the profile is permanent for that platform until the user manually changes it
+- The profile is loaded automatically on every subsequent `/feed` execution for that platform
+- To change: user edits `~/.config/feed/config/preferences.json` directly
+
+---
+
 ## Step 3. Style Selection
 
 ### Skip Condition
@@ -201,6 +260,7 @@ Load all required files according to the routing table in `reference.md`:
 - `platforms/{platform}.md` (selected platform)
 - `styles/{style}.md` (selected style)
 - `audiences/{audience}.md` (selected target audience)
+- `preferences.json → profiles.{platform}` (author profile — persona and description)
 
 ### Search (For Informational Styles or When Facts Are Needed)
 - Check the **search sources** section of the target audience file.
@@ -212,6 +272,7 @@ Load all required files according to the routing table in `reference.md`:
 - Generate content adhering to all loaded rules, platform characteristics, and style templates.
 - Reference the style file's structure, rules, tone, and good examples.
 - Comply with the platform file's character limits, What Works/Doesn't Work guidelines.
+- **Write from the author's perspective** using the loaded author profile. The post voice must match the author's persona, NOT the target audience. (e.g., author=developer, target=designer → write as a developer recommending to designers, not as a designer)
 - **Reflect the target audience file's tone/terminology level.** (e.g., developer → use technical terms as-is; general → no jargon)
 
 ### Self-Evaluation
@@ -220,12 +281,14 @@ Load all required files according to the routing table in `reference.md`:
 - Write the score table in the output format specified by `rules/scoring.md`.
 
 ### Pass/Regenerate Decision
-- **All items 7+ points** → PASS
+- **All items 7+ points** → minimum PASS
 - **Any item below 7** → FAIL → automatic regeneration
 - `human-feel` below 7 → unconditional regeneration (regardless of other scores)
 - `humor` + `twist` both 6 or below → regeneration
-- **Maximum 2 regenerations**. Explicitly improve the weak areas from the previous version.
-- If still failing after 2 regenerations → adopt the version with the highest score, but mark the FAIL status.
+- **Average below 7.5** → PASS but **auto-improve once** before showing to user (content is acceptable but not good enough for a generation tool)
+- **Average 8.0+** → EXCELLENT — target quality reached
+- **Maximum 3 total attempts** (1 initial + 2 regenerations). Explicitly improve the weak areas from the previous version.
+- If still below target after 3 attempts → adopt the version with the highest score and show to user.
 
 ### Result Display
 Show the generated content + score table to the user:

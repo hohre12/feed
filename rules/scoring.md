@@ -95,17 +95,25 @@ This is **the most important dimension.** Even if everything else scores well, a
 
 ## Passing Criteria
 
-### Required Conditions
+### Minimum Threshold (below this = fail)
 - **All dimensions must score 7 or above** to pass
 - If any single dimension is below 7, **auto-regenerate** (up to 2 retries)
 
+### Quality Target (aim for this)
+- **Target average: 8.0+** — this is what a content generation tool should produce
+- Average 7.0-7.4 → PASS but **auto-improve once** (content is acceptable but not good enough)
+- Average 7.5-7.9 → PASS, publishable
+- Average 8.0+ → EXCELLENT, confidently publish
+
 ### Forced Regeneration Conditions
-- `human-feel` below 7 -> **mandatory regeneration** (no matter how high other scores are)
-- Both `humor` and `twist` at 6 or below -> regenerate (core entertainment value missing)
+- `human-feel` below 7 → **mandatory regeneration** (no matter how high other scores are)
+- Both `humor` and `twist` at 6 or below → regenerate (core entertainment value missing)
+- Average below 7.5 after first generation → **auto-improve once** before showing to user
 
 ### Regeneration Rules
 - When regenerating, explicitly target the low-scoring dimensions for improvement
-- If still failing after 2 regenerations, select the version with the highest overall score, but mark it as having failed the pass criteria
+- If still failing after 2 regenerations, select the version with the highest overall score, but mark it as having failed the quality target
+- Maximum 3 total attempts (1 initial + 2 regenerations)
 
 ---
 
@@ -114,8 +122,9 @@ This is **the most important dimension.** Even if everything else scores well, a
 ### Attitude
 - **Score strictly.** Do not be generous with your own writing.
 - If you are giving 8+ on every dimension, **re-read the scoring criteria.** You are being too lenient.
-- **A good post averages 7.0-7.5.** If the average exceeds 7.5, be suspicious and double-check.
-- **7 means "acceptable," not "good."** 8 is only for when it's genuinely excellent.
+- **Target average is 8.0+.** This is a content generation tool — "acceptable" is not good enough.
+- **7 means "minimum pass."** 8 means "good." 9 means "viral potential."
+- If you're averaging below 7.5, the content needs improvement, not lenient scoring.
 
 ### Verification Questions (Mandatory Before Scoring — Do Not Skip)
 
