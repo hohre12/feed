@@ -78,17 +78,22 @@ This step runs automatically after platform selection. **No step number is shown
 AskUserQuestion:
   "{platform}에서 사용할 프로필을 설정합니다. (최초 1회만)
 
-  당신의 역할/직업은 무엇인가요?
-  (예: 개발자, 디자이너, 마케터, 학생, 프리랜서 등)"
+  SNS 프로필을 그대로 붙여넣거나, 역할과 자기소개를 입력해주세요.
+
+  (예1 - 간단히) 개발자. AI 도구와 자동화에 관심 많음.
+  (예2 - 프로필 복붙)
+  개발 10년차, AI로 일하는 방식을 바꾸는 중
+  Claude Code 헤비유저
+  AI × 개발 실무 이야기를 검증하고 나눕니다."
 ```
 
-After receiving the persona:
+### Profile Parsing
 
-```
-AskUserQuestion:
-  "간단한 자기소개를 입력해주세요. (1-2줄)
-  (예: 풀스택 개발자. AI 도구와 자동화에 관심 많음.)"
-```
+From the user's input, extract:
+- **persona**: The core role/identity (e.g., "developer" from "개발 10년차")
+- **description**: The full input text as-is (preserve everything the user typed)
+
+If the user pastes their full SNS profile, use ALL of it as the description. The richer the profile, the more specific and authentic the generated content voice will be.
 
 ### Save to preferences.json
 
