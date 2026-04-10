@@ -1,0 +1,8 @@
+{
+  "name": "feed",
+  "version": "0.1.0",
+  "description": "SNS content generator & publisher",
+  "license": "MIT",
+  "keywords": ["sns", "social-media", "content"],
+  "skills": "skills/"
+}

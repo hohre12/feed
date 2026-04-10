@@ -1,0 +1,11 @@
+# 로컬 개발용 심볼릭 링크 (플러그인 배포에 불필요)
+.claude/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Write(~/.config/feed/*)",
+      "Glob(*)",
+      "Bash(pbcopy)"
+    ]
+  }
+}
