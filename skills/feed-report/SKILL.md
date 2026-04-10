@@ -1,6 +1,6 @@
 ---
 name: feed-report
-description: 기간별 포스팅 통계와 반응 리포트를 생성합니다
+description: Generates posting statistics and engagement reports for a given period
 disable-model-invocation: true
 argument-hint: <week|month|platform>
 allowed-tools: Read Write Glob Grep Bash AskUserQuestion
@@ -8,95 +8,95 @@ allowed-tools: Read Write Glob Grep Bash AskUserQuestion
 
 # /feed-report
 
-기간별 포스팅 통계와 반응 데이터를 분석하여 리포트를 생성한다.
+Analyzes posting statistics and engagement data for a given period and generates a report.
 
 ---
 
-## Step 0. 사전 확인
+## Step 1. Precondition Check
 
-`~/.config/feed/` 디렉토리가 존재하는지 확인한다.
+Check whether the `~/.config/feed/` directory exists.
 
 ```
 Bash: test -d ~/.config/feed
 ```
 
-- **존재하지 않으면** → 메시지 출력 후 종료:
+- **Does not exist** → display message and terminate:
   ```
   먼저 /feed로 포스트를 생성해주세요.
   ```
-- **존재하면** → Step 1로 진행.
+- **Exists** → proceed to Step 2.
 
 ---
 
-## Step 1. 인자 파싱
+## Step 2. Argument Parsing
 
-`$ARGUMENTS`를 공백으로 분리하여 **기간**과 **플랫폼 필터**를 결정한다.
+Split `$ARGUMENTS` by whitespace to determine the **period** and **platform filter**.
 
-### 기간 키워드
+### Period Keywords
 
-| 키워드 | 의미 |
-|--------|------|
-| `week` | 이번 주 (월요일 ~ 오늘) |
-| `month` | 이번 달 (1일 ~ 오늘) |
-| *(없음)* | 기본값 = `week` |
+| Keyword | Meaning |
+|---------|---------|
+| `week` | This week (Monday through today) |
+| `month` | This month (1st through today) |
+| *(none)* | Default = `week` |
 
-### 플랫폼 키워드
+### Platform Keywords
 
-| 키워드 | 플랫폼 |
-|--------|--------|
+| Keyword | Platform |
+|---------|----------|
 | `threads` | threads |
 | `x` | x |
 | `reddit` | reddit |
 | `devto` | devto |
-| *(없음)* | 전체 플랫폼 |
+| *(none)* | All platforms |
 
-### 조합 예시
+### Combination Examples
 
 ```
-/feed-report                    → 이번 주, 전체 플랫폼
-/feed-report week               → 이번 주, 전체 플랫폼
-/feed-report month              → 이번 달, 전체 플랫폼
-/feed-report threads            → 이번 주, Threads만
-/feed-report month threads      → 이번 달, Threads만
-/feed-report x week             → 이번 주, X만 (순서 무관)
+/feed-report                    → this week, all platforms
+/feed-report week               → this week, all platforms
+/feed-report month              → this month, all platforms
+/feed-report threads            → this week, Threads only
+/feed-report month threads      → this month, Threads only
+/feed-report x week             → this week, X only (order does not matter)
 ```
 
-### 파싱 로직
+### Parsing Logic
 
-1. `$ARGUMENTS`를 공백으로 분리하여 토큰 배열을 만든다.
-2. 각 토큰을 순회하며:
-   - `week` 또는 `month` → 기간으로 설정
-   - `threads`, `x`, `reddit`, `devto` → 플랫폼 필터로 설정
-   - 인식 불가 → 무시
-3. 기간이 설정되지 않았으면 `week`을 기본값으로 사용한다.
-4. 플랫폼 필터가 설정되지 않았으면 전체 플랫폼을 대상으로 한다.
+1. Split `$ARGUMENTS` by whitespace into a token array.
+2. Iterate through each token:
+   - `week` or `month` → set as period
+   - `threads`, `x`, `reddit`, `devto` → set as platform filter
+   - Unrecognized → ignore
+3. If no period is set, use `week` as the default.
+4. If no platform filter is set, target all platforms.
 
 ---
 
-## Step 2. 기간 범위 계산
+## Step 3. Calculate Date Range
 
-오늘 날짜를 기준으로 시작일과 종료일을 계산한다.
+Calculate the start and end dates based on today's date.
 
 ```bash
-# 오늘 날짜
+# Today's date
 TODAY=$(date +%Y-%m-%d)
 ```
 
-### week인 경우
+### For `week`
 
-이번 주 월요일부터 오늘까지.
+From this week's Monday through today.
 
 ```bash
 # macOS
-WEEKDAY=$(date +%u)  # 1=월 ~ 7=일
+WEEKDAY=$(date +%u)  # 1=Mon ~ 7=Sun
 DAYS_SINCE_MONDAY=$((WEEKDAY - 1))
 START_DATE=$(date -v-${DAYS_SINCE_MONDAY}d +%Y-%m-%d)
 END_DATE=$TODAY
 ```
 
-### month인 경우
+### For `month`
 
-이번 달 1일부터 오늘까지.
+From the 1st of this month through today.
 
 ```bash
 START_DATE=$(date +%Y-%m-01)
@@ -105,48 +105,48 @@ END_DATE=$TODAY
 
 ---
 
-## Step 3. 포스트 스캔
+## Step 4. Scan Posts
 
-`~/.config/feed/posts/` 아래에서 기간 내 포스트 파일들을 수집한다.
+Collect post files within the date range from `~/.config/feed/posts/`.
 
-### 스캔 대상 플랫폼
+### Target Platforms
 
-- 플랫폼 필터가 있으면 → 해당 플랫폼 디렉토리만
-- 없으면 → `~/.config/feed/posts/` 아래 모든 플랫폼 디렉토리
+- If a platform filter is set → only that platform's directory
+- If not → all platform directories under `~/.config/feed/posts/`
 
-### 날짜 기반 디렉토리 탐색
+### Date-Based Directory Traversal
 
-포스트는 `~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/` 구조로 저장된다.
-기간 범위에 해당하는 YYYY/MM/DD 조합을 계산하여 해당 디렉토리만 탐색한다.
+Posts are stored in the `~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/` structure.
+Calculate the YYYY/MM/DD combinations that fall within the date range and traverse only those directories.
 
 ```
-# 플랫폼 목록 확인
+# Check platform list
 Glob ~/.config/feed/posts/*/
 
-# 기간 내 포스트 파일 수집 (각 플랫폼별)
-# 예: 2026-04-07 ~ 2026-04-09 범위라면
+# Collect post files within the date range (per platform)
+# Example: for the range 2026-04-07 ~ 2026-04-09
 Glob ~/.config/feed/posts/{platform}/2026/04/07/*.md
 Glob ~/.config/feed/posts/{platform}/2026/04/08/*.md
 Glob ~/.config/feed/posts/{platform}/2026/04/09/*.md
 ```
 
-### 각 포스트 파일에서 frontmatter 읽기
+### Read Frontmatter from Each Post File
 
-수집된 각 `.md` 파일의 frontmatter를 Read로 읽어 아래 정보를 추출한다:
+Read the frontmatter of each collected `.md` file using Read and extract the following information:
 
-| 필드 | 용도 |
-|------|------|
-| `platform` | 플랫폼별 집계 |
-| `style` | 스타일별 집계 |
-| `topic` | Top 3 표시, topics.json 업데이트 |
-| `published` | 발행 여부 집계 |
-| `created_at` | 기간 내 확인 (디렉토리 구조와 이중 검증) |
-| `score.*` | 평균 점수 계산, Top 3 순위 |
-| `engagement.*` | 반응 데이터 집계, Top 3 순위 |
+| Field | Purpose |
+|-------|---------|
+| `platform` | Per-platform aggregation |
+| `style` | Per-style aggregation |
+| `topic` | Top 3 display, topics.json update |
+| `published` | Publish status aggregation |
+| `created_at` | Date range verification (double-check against directory structure) |
+| `score.*` | Average score calculation, Top 3 ranking |
+| `engagement.*` | Engagement data aggregation, Top 3 ranking |
 
-### 포스트가 없는 경우
+### No Posts Found
 
-스캔 결과 파일이 0개이면 메시지 출력 후 종료:
+If the scan returns 0 files, display message and terminate:
 
 ```
 해당 기간에 포스트가 없습니다. (2026-04-07 ~ 2026-04-09)
@@ -154,57 +154,57 @@ Glob ~/.config/feed/posts/{platform}/2026/04/09/*.md
 
 ---
 
-## Step 4. 데이터 집계
+## Step 5. Data Aggregation
 
-수집된 포스트들의 frontmatter 데이터를 집계한다.
+Aggregate the frontmatter data from collected posts.
 
-### 4.1 전체 요약
+### 5.1 Overall Summary
 
-- `total_created`: 전체 포스트 수
-- `total_published`: `published: true`인 포스트 수
-- `start_date`: 기간 시작일
-- `end_date`: 기간 종료일
+- `total_created`: Total number of posts
+- `total_published`: Number of posts with `published: true`
+- `start_date`: Period start date
+- `end_date`: Period end date
 
-### 4.2 플랫폼별 집계
+### 5.2 Per-Platform Aggregation
 
-각 플랫폼에 대해:
+For each platform:
 
-- `count`: 생성 수
-- `published`: 발행 수
-- `avg_score`: score 항목들의 전체 평균 (소수점 첫째 자리)
+- `count`: Number created
+- `published`: Number published
+- `avg_score`: Overall average of score items (one decimal place)
 
-### 4.3 스타일별 집계
+### 5.3 Per-Style Aggregation
 
-각 스타일에 대해:
+For each style:
 
-- `count`: 생성 수
-- `avg_score`: score 항목들의 전체 평균 (소수점 첫째 자리)
+- `count`: Number created
+- `avg_score`: Overall average of score items (one decimal place)
 
-### 4.4 Top 3 포스트
+### 5.4 Top 3 Posts
 
-순위 기준:
-1. engagement 데이터가 있는 포스트 → `likes + comments * 2 + reposts * 1.5` 가중 합산으로 순위
-2. engagement 데이터가 없는 포스트 → score 항목들의 평균으로 순위
-3. engagement 있는 포스트가 우선 (engagement 데이터가 있으면 score보다 우선)
+Ranking criteria:
+1. Posts with engagement data → rank by weighted sum: `likes + comments * 2 + reposts * 1.5`
+2. Posts without engagement data → rank by average of score items
+3. Posts with engagement data take priority (engagement data outranks score)
 
-각 포스트에서 표시할 정보:
-- 플랫폼, 스타일, 주제, score 평균, engagement (있으면)
+Information to display for each post:
+- Platform, style, topic, average score, engagement (if available)
 
-### 4.5 반응 데이터 요약
+### 5.5 Engagement Data Summary
 
-`~/.config/feed/analytics/engagement.json`을 Read로 읽는다.
+Read `~/.config/feed/analytics/engagement.json` using Read.
 
-- 기간 내 entries 필터링 (`checked_at`이 기간 범위 내)
-- 총 likes, comments, reposts 합산
-- 가장 반응 좋았던 포스트 (위 4.4와 동일한 가중 합산 기준)
+- Filter entries within the date range (`checked_at` falls within the range)
+- Sum total likes, comments, reposts
+- Identify the best-performing post (same weighted sum criteria as 5.4)
 
-engagement.json에 데이터가 없거나 기간 내 데이터가 없으면 이 섹션은 생략한다.
+If engagement.json has no data or no data within the date range, omit this section.
 
 ---
 
-## Step 5. 리포트 출력
+## Step 6. Report Output
 
-아래 형식으로 리포트를 출력한다. **모든 텍스트는 한국어로 작성한다.**
+Output the report in the format below. **All user-facing text is written in Korean.**
 
 ```markdown
 # Feed 리포트
@@ -263,141 +263,141 @@ engagement.json에 데이터가 없거나 기간 내 데이터가 없으면 이 
 - **최고 반응 포스트**: {best_post_topic} ({platform}, {style}) — 👍 {likes} 💬 {comments} 🔄 {reposts}
 ```
 
-### period_label 값
+### period_label Values
 
-| 기간 | 라벨 |
-|------|------|
+| Period | Label |
+|--------|-------|
 | week | 이번 주 |
 | month | 이번 달 |
 
-### 플랫폼 필터 적용 시
+### When Platform Filter Is Applied
 
-리포트 제목에 플랫폼을 명시한다:
+Add the platform name to the report title:
 
 ```markdown
 # Feed 리포트 — Threads
 ```
 
-플랫폼별 테이블은 해당 플랫폼 1행만 표시한다.
+The per-platform table shows only the single filtered platform row.
 
 ---
 
-## Step 6. 반응 데이터 업데이트 (Engagement Update)
+## Step 7. Engagement Data Update
 
-리포트 출력 후, 기간 내 발행된 포스트(`published: true`)에 대해 반응 데이터 업데이트를 진행한다.
+After outputting the report, proceed with engagement data updates for published posts (`published: true`) within the period.
 
-### 6.1 accounts.json 확인
+### 7.1 Check accounts.json
 
 ```
 Read ~/.config/feed/config/accounts.json
 ```
 
-각 플랫폼의 `enabled` 상태를 확인한다.
+Check each platform's `enabled` status.
 
-### 6.2 플랫폼별 분기
+### 7.2 Per-Platform Branching
 
-#### API 지원 + enabled 플랫폼
+#### API-Supported + Enabled Platforms
 
-해당 플랫폼의 발행된 포스트에 대해:
+For published posts on that platform:
 
 ```
 {platform}의 반응 데이터를 API로 가져올까요? [1] 예 [2] 건너뛰기
 ```
 
-- **[1] 예** → API 호출하여 engagement 데이터 수집 (현재는 placeholder — 실제 API 연동은 Phase 3)
-- **[2] 건너뛰기** → 다음 플랫폼으로
+- **[1] Yes** → fetch engagement data via API call (currently placeholder — actual API integration is Phase 3)
+- **[2] Skip** → move to the next platform
 
-#### API 미지원 또는 disabled 플랫폼
+#### API-Unsupported or Disabled Platforms
 
-해당 플랫폼의 발행된 포스트 각각에 대해 수동 입력을 제안한다.
+Offer manual input for each published post on that platform.
 
-포스트 식별자는 파일명에서 추출한다:
+Post identifier is extracted from the filename:
 `{HHMMSS}-{style}-{NNN}.md` → `{platform} {style}-{NNN}`
 
 ```
 threads twist-poem-001의 반응을 입력하시겠습니까? [1] 예 [2] 건너뛰기
 ```
 
-- **[2] 건너뛰기** → 다음 포스트로
-- **[1] 예** → 순서대로 질문:
+- **[2] Skip** → move to the next post
+- **[1] Yes** → ask in sequence:
 
 ```
 좋아요 수:
 ```
-→ 사용자 입력 (숫자)
+→ User input (number)
 
 ```
 댓글 수:
 ```
-→ 사용자 입력 (숫자)
+→ User input (number)
 
 ```
 리포스트 수:
 ```
-→ 사용자 입력 (숫자)
+→ User input (number)
 
-### 6.3 데이터 저장
+### 7.3 Save Data
 
-반응 데이터를 입력받았으면 두 곳을 업데이트한다.
+If engagement data was received, update two locations.
 
-#### A. 포스트 frontmatter 업데이트
+#### A. Update Post Frontmatter
 
-해당 포스트 파일의 frontmatter에서 engagement 필드를 업데이트한다:
+Update the engagement field in the post file's frontmatter:
 
 ```yaml
 engagement:
-  likes: {입력값}
-  comments: {입력값}
-  reposts: {입력값}
-  last_checked: {현재시각 ISO 8601}
+  likes: {input value}
+  comments: {input value}
+  reposts: {input value}
+  last_checked: {current ISO 8601 timestamp}
 ```
 
-Read로 파일 전체를 읽고, engagement 블록만 교체하여 Write로 저장한다.
+Read the entire file using Read, replace only the engagement block, and save with Write.
 
-#### B. engagement.json 업데이트
+#### B. Update engagement.json
 
 ```
 Read ~/.config/feed/analytics/engagement.json
 ```
 
-`entries` 배열에 새 항목을 추가하거나, 동일 `post_path`의 기존 항목을 갱신한다:
+Add a new entry to the `entries` array, or update an existing entry with the same `post_path`:
 
 ```json
 {
   "post_path": "posts/{platform}/{YYYY}/{MM}/{DD}/{filename}",
   "platform": "{platform}",
-  "checked_at": "{현재시각 ISO 8601}",
-  "likes": {입력값},
-  "comments": {입력값},
-  "reposts": {입력값}
+  "checked_at": "{current ISO 8601 timestamp}",
+  "likes": {input value},
+  "comments": {input value},
+  "reposts": {input value}
 }
 ```
 
-- `post_path`는 `~/.config/feed/` 이후의 상대 경로를 사용한다.
-- 동일 `post_path`가 이미 있으면 해당 항목을 덮어쓴다 (최신 데이터 유지).
-- Write로 engagement.json을 저장한다.
+- `post_path` uses the relative path after `~/.config/feed/`.
+- If the same `post_path` already exists, overwrite that entry (keep latest data).
+- Save engagement.json with Write.
 
 ---
 
-## Step 7. topics.json 업데이트
+## Step 8. Update topics.json
 
-모든 데이터 수집이 끝난 후, `~/.config/feed/analytics/topics.json`을 업데이트한다.
+After all data collection is complete, update `~/.config/feed/analytics/topics.json`.
 
 ```
 Read ~/.config/feed/analytics/topics.json
 ```
 
-### 업데이트 로직
+### Update Logic
 
-기간 내 수집된 모든 포스트의 topic을 순회하며:
+Iterate through all post topics collected within the period:
 
-1. **기존 topic이 있으면** → 해당 항목 업데이트:
-   - `used_count`: 전체 포스트에서 해당 topic이 사용된 총 횟수로 재계산
-   - `avg_engagement`: engagement 데이터가 있는 포스트들의 평균으로 재계산
-   - `platforms`: 사용된 플랫폼 목록 (중복 제거)
-   - `styles`: 사용된 스타일 목록 (중복 제거)
+1. **If the topic already exists** → update that entry:
+   - `used_count`: recalculate as the total number of times this topic was used across all posts
+   - `avg_engagement`: recalculate as the average across posts that have engagement data
+   - `platforms`: list of platforms used (deduplicated)
+   - `styles`: list of styles used (deduplicated)
 
-2. **기존 topic이 없으면** → 새 항목 추가:
+2. **If the topic does not exist** → add a new entry:
    ```json
    {
      "name": "{topic}",
@@ -414,25 +414,25 @@ Read ~/.config/feed/analytics/topics.json
    }
    ```
 
-3. Write로 topics.json을 저장한다.
+3. Save topics.json with Write.
 
-### 업데이트 완료 메시지
+### Update Complete Message
 
 ```
-topics.json 업데이트 완료 — {업데이트된 토픽 수}개 토픽 반영
+topics.json 업데이트 완료 — {updated topic count}개 토픽 반영
 ```
 
 ---
 
-## 엣지 케이스 정리
+## Appendix: Edge Cases
 
-| 상황 | 처리 |
-|------|------|
-| `~/.config/feed/` 미존재 | "먼저 /feed로 포스트를 생성해주세요" 출력 후 종료 |
-| 기간 내 포스트 0개 | "해당 기간에 포스트가 없습니다. ({start} ~ {end})" 출력 후 종료 |
-| engagement.json 미존재 또는 빈 entries | 반응 데이터 섹션 생략 |
-| topics.json 미존재 | 빈 `{ "topics": [] }`로 새로 생성 후 업데이트 |
-| score 필드가 비어있는 포스트 | 평균 계산에서 제외 |
-| engagement 필드가 모두 null인 포스트 | engagement 없는 포스트로 분류 (score 기반 순위) |
-| 사용자가 숫자가 아닌 값 입력 | "숫자를 입력해주세요"로 재요청 |
-| accounts.json 미존재 | 모든 플랫폼을 disabled로 간주 → 수동 입력만 제안 |
+| Situation | Handling |
+|-----------|----------|
+| `~/.config/feed/` does not exist | Output "먼저 /feed로 포스트를 생성해주세요" and terminate |
+| 0 posts within the period | Output "해당 기간에 포스트가 없습니다. ({start} ~ {end})" and terminate |
+| engagement.json missing or empty entries | Omit the engagement data section |
+| topics.json missing | Create a new file with empty `{ "topics": [] }` then update |
+| Post with empty score fields | Exclude from average calculation |
+| Post with all null engagement fields | Classify as no-engagement post (rank by score) |
+| User enters non-numeric value | Re-prompt with "숫자를 입력해주세요" |
+| accounts.json missing | Treat all platforms as disabled → offer manual input only |

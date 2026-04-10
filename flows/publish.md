@@ -1,48 +1,48 @@
-# 발행 플로우
+# Publish Flow
 
-사용자가 발행을 선택하면 이 파일의 로직에 따라 처리한다.
-발행 대상 포스트는 이미 `~/.config/feed/posts/`에 `published: false` 상태로 저장되어 있어야 한다.
+When the user selects publish, process it according to the logic in this file.
+The target post must already be saved in `~/.config/feed/posts/` with `published: false`.
 
 ---
 
-## 발행 분기 로직
+## Publish Branching Logic
 
 ```
-사용자: [발행] 선택
-  │
-  ├── 포스트가 ~/.config/feed/posts/에 저장됨 (published: false)
-  │
-  ├── ~/.config/feed/config/accounts.json 읽기
-  │   해당 플랫폼의 enabled 값 확인
-  │
-  ├── enabled = true:
-  │   질문: "자동 발행할까요? [1] 예 [2] 아니오 (클립보드 복사)"
-  │   ├── [1] 예 → API 발행 → frontmatter 업데이트
-  │   │         (published: true, publish_method: api, publish_url: ...)
-  │   └── [2] 아니오 → 클립보드 복사 → frontmatter 업데이트
-  │                   (published: true, publish_method: clipboard)
-  │
-  └── enabled = false:
-      → 클립보드에 자동 복사 → frontmatter 업데이트
+User: selects [Publish]
+  |
+  +-- Post is saved in ~/.config/feed/posts/ (published: false)
+  |
+  +-- Read ~/.config/feed/config/accounts.json
+  |   Check the enabled value for the target platform
+  |
+  +-- enabled = true:
+  |   Ask: "자동 발행할까요? [1] 예 [2] 아니오 (클립보드 복사)"
+  |   +-- [1] Yes -> API publish -> update frontmatter
+  |   |         (published: true, publish_method: api, publish_url: ...)
+  |   +-- [2] No -> copy to clipboard -> update frontmatter
+  |                 (published: true, publish_method: clipboard)
+  |
+  +-- enabled = false:
+      -> automatically copy to clipboard -> update frontmatter
         (published: true, publish_method: clipboard)
-      → 메시지: "클립보드에 복사했습니다. 직접 붙여넣기 해주세요."
+      -> Message: "클립보드에 복사했습니다. 직접 붙여넣기 해주세요."
 ```
 
 ---
 
-## 클립보드 복사
+## Clipboard Copy
 
-### 방법
+### Method
 
-macOS의 `pbcopy` 명령어로 콘텐츠 본문만 클립보드에 복사한다.
-**frontmatter는 제외**하고 순수 콘텐츠 본문만 복사한다.
+Use the macOS `pbcopy` command to copy only the content body to the clipboard.
+**Exclude the frontmatter** and copy only the pure content body.
 
 ```bash
-# 포스트 파일에서 frontmatter를 제외한 본문만 추출하여 복사
-# (두 번째 --- 이후의 내용)
+# Extract only the body (after the second ---) from the post file and copy
+# (content after the second ---)
 ```
 
-### 복사 후 안내
+### Post-Copy Message
 
 ```
 클립보드에 복사했습니다. 직접 붙여넣기 해주세요.
@@ -55,109 +55,113 @@ macOS의 `pbcopy` 명령어로 콘텐츠 본문만 클립보드에 복사한다.
 ---
 ```
 
-복사된 내용의 첫 2~3줄을 미리보기로 보여준다.
+Show a preview of the first 2-3 lines of the copied content.
 
 ---
 
-## API 발행 (플랫폼별)
+## API Publishing (Per Platform)
 
 ### Threads (Meta Threads API)
 
-- **인증**: `access_token` (accounts.json의 `threads.access_token`)
-- **방식**: POST 요청으로 텍스트 컨테이너 생성 → 게시
-- **엔드포인트**: Meta Graph API (`https://graph.threads.net/v1.0/`)
-- **주의**: rate limit과 콘텐츠 정책 제한이 있음. 500자 제한 확인 필요.
+- **Auth**: `access_token` (`threads.access_token` from accounts.json)
+- **Method**: POST request to create a text container, then publish
+- **Endpoint**: Meta Graph API (`https://graph.threads.net/v1.0/`)
+- **Note**: Subject to rate limits and content policy restrictions. Verify the 500-character limit.
+- **Rate Limit**: 250 API calls per user per hour. If rate-limited (HTTP 429), wait and retry after the period indicated in the `Retry-After` header. Do NOT retry immediately.
 
 ### X (Twitter API v2)
 
-- **인증**: OAuth 1.0a (accounts.json의 `x.api_key`, `x.api_secret`, `x.access_token`, `x.access_secret`)
-- **방식**: POST tweet 요청
-- **엔드포인트**: `https://api.twitter.com/2/tweets`
-- **주의**: 글자 수 제한 (280자 영문 / 140자 한글 기준) 확인 필요.
+- **Auth**: OAuth 1.0a (`x.api_key`, `x.api_secret`, `x.access_token`, `x.access_secret` from accounts.json)
+- **Method**: POST tweet request
+- **Endpoint**: `https://api.twitter.com/2/tweets`
+- **Note**: Verify character limits (280 chars English / ~140 chars Korean).
+- **Rate Limit**: 200 tweets per 15-minute window per user (app-level limits also apply). On HTTP 429, read the `x-rate-limit-reset` header for the UNIX timestamp when the limit resets. Fall back to clipboard copy if the reset time is more than 5 minutes away.
 
-### Reddit (Reddit API — PRAW 패턴)
+### Reddit (Reddit API -- PRAW pattern)
 
-- **인증**: OAuth2 (accounts.json의 `reddit.client_id`, `reddit.client_secret`, `reddit.username`, `reddit.password`)
-- **방식**: subreddit에 POST 요청으로 게시
-- **엔드포인트**: `https://oauth.reddit.com/api/submit`
-- **주의**: subreddit 선택이 필요함. 발행 시 대상 subreddit을 인터뷰로 확인.
+- **Auth**: OAuth2 (`reddit.client_id`, `reddit.client_secret`, `reddit.username`, `reddit.password` from accounts.json)
+- **Method**: POST request to submit to a subreddit
+- **Endpoint**: `https://oauth.reddit.com/api/submit`
+- **Note**: Requires subreddit selection. Confirm the target subreddit via interview at publish time.
+- **Rate Limit**: 100 requests per minute per OAuth client. Reddit returns HTTP 429 with a `Retry-After` header in seconds. Respect the delay before retrying. Some subreddits also enforce posting cooldowns (typically 10 minutes between posts).
 
 ### Dev.to (Dev.to REST API)
 
-- **인증**: API Key (accounts.json의 `devto.api_key`)
-- **방식**: POST article 요청
-- **엔드포인트**: `https://dev.to/api/articles`
-- **주의**: title 필드가 필수. 발행 시 제목을 인터뷰로 확인.
+- **Auth**: API Key (`devto.api_key` from accounts.json)
+- **Method**: POST article request
+- **Endpoint**: `https://dev.to/api/articles`
+- **Note**: The `title` field is required. Confirm the title via interview at publish time.
+- **Rate Limit**: 30 requests per 30 seconds per API key. On HTTP 429, wait at least 30 seconds before retrying. Dev.to also enforces a limit of approximately 30 articles per day.
 
 ---
 
-## 실패 처리
+## Failure Handling
 
-### API 발행 실패 시
+### On API Publish Failure
 
 ```
-API 발행 실패 시:
-  │
-  ├── 에러 메시지 표시
-  │   "발행에 실패했습니다: {에러 메시지}"
-  │
-  ├── 자동으로 클립보드 복사 (폴백)
-  │   "대신 클립보드에 복사했습니다. 직접 붙여넣기 해주세요."
-  │
-  └── frontmatter 업데이트
+On API publish failure:
+  |
+  +-- Display error message
+  |   "발행에 실패했습니다: {error message}"
+  |
+  +-- Automatically copy to clipboard (fallback)
+  |   "대신 클립보드에 복사했습니다. 직접 붙여넣기 해주세요."
+  |
+  +-- Update frontmatter
       publish_method: failed
-      error: {에러 메시지}
-      published: false (발행 실패이므로 false 유지)
+      error: {error message}
+      published: false (remains false since publish failed)
 ```
 
-### 재시도
+### Retry
 
-- 발행에 실패한 포스트는 나중에 `/feed-publish`로 재시도할 수 있다.
-- `publish_method: failed`인 포스트도 미발행 목록에 포함된다.
+- Failed posts can be retried later with `/feed-publish`.
+- Posts with `publish_method: failed` are included in the unpublished list.
 
 ---
 
-## Frontmatter 업데이트
+## Frontmatter Update
 
-발행 결과에 따라 포스트 파일의 frontmatter를 업데이트한다.
+Update the post file's frontmatter based on the publish result.
 
-### API 발행 성공
+**CRITICAL:** `published_at` must always be a fresh timestamp captured at the moment of publishing. NEVER copy the value from `created_at`. Always generate a new timestamp using `Bash(date +%Y-%m-%dT%H:%M:%S)`.
+
+### API Publish Success
 
 ```yaml
 published: true
-published_at: 2026-04-09T14:31:05    # 발행 완료 시각
+published_at: 2026-04-09T14:31:05    # Timestamp at publish completion (from `date` command)
 publish_method: api
-publish_url: https://threads.net/...  # 플랫폼이 반환한 URL
+publish_url: https://threads.net/...  # URL returned by the platform
 error: null
 ```
 
-### 클립보드 복사 (수동 발행)
+### Clipboard Copy (Manual Publish)
 
 ```yaml
 published: true
-published_at: 2026-04-09T15:31:05    # 클립보드 복사 시각 (현재 시각을 새로 찍을 것. created_at을 복사하지 말 것!)
+published_at: 2026-04-09T15:31:05    # Timestamp at clipboard copy (fresh from `date` command, NOT from created_at!)
 publish_method: clipboard
-publish_url: null                     # 수동이므로 URL 없음
+publish_url: null                     # No URL for manual publish
 error: null
 ```
 
-**주의:** `published_at`은 반드시 발행 시점의 현재 시각을 새로 가져와야 한다. `created_at` 값을 그대로 복사하면 안 된다. `Bash(date +%Y-%m-%dT%H:%M:%S)`로 현재 시각을 구한다.
-
-### API 발행 실패
+### API Publish Failure
 
 ```yaml
-published: false                      # 실패이므로 false 유지
+published: false                      # Remains false since publish failed
 published_at: null
 publish_method: failed
 publish_url: null
-error: "401 Unauthorized: Invalid access token"  # 실제 에러 메시지
+error: "401 Unauthorized: Invalid access token"  # Actual error message
 ```
 
 ---
 
-## 발행 완료 메시지
+## Completion Messages
 
-### API 발행 성공 시
+### On API Publish Success
 
 ```
 발행 완료!
@@ -165,14 +169,14 @@ URL: https://threads.net/...
 파일: ~/.config/feed/posts/threads/2026/04/09/143022-twist-poem-001.md
 ```
 
-### 클립보드 복사 시
+### On Clipboard Copy
 
 ```
 클립보드에 복사했습니다. 직접 붙여넣기 해주세요.
 파일: ~/.config/feed/posts/threads/2026/04/09/143022-twist-poem-001.md
 ```
 
-### 발행 실패 시
+### On Publish Failure
 
 ```
 발행에 실패했습니다: 401 Unauthorized: Invalid access token

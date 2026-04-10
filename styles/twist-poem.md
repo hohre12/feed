@@ -1,91 +1,100 @@
-# 반전시 (Twist Poem)
+# Twist Poem
 
-> Feed 플러그인의 시그니처 스타일. 감정 독백이 마지막 줄에서 완전히 뒤집힌다.
+> Feed plugin's signature style. An emotional monologue whose meaning is completely flipped by the final line.
 
 ---
 
-## 구조
+## Structure
 
-1. **감정 독백** (3~7줄) — 연애/관계처럼 읽히는 감정 흐름
-2. **빈 줄**
-3. **화자 공개** — `- {화자}` 형식으로 정체 공개
-4. 화자가 밝혀지면 앞의 모든 문장이 다른 의미로 읽힌다
+1. **Emotional monologue** (3-7 lines) — An emotional flow that reads like a romance/relationship
+2. **Blank line**
+3. **Speaker reveal** — Reveal the speaker's identity in the format `- {speaker}`
+4. Once the speaker is revealed, every preceding line takes on a completely different meaning
 
 ```
-[감정 독백 3~7줄]
+[Emotional monologue, 3-7 lines]
 
-- {화자}
+- {speaker}
 ```
 
 ---
 
-## 화자 규칙
+## Rules
 
-### 반드시 사람이 아닌 것
+### The speaker must NOT be a person
 
-화자는 사물, 앱, 감정, 개념이어야 한다. 사람 이름 절대 불가.
+The speaker must be an object, app, emotion, or concept. Never use a person's name.
 
-### 좋은 화자 (바로 쓸 수 있는 것들)
+### Good speakers (ready to use)
 
-| 화자 | 왜 좋은가 |
-|------|-----------|
-| 조회수 | 집착, 확인 강박 |
-| 알람 | 매일 찾아오는 귀찮은 존재 |
-| 건강 | 무시당하다가 나중에 후회 |
-| 저축 | 맨날 하겠다고 하면서 안 함 |
-| 운동 | 미루기의 대명사 |
-| 다이어트 | 작심삼일 |
-| 읽씹 | 무시, 기다림 |
-| 월요일 | 싫지만 매주 옴 |
-| 배터리 | 의존, 불안 |
-| 유통기한 | 관심 없다가 급해짐 |
-| 체중계 | 피하고 싶은 진실 |
-| 장바구니 | 담기만 하고 안 삼 |
-| 넷플릭스 | 끊으려다 못 끊음 |
-| 와이파이 | 없으면 불안, 집착 |
-| 충전기 | 의존, 매달림 |
-| 스누즈 버튼 | 거부하면서 또 누름 |
-| 읽지 않은 메일 | 쌓여가는 것, 외면 |
+| Speaker | Why it works |
+|---------|-------------|
+| 조회수 (view count) | Obsession, compulsive checking |
+| 알람 (alarm) | An annoying presence that comes every day |
+| 건강 (health) | Ignored until regret hits later |
+| 저축 (savings) | Always saying you'll do it, but never do |
+| 운동 (exercise) | The epitome of procrastination |
+| 다이어트 (diet) | Lasts three days at most |
+| 읽씹 (read receipt ignored) | Being ignored, waiting |
+| 월요일 (Monday) | Hated but returns every week |
+| 배터리 (battery) | Dependence, anxiety |
+| 유통기한 (expiration date) | No attention until it's urgent |
+| 체중계 (scale) | A truth you want to avoid |
+| 장바구니 (shopping cart) | Adding items but never buying |
+| 넷플릭스 (Netflix) | Trying to cancel but can't |
+| 와이파이 (Wi-Fi) | Anxious and clingy without it |
+| 충전기 (charger) | Dependence, attachment |
+| 스누즈 버튼 (snooze button) | Rejecting it yet hitting it again |
+| 읽지 않은 메일 (unread email) | Piling up, being avoided |
 
-### 나쁜 화자 (쓰지 마)
+### Bad speakers (do not use)
 
-| 화자 | 왜 나쁜가 |
-|------|-----------|
-| 사람 이름 | 반전이 안 됨. 그냥 연애시가 됨 |
-| 시간 | 너무 추상적. 감정 위장이 안 됨 |
-| 인생 | 추상적 + 뻔함 |
-| 사랑 | 화자가 감정 자체면 위장할 게 없음 |
-| 행복 | 위와 동일 |
-| 설명이 필요한 것 | "이게 왜 화자지?" 싶으면 탈락 |
+| Speaker | Why it fails |
+|---------|-------------|
+| A person's name | No twist. It just becomes a love poem |
+| 시간 (time) | Too abstract. The emotional disguise doesn't work |
+| 인생 (life) | Abstract + predictable |
+| 사랑 (love) | If the speaker IS an emotion, there's nothing to disguise |
+| 행복 (happiness) | Same as above |
+| Anything requiring explanation | If the reaction is "why is THAT the speaker?" — it fails |
 
-### 화자 선택 기준
+### Speaker selection criteria
 
-- 사람들이 일상에서 **관계를 맺는** 대상이어야 한다
-- 그 관계에 **감정**(집착, 미련, 귀찮음, 의존)이 있어야 한다
-- 화자를 밝혔을 때 **"아 맞아ㅋㅋ"** 반응이 나와야 한다
-- 너무 마이너하면 안 됨. 대부분의 사람이 아는 것이어야 한다
-
----
-
-## 감정 위장 패턴
-
-독백은 연애/관계처럼 읽혀야 한다. 아래 감정을 연애로 위장한다:
-
-| 실제 감정 | 위장 | 예시 맥락 |
-|-----------|------|-----------|
-| 집착 | 미련 있는 전 연인 | 조회수를 계속 확인하는 것 |
-| 관심 없는 척 | 쿨한 척하는 감정 | 알람을 꺼놓고 결국 다시 켜는 것 |
-| 미루기 | 잡을 듯 말 듯 | 운동/저축을 내일로 미루는 것 |
-| 의존 | 없으면 불안 | 와이파이/충전기 없을 때 |
-| 귀찮음 | 싫은데 계속 오는 | 월요일, 알람 |
-| 습관 | 끊으려는데 못 끊는 | 넷플릭스, SNS |
-| 외면 | 보기 싫은 진실 | 체중계, 유통기한 |
+- The speaker must be something people have a **daily relationship** with
+- That relationship must carry **emotion** (obsession, lingering feelings, annoyance, dependence)
+- When the speaker is revealed, the reaction should be **"oh right haha"**
+- It must not be too niche. Most people should recognize it
 
 ---
 
-## 좋은 예시 (이 퀄리티가 목표)
+## Emotional Disguise Patterns
 
-### 예시 1: 조회수
+The monologue must read as if it's about romance/relationships. Disguise the following emotions as romantic feelings:
+
+| Actual emotion | Disguise | Example context |
+|---------------|----------|----------------|
+| Obsession | Lingering feelings for an ex | Compulsively checking view counts |
+| Feigning indifference | Playing it cool | Turning off the alarm only to turn it back on |
+| Procrastination | Almost-but-not-quite reaching | Putting off exercise/savings until tomorrow |
+| Dependence | Anxious without it | When there's no Wi-Fi/charger |
+| Annoyance | Hated but keeps coming | Monday, alarm |
+| Habit | Trying to quit but can't | Netflix, social media |
+| Avoidance | An unwelcome truth | Scale, expiration date |
+
+---
+
+## Tone
+
+- **Confessional and raw** — Like a late-night emotional diary entry
+- **Colloquial Korean** — Spoken-word fragments, not literary prose
+- **Vulnerable** — The monologue should feel genuinely emotional before the twist
+- **No formal endings** — Use casual/incomplete sentence endings (~인데, ~하고, ~거든)
+
+---
+
+## Good Examples (this is the target quality)
+
+### Example 1: 조회수 (View Count)
 
 ```
 안 보면 될 걸
@@ -100,14 +109,14 @@
 - 조회수
 ```
 
-**왜 좋은가:**
-- "안 보면 될 걸" — 구어체, 입말 그대로
-- "달라진 거 없으면서" — 불완전 문장, 혼잣말 느낌
-- "또 확인하고" — 반복 행위가 집착으로 읽힘
-- 끝까지 연애로 읽히다가 "조회수"에서 완전 반전
-- 다시 읽으면 모든 줄이 이중 의미
+**Why it works:**
+- "안 보면 될 걸" — Colloquial, exactly how people talk
+- "달라진 거 없으면서" — Incomplete sentence, inner-monologue feel
+- "또 확인하고" — Repetitive action reads as obsession
+- Reads entirely as romance until "조회수" delivers the complete twist
+- On re-read, every line carries a double meaning
 
-### 예시 2: 스누즈 버튼
+### Example 2: 스누즈 버튼 (Snooze Button)
 
 ```
 매일 아침 찾아오는데
@@ -119,17 +128,17 @@
 - 스누즈 버튼
 ```
 
-**왜 좋은가:**
-- "밀어냄" — 물리적 동작(스누즈)이 감정적 거부로 읽힘
-- "진심인가 봄" — 구어체 종결 + 계절(봄)과 겹치는 중의적 느낌
-- 짧고 타이트함. 군더더기 없음
-- 연인의 집착으로 읽히다가 알람으로 반전
+**Why it works:**
+- "밀어냄" — The physical action (swiping snooze) reads as emotional rejection
+- "진심인가 봄" — Colloquial ending + ambiguity with the word "봄" (spring/seems)
+- Short and tight. Zero filler
+- Reads as a clingy lover until it twists to alarm clock
 
 ---
 
-## 나쁜 예시 (이렇게 쓰면 안 됨)
+## Bad Examples (do NOT write like this)
 
-### 나쁜 예시 1: 장바구니
+### Bad Example 1: 장바구니 (Shopping Cart)
 
 ```
 매번 담아만 놓고
@@ -140,13 +149,13 @@
 - 장바구니
 ```
 
-**왜 나쁜가:**
-- "담아만 놓고 / 데려갈 생각은 없어" — 대구가 너무 깔끔. AI가 짠 느낌
-- "들여다보며" — 문어체. SNS에서 "들여다보며"라고 쓰는 사람 없음
-- "언젠간 하겠지 해" — 마무리가 정돈됨
-- 전체적으로 너무 다듬어져 있음. 사람이 쓴 느낌이 안 남
+**Why it fails:**
+- "담아만 놓고 / 데려갈 생각은 없어" — Parallelism is too clean. Feels AI-generated
+- "들여다보며" — Literary/written style. Nobody writes "들여다보며" on social media
+- "언젠간 하겠지 해" — The ending is too polished
+- Overall too refined. Doesn't feel like a real person wrote it
 
-### 나쁜 예시 2: 시간
+### Bad Example 2: 시간 (Time)
 
 ```
 항상 곁에 있었는데
@@ -157,44 +166,29 @@
 - 시간
 ```
 
-**왜 나쁜가:**
-- "시간"이 화자면 반전이 약함. "아 시간 얘기구나" 이상의 감흥이 없음
-- "소중함을 깨달았다" — 교훈적, 문어체
-- 뻔한 메시지. "시간은 소중하다"를 돌려 말한 것뿐
-- 웃기지도, 공감되지도 않음
+**Why it fails:**
+- "시간" as the speaker makes the twist weak. "Oh, it's about time" — no further impact
+- "소중함을 깨달았다" — Preachy, literary style
+- Predictable message. It's just a roundabout way of saying "time is precious"
+- Neither funny nor relatable
 
 ---
 
-## 생성 시 체크리스트
+## Scoring Weights
 
-생성 후 아래 항목을 하나씩 확인한다. 하나라도 X면 재생성.
+The most important scoring criteria for this style:
 
-- [ ] 화자 밝히기 전까지 **연애/관계 글로 읽히는가?**
-- [ ] 화자를 보고 나서 **"아 그래서!"** 하고 다시 읽게 되는가?
-- [ ] 다시 읽으면 **모든 줄이 이중 의미**를 가지는가?
-- [ ] **문어체 표현**이 하나도 없는가? (~하며, ~하였다, 들여다보며 등)
-- [ ] **깔끔한 대구**가 없는가? (A하고 / B하고 식의 정돈된 병렬)
-- [ ] **한 줄 15자** 이내인가?
-- [ ] 총 **3~7줄**인가? (빈 줄, 화자 줄 제외)
-- [ ] 소리 내서 읽었을 때 **입말처럼 들리는가?**
-
----
-
-## 채점 가중치
-
-이 스타일에서 가장 중요한 채점 항목:
-
-| 우선순위 | 항목 | 이유 |
-|----------|------|------|
-| 1 | `human-feel` | 사람 느낌이 없으면 전부 무의미. 가장 치명적 |
-| 2 | `twist` | 이 스타일의 존재 이유. 반전이 약하면 그냥 감성글 |
-| 3 | `relatability` | 공감 안 되면 공유 안 함 |
-| 4 | `humor` | 반전에서 오는 웃음. 없어도 되지만 있으면 바이럴 |
-| 5 | `brevity` | 짧아야 하지만, 위 항목들보다 후순위 |
+| Priority | Criterion | Reason |
+|----------|-----------|--------|
+| 1 | `human-feel` | If it doesn't feel human, everything else is meaningless. Most critical |
+| 2 | `twist` | The reason this style exists. A weak twist makes it just another sentimental post |
+| 3 | `relatability` | If people can't relate, they won't share |
+| 4 | `humor` | Laughter from the twist. Not required, but if present it goes viral |
+| 5 | `brevity` | Must be short, but lower priority than the above |
 
 ---
 
-## 호환 플랫폼
+## Compatible Platforms
 
-- **threads** — 공유율 높음, 감성 톤과 궁합 좋음
-- **x** — 짧은 포맷, 스크린샷 공유 문화와 맞음
+- **threads** — High share rate; pairs well with the emotional tone
+- **x** — Short format; fits the screenshot-sharing culture

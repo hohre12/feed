@@ -1,112 +1,151 @@
-# 한국어 작문 규칙
+# Korean Writing Rules
 
-`language=ko`일 때 적용되는 규칙.
-
----
-
-## 기본 톤
-
-- 반말 + 독백체
-- 혼잣말하듯이. 누구한테 말하는 게 아니라 중얼거리는 느낌
-- 읽는 사람에게 "전달"하는 게 아니라, 혼자 생각을 흘리는 것
+Applied when `language=ko`.
 
 ---
 
-## 글자 수
+## Base Tone
 
-- 한 줄 최대 **15자** (스마트폰 세로 스크롤 최적화)
-- 총 **3~7줄** (빈 줄 제외)
+- 반말 + 독백체 (casual speech + monologue style)
+- As if muttering to yourself. Not addressing anyone — just letting thoughts leak out
+- Not "delivering" to the reader — just spilling a thought alone
 
 ---
 
-## 필수 구어체 표현
+## Character Count
 
-### 축약/줄임
+- Maximum **15 characters per line** (optimized for vertical smartphone scrolling)
+- Total **3-7 lines** (excluding blank lines)
 
-일상 대화에서 쓰는 자연스러운 줄임말을 사용한다.
+---
+
+## Required Colloquial Expressions
+
+### Contractions / Abbreviations
+
+Use the natural shortened forms found in everyday conversation.
 
 - ~건, ~걸, ~잖아, ~거면서, ~인데
 
-| 구분 | 예시 |
-|------|------|
+| | Example |
+|---|---------|
 | O | "안 보면 될 걸" |
 | X | "안 보면 될 것을" |
 
-### 강조 (편당 0~1개, 과하면 안 됨)
+### Emphasis (0-1 per post, overuse kills it)
 
-남발하면 가벼워진다. 글 전체에서 최대 1개만.
+Overusing emphasis makes the tone feel cheap. Maximum 1 per entire post.
 
 - 1도, 진짜, 걍, ㅇㅇ, ㅋㅋ
 
-| 구분 | 예시 |
-|------|------|
+| | Example |
+|---|---------|
 | O | "살 생각은 1도 없음" |
 
-### 불완전 문장
+### Incomplete Sentences
 
-주어 생략, 한 단어 줄로 여운을 남긴다.
+Omit the subject, use single-word lines to leave an aftertaste.
 
-| 구분 | 예시 |
-|------|------|
+| | Example |
+|---|---------|
 | O | "그냥." |
 | O | "몰라." |
 | O | "또." |
+| O | "아." |
+| O | "근데." |
+| O | "알면서도." |
 
-### 말끝 흐림
+Additional patterns for incomplete sentences:
+- **Verb alone, no object**: "봤는데." / "갔는데." / "했는데."
+- **Noun fragment**: "그 사람." / "그때." / "진짜로."
+- **Interrupted thought**: "아니 그게" / "근데 왜" / "그래서 뭐"
+- **Trailing enumeration**: "밥도 먹고 커피도 마시고" (no conclusion)
 
-끝을 맺지 않고 흐리면 생각이 아직 끝나지 않은 느낌이 난다.
+### Trailing Off
+
+Not finishing the thought creates a feeling of lingering, unresolved thinking.
 
 - ...인 거 같은데
 - ...몰라
 - ...인데
 
-| 구분 | 예시 |
-|------|------|
+| | Example |
+|---|---------|
 | O | "좋아하는 건지 몰라" |
 
-### 구어 어미
+### Colloquial Sentence Endings
 
-문장을 마무리할 때 입말 어미를 쓴다.
+Use spoken-language endings to close sentences.
 
 - ~함, ~임, ~는 중, ~같은 거
 
-| 구분 | 예시 |
-|------|------|
+| | Example |
+|---|---------|
 | O | "일주일째 피하는 중" |
 
 ---
 
-## 금지 표현
+## Spacing and Whitespace Rules
 
-아래 표현이 나오면 톤이 깨진다. 절대 사용하지 않는다.
+Proper use of blank lines and spacing is critical for readability and rhythm on mobile.
 
-| 유형 | 금지 예시 | 이유 |
-|------|-----------|------|
-| 문어체 | ~하며, ~하였다, ~노라 | 에세이/소설 느낌 |
-| 존댓말 | ~합니다, ~입니다 | 독백체에 안 맞음 |
-| 딱딱한 한자어 | 데려갈, 심화되는 | casual 맥락에서 부자연스러움 |
-| 과도한 정돈 | 모든 줄이 깔끔한 완성 문장 | 독백이 아니라 원고처럼 보임 |
+### Blank Lines Between Stanzas
+- Use 1 blank line to separate thought groups (stanzas)
+- Never use 2+ consecutive blank lines
+- Not every post needs stanza breaks — short posts (3 lines) can be a single block
+
+### No Trailing Spaces
+- Lines must not end with trailing whitespace
+- Trailing spaces are invisible but may cause rendering issues on some platforms
+
+### Indentation
+- Never indent lines. SNS posts are left-aligned, flush to the edge
+- Leading spaces look wrong and break the casual tone
+
+### Line Length Rhythm
+- Vary line lengths within a post: one short line, one longer line
+- Avoid all lines being the same character count — it looks machine-generated
+- Example of good rhythm:
+  ```
+  또 미뤘음
+  내일 한다고 했는데
+  그 내일이 언젠지
+  몰라
+  ```
 
 ---
 
-## 좋은 예 vs 나쁜 예
+## Forbidden Expressions
 
-### 좋은 예
+If any of these appear, the tone breaks. Never use them.
+
+| Type | Forbidden Example | Reason |
+|------|-------------------|--------|
+| Written style | ~하며, ~하였다, ~노라 | Sounds like an essay or novel |
+| Honorific/formal | ~합니다, ~입니다 | Doesn't match monologue style |
+| Stiff Sino-Korean | 데려갈, 심화되는 | Unnatural in casual context |
+| Over-polished | Every line is a clean, complete sentence | Looks like a manuscript, not a monologue |
+
+---
+
+## Good Example vs Bad Example
+
+### Good Example
 
 ```
 안 보면 될 걸
 자꾸 확인하고
 ```
 
-> "될 걸"이 입말, "자꾸"가 구어체.
-> 문장이 불완전하게 끊겨서 혼잣말 느낌이 산다.
+> "될 걸" is spoken-form, "자꾸" is colloquial.
+> The sentence cuts off incompletely, creating a genuine monologue feel.
 
-### 나쁜 예
+### Bad Example
 
 ```
 매번 담아만 놓고
 데려갈 생각은 없어
 ```
 
-> "담아만 놓고 / 데려갈 생각은 없어" 대구가 너무 정돈됨.
-> "데려갈"이 문어체라 독백 톤이 깨진다.
+> "담아만 놓고 / 데려갈 생각은 없어" — the parallel structure is too neat.
+> "데려갈" is written-style Korean, which breaks the monologue tone.

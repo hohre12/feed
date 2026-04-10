@@ -1,168 +1,176 @@
-# 콘텐츠 자체 채점 기준
+# Content Self-Scoring Rubric
 
-생성한 콘텐츠를 스스로 평가할 때 반드시 이 기준을 따른다.
-**채점은 엄격하게.** 자기 글에 후한 점수를 주는 순간 품질은 떨어진다.
-
----
-
-## 채점 항목
-
-| 항목 | 키(key) | 측정 대상 |
-|------|---------|-----------|
-| 반전력 | `twist` | 마지막 줄이 앞의 맥락을 완전히 뒤집는가? 단순한 반전이 아니라 "아 그래서 이 얘기였어?" 수준의 전복이 있는가? |
-| 공감도 | `relatability` | 읽는 사람이 "아 나도..." 하고 무릎을 치는가? 특정 집단이 아닌 넓은 층이 고개를 끄덕이는가? |
-| 웃음 | `humor` | 입꼬리가 올라가는 수준이 아니라 실제로 소리 내서 웃게 만드는가? |
-| 간결함 | `brevity` | 군더더기 없이 빠듯한가? 한 글자라도 빼면 의미가 달라질 정도로 타이트한가? |
-| 사람 느낌 | `human-feel` | SNS에서 실제 사람이 쓴 글이라고 믿을 수 있는가? AI가 쓴 티가 나는 순간 실격이다. |
+Score your own generated content strictly using these criteria.
+**Be harsh.** The moment you go easy on your own writing, quality drops.
 
 ---
 
-## 점수 기준 (엄격하게 적용할 것)
+## Scoring Dimensions
 
-### 반전력 (`twist`)
-
-| 점수 | 기준 |
-|------|------|
-| 1-3 | 반전이 없거나, 뻔하거나, "그래서?" 수준. 마지막 줄을 읽어도 감정 변화가 없다. |
-| 4-6 | 반전이 있긴 한데 예상 가능하다. "아 그렇구나" 정도. 놀라움은 없다. |
-| 7-8 | "오?" 하고 다시 읽게 된다. 앞부분의 의미가 달라지는 반전. 한 번 더 읽으면 더 웃기거나 슬프다. |
-| 9-10 | 완전히 뒤통수를 맞는다. 읽고 나서 "와..." 하고 멈칫하게 되는 수준. 앞의 모든 문장이 이중 의미를 가진다. |
-
-### 공감도 (`relatability`)
-
-| 점수 | 기준 |
-|------|------|
-| 1-3 | 공감 포인트가 불분명하거나 너무 개인적이다. "이게 뭔 소리지?" 반응. |
-| 4-6 | 공감은 되는데 "남 얘기" 느낌. 좋아요는 누를 수 있지만 공유까지는 안 한다. |
-| 7-8 | "아 진짜 이거 나인데?" 수준. 댓글로 자기 경험을 쓰고 싶어진다. |
-| 9-10 | 읽자마자 특정 사람 얼굴이 떠오르면서 태그하고 싶어진다. "야 이거 너 아니냐" 반응. |
-
-### 웃음 (`humor`)
-
-이 항목은 특히 엄격하게 채점한다. **미소는 웃음이 아니다.**
-
-| 점수 | 기준 |
-|------|------|
-| 1-3 | 웃기지 않다. 유머를 시도했는데 실패했거나 아예 유머 요소가 없다. |
-| 4-5 | 약간 재밌긴 한데 표정 변화가 없다. "ㅎ" 수준. 코로 바람 한 번 나오는 정도. |
-| 6 | 입꼬리가 올라간다. 하지만 소리는 안 난다. "ㅋ" 하나 수준. |
-| 7 | 실제로 미소가 지어진다. 얼굴 근육이 움직인다. "ㅋㅋ" 수준. |
-| 8 | 소리 내서 "ㅋㅋㅋ" 한다. 혼자 있으면 실제로 웃음소리가 난다. |
-| 9 | 스크린샷 찍어서 단톡방에 공유한다. "야 이거 봐" 하면서 보내는 수준. |
-| 10 | 숨을 못 쉴 정도로 웃긴다. 읽을 때마다 또 웃긴다. 며칠 뒤에 떠올려도 웃긴다. |
-
-**주의:** 10점은 거의 나오지 않는다. 9점도 드물다. 대부분의 "괜찮은" 유머는 6-7점이다.
-
-### 간결함 (`brevity`)
-
-| 점수 | 기준 |
-|------|------|
-| 1-3 | 불필요한 수식어, 반복, 설명이 넘친다. 절반으로 줄여도 의미가 같다. |
-| 4-6 | 깔끔하긴 한데 한두 군데 군더더기가 보인다. "이 문장 빼도 되지 않나?" 싶은 부분이 있다. |
-| 7-8 | 타이트하다. 모든 단어가 역할이 있다. 빼면 의미가 달라진다. |
-| 9-10 | 한 글자도 손댈 수 없다. 압축의 극치. 짧은데 많은 걸 담고 있다. |
-
-### 사람 느낌 (`human-feel`)
-
-이 항목은 **가장 중요하다.** 나머지가 다 좋아도 이게 낮으면 의미 없다.
-
-| 점수 | 기준 |
-|------|------|
-| 1-3 | 한눈에 AI가 쓴 티가 난다. 깔끔하고 정돈된 것 자체가 부자연스럽다. |
-| 4-6 | 잘 쓴 글이긴 한데 "너무 잘 썼다." SNS 글치고 이상하게 완성도가 높다. |
-| 7-8 | 자연스럽다. 실제 타임라인에 올라와도 의심 안 한다. |
-| 9-10 | 완벽하게 사람이다. 특정 사람의 말투가 느껴질 정도. 개성이 있다. |
-
-**감점 요소 (발견 시 즉시 -1~-2점):**
-- 깔끔한 대구법 (예: "A는 B하고, C는 D한다" 식의 균형 잡힌 구조)
-- 문학적 마무리 (예: "...인 걸." "...이었다." 같은 깔끔한 종결)
-- 균일한 문장 구조 (모든 문장 길이가 비슷하거나 패턴이 반복됨)
-- 과하게 다듬어진 문법 (맞춤법이 너무 완벽함)
-- 접속사 남용 ("그러나", "하지만", "그래서" 등이 문장마다 등장)
-- 리스트나 나열이 3개 이상 깔끔하게 정리됨 (**예외: curated-list 스타일은 리스트가 본질이므로 이 감점 적용 안 함. 대신 "리스트에 인격이 있는가"로 평가 — 개인 의견/코멘트 없이 브랜드명만 나열하면 감점**)
-
-**가점 요소 (발견 시 +1점):**
-- 불완전한 문장 ("아 그거... 진짜")
-- 구어체 축약 ("걍", "ㅇㅇ", "ㄹㅇ", "~함", "~임")
-- 날것의 느낌 (다듬지 않은 듯한 거친 문체)
-- 문장 길이가 들쭉날쭉함
-- 오타가 있어도 자연스러운 수준의 캐주얼함
-- 감정 표현이 과하거나 날 것 ("ㅠㅠ", "ㅋㅋㅋㅋ", "ㄹㅇ미침")
+| Dimension | Key | What It Measures |
+|-----------|-----|------------------|
+| Twist | `twist` | Does the last line completely flip the context of what came before? Not a simple reversal — does it reach the level of "oh, THAT's what this was about?" |
+| Relatability | `relatability` | Does the reader think "oh god, me too..." and instinctively nod? Not limited to a niche group — broad enough that most people get it? |
+| Humor | `humor` | Not just a slight smile — does it make the reader actually laugh out loud? |
+| Brevity | `brevity` | Is it tight with zero filler? So compressed that removing a single character would change the meaning? |
+| Human Feel | `human-feel` | Would this pass as something a real person wrote on SNS? The instant it feels AI-generated, it fails. |
 
 ---
 
-## 통과 기준
+## Score Definitions (Apply Strictly)
 
-### 필수 조건
-- **모든 항목 7점 이상**이어야 통과
-- 하나라도 7점 미만이면 **자동 재생성** (최대 2회 재시도)
+### Twist (`twist`)
 
-### 강제 재생성 조건
-- `human-feel` 7점 미만 → **무조건 재생성** (다른 점수가 아무리 높아도)
-- `humor` + `twist` 둘 다 6점 이하 → 재생성 (핵심 재미 요소 부족)
+| Score | Criteria |
+|-------|----------|
+| 1-3 | No twist, or the twist is obvious, or "so what?" level. Reading the last line triggers no emotional shift. |
+| 4-6 | There is a twist, but it's predictable. Reaction is "ah, I see" at most. No surprise. |
+| 7-8 | Makes you go "oh?" and re-read. The meaning of the earlier lines changes on second reading. Funnier or sadder the second time. |
+| 9-10 | Complete blindside. You stop and go "wow..." after reading. Every preceding sentence gains a double meaning. |
 
-### 재생성 규칙
-- 재생성 시 이전 버전의 낮은 점수 항목을 명시적으로 개선할 것
-- 재생성 2회 후에도 통과 못하면 가장 높은 점수의 버전을 채택하되, 통과 실패 사실을 표시할 것
+**Style-specific override:** Some styles have a fixed twist score. For example, `curated-list` style always receives `twist=7` because the twist comes from the list's personality/commentary rather than a narrative reversal. When a style specifies a fixed score, use it and do not re-evaluate that dimension.
+
+### Relatability (`relatability`)
+
+| Score | Criteria |
+|-------|----------|
+| 1-3 | The empathy point is unclear or too personal. Reaction: "what is this even about?" |
+| 4-6 | Relatable, but feels like "someone else's story." Might get a like, but not a share. |
+| 7-8 | "Oh god, this is literally me?" level. Makes the reader want to write their own experience in the comments. |
+| 9-10 | Immediately brings a specific person's face to mind. The reader wants to tag them: "야 이거 너 아니냐" |
+
+### Humor (`humor`)
+
+This dimension is scored especially strictly. **A smile is not a laugh.**
+
+| Score | Criteria |
+|-------|----------|
+| 1-3 | Not funny. The humor attempt failed, or there is no humor element at all. |
+| 4-5 | Mildly amusing but no facial change. "ㅎ" level. A single puff of air through the nose. |
+| 6 | Corners of the mouth go up. But no sound. One "ㅋ" level. |
+| 7 | An actual smile forms. Facial muscles move. "ㅋㅋ" level. |
+| 8 | Audible "ㅋㅋㅋ". If alone, you'd actually make a sound. |
+| 9 | Screenshot it and send to a group chat. "야 이거 봐" level. |
+| 10 | Can't breathe from laughing. Still funny on re-read. Still funny days later when you remember it. |
+
+**Note:** A 10 almost never occurs. 9 is rare. Most "decent" humor lands at 6-7.
+
+### Brevity (`brevity`)
+
+| Score | Criteria |
+|-------|----------|
+| 1-3 | Overflowing with unnecessary modifiers, repetition, and explanation. Could be cut in half without losing meaning. |
+| 4-6 | Clean enough, but one or two spots have filler. "Could this sentence be removed?" feeling in places. |
+| 7-8 | Tight. Every word has a role. Removing one changes the meaning. |
+| 9-10 | Not a single character can be touched. Peak compression. Short yet dense with meaning. |
+
+### Human Feel (`human-feel`)
+
+This is **the most important dimension.** Even if everything else scores well, a low score here makes the post worthless.
+
+| Score | Criteria |
+|-------|----------|
+| 1-3 | Immediately identifiable as AI-written. The cleanliness and order itself is unnatural. |
+| 4-6 | Well-written, but "too well-written." Suspiciously polished for an SNS post. |
+| 7-8 | Natural. Would not raise suspicion on an actual timeline. |
+| 9-10 | Perfectly human. You can almost feel a specific person's voice. Has personality. |
+
+**Deduction triggers (apply -1 to -2 immediately upon detection):**
+- Clean parallel structure (e.g., "A는 B하고, C는 D한다" — too balanced)
+- Literary-style endings (e.g., "...인 걸." "...이었다." — too neat)
+- Uniform sentence structure (all sentences similar in length or repeating a pattern)
+- Overly correct grammar (spelling too perfect)
+- Conjunction overuse ("그러나", "하지만", "그래서" appearing in every sentence)
+- Lists/enumerations neatly organized with 3+ items (**Exception: curated-list style** — lists are the essence of that style, so this deduction does not apply. Instead, evaluate "does the list have personality?" — if items are just brand names without personal opinion/commentary, deduct.)
+
+**Bonus triggers (apply +1 upon detection):**
+- Incomplete sentences ("아 그거... 진짜")
+- Colloquial abbreviations ("걍", "ㅇㅇ", "ㄹㅇ", "~함", "~임")
+- Raw, unpolished feel (rough style that looks unedited)
+- Irregular sentence lengths (long-short-long variation)
+- Typos at a level that feels naturally casual
+- Raw emotional expression ("ㅠㅠ", "ㅋㅋㅋㅋ", "ㄹㅇ미침")
 
 ---
 
-## 자체 채점 규칙
+## Passing Criteria
 
-### 태도
-- **엄격하게 채점한다.** 자기 글에 관대하지 않는다.
-- 모든 항목에 8점 이상을 주고 있다면 **채점 기준을 다시 읽어라.** 너무 후하다.
-- 좋은 콘텐츠의 평균 점수는 **7.0~7.5점**이다. 7.5점 이상이면 의심해라.
-- **7점은 "괜찮다"이지 "좋다"가 아니다.** 8점은 진짜 좋을 때만.
+### Required Conditions
+- **All dimensions must score 7 or above** to pass
+- If any single dimension is below 7, **auto-regenerate** (up to 2 retries)
 
-### 검증 질문 (채점 전 반드시 자문 — 건너뛰지 말 것)
+### Forced Regeneration Conditions
+- `human-feel` below 7 -> **mandatory regeneration** (no matter how high other scores are)
+- Both `humor` and `twist` at 6 or below -> regenerate (core entertainment value missing)
 
-채점 전에 아래 5개 질문에 **솔직하게** 답한다. 답변이 점수의 상한선을 결정한다.
-
-1. **이 글을 타임라인에서 봤다면 스크롤을 멈추는가?**
-   → "그냥 지나칠 것 같다" → 전체 평균 최대 7점
-2. **이 글을 직접 캡처해서 친구한테 보내겠는가?**
-   → "아니" → `humor` 최대 7점, `twist` 최대 7점
-3. **이 글이 AI가 쓴 것 같은가? 1%라도?**
-   → "조금이라도 그렇다" → `human-feel` 최대 6점
-4. **읽고 나서 "오?" 하고 다시 읽었는가?**
-   → "한 번에 다 읽혔다" → `twist` 최대 6점
-5. **실제로 소리 내서 웃었는가? (미소 말고 웃음)**
-   → "미소만 지었다" → `humor` 최대 6점
-   → "피식도 안 났다" → `humor` 최대 5점
-
-### 안전한 글 감점 (NEW)
-
-"불쾌하지 않고 공감은 되는데 공유하고 싶진 않은 글"은 안전한 글이다.
-안전한 글의 특징:
-- 누구나 할 수 있는 뻔한 관찰 (예: "읽씹 싫다면서 나도 읽씹함" — 너무 많이 본 패턴)
-- 메타 유머에만 의존 (예: "이거 쓰면서 ~하는 중" — 틀이 뻔함)
-- 위험을 감수하지 않는 안전한 주제와 안전한 각도
-
-안전한 글은 다음 감점 적용:
-- `humor` -1점
-- `relatability` -1점 (뻔하면 공감이 아니라 "또 이거야"가 됨)
-- 전체 평균이 7.5 이상이면 **무조건 재검토**
+### Regeneration Rules
+- When regenerating, explicitly target the low-scoring dimensions for improvement
+- If still failing after 2 regenerations, select the version with the highest overall score, but mark it as having failed the pass criteria
 
 ---
 
-## 출력 형식
+## Self-Scoring Protocol
 
-생성된 콘텐츠 아래에 다음 형식으로 점수표를 표시한다:
+### Attitude
+- **Score strictly.** Do not be generous with your own writing.
+- If you are giving 8+ on every dimension, **re-read the scoring criteria.** You are being too lenient.
+- **A good post averages 7.0-7.5.** If the average exceeds 7.5, be suspicious and double-check.
+- **7 means "acceptable," not "good."** 8 is only for when it's genuinely excellent.
+
+### Verification Questions (Mandatory Before Scoring — Do Not Skip)
+
+Before scoring, answer these 5 questions **honestly.** The answers set the ceiling for your scores.
+
+1. **If you saw this post on your timeline, would you stop scrolling?**
+   -> "I'd probably scroll past" -> overall average capped at 7
+2. **Would you personally screenshot this and send it to a friend?**
+   -> "No" -> `humor` capped at 7, `twist` capped at 7
+3. **Does this look like AI wrote it? Even 1%?**
+   -> "Even a little bit, yes" -> `human-feel` capped at 6
+4. **Did you go "oh?" and re-read it?**
+   -> "I read it through in one pass" -> `twist` capped at 6
+5. **Did you actually laugh out loud? (Not just smile — laugh)**
+   -> "I just smiled" -> `humor` capped at 6
+   -> "Not even a smirk" -> `humor` capped at 5
+
+### Safe Post Deduction
+
+"A post that isn't offensive and is somewhat relatable, but nobody wants to share it" is a safe post.
+
+**Detection criteria** — the post is "safe" if 2 or more of the following are true:
+- It's an obvious observation anyone could make (e.g., "읽씹 싫다면서 나도 읽씹함" — seen too many times)
+- It relies solely on meta-humor (e.g., "이거 쓰면서 ~하는 중" — the frame itself is the only joke)
+- Both the topic and the angle avoid any risk (neither provocative nor sharp)
+- The ending is predictable from the first line
+- Nobody would tag a friend to share it
+
+**Implementation rules for safe-post deduction:**
+1. Run the 5 detection criteria above after initial scoring
+2. If 2+ criteria are met, apply the following deductions:
+   - `humor` -1 point
+   - `relatability` -1 point (because obvious ≠ relatable — it becomes "ugh, this again")
+3. If the overall average is 7.5 or above after deductions, **mandatory re-review** — a safe post should not score this high
+4. Log which detection criteria triggered so the regeneration can specifically address them
+
+---
+
+## Output Format
+
+Display the scorecard below the generated content in the following format:
 
 ```
 ---
-| 항목 | 점수 | 근거 |
-|------|------|------|
-| 반전력 (twist) | 8 | 마지막 줄에서 "출근"의 의미가 완전히 반전됨 |
-| 공감도 (relatability) | 7 | 직장인이라면 공감하지만 범위가 한정적 |
-| 웃음 (humor) | 7 | 미소가 나오는 수준, 소리 내서 웃기진 않음 |
-| 간결함 (brevity) | 8 | 군더더기 없음, 모든 줄이 역할 있음 |
-| 사람 느낌 (human-feel) | 7 | 자연스러우나 문장 구조가 약간 균일함 |
-| **평균** | **7.4** | |
-| **판정** | **PASS** | |
+| Dimension | Score | Reasoning |
+|-----------|-------|-----------|
+| Twist (twist) | 8 | The meaning of "출근" completely flips in the last line |
+| Relatability (relatability) | 7 | Relatable for office workers, but scope is limited |
+| Humor (humor) | 7 | Smile-level, not laugh-out-loud |
+| Brevity (brevity) | 8 | Zero filler, every line serves a purpose |
+| Human Feel (human-feel) | 7 | Natural, but sentence structure is slightly uniform |
+| **Average** | **7.4** | |
+| **Verdict** | **PASS** | |
 ---
 ```
 
-**근거 칸은 필수.** 점수만 달랑 쓰지 말 것. 왜 그 점수인지 한 줄로 설명한다.
-판정이 FAIL이면 어떤 항목이 부족한지, 재생성 시 무엇을 개선할지 명시한다.
+**The Reasoning column is mandatory.** Do not just write a number. Explain in one line why that score was given.
+If the verdict is FAIL, specify which dimensions fell short and what must be improved in the regeneration.

@@ -1,53 +1,101 @@
-# 자조 (Self-Deprecation with Numbers)
+# Self-Deprecation with Numbers
 
-구체적인 숫자/통계로 자기 자신의 실패를 보고하는 스타일.
+> Report your own failures using specific numbers and statistics.
 
-## 구조
+---
 
-- 3~5줄
-- 구체적인 숫자를 반드시 포함
-- 숫자가 자조적인 이야기를 만들어냄
-- 숫자 덕분에 구체적이고 솔직한 느낌
+## Structure
 
-## 규칙
+- 3-5 lines
+- Must include at least one specific number
+- Numbers create a self-deprecating narrative
+- The specificity of numbers creates an honest, concrete feel
 
-- 최소 하나 이상의 구체적인 숫자 필수
-- 숫자 간 대비가 있어야 함 (목표 vs 현실, 계획 vs 실행)
-- 유머는 데이터를 동반한 잔인한 솔직함에서 나옴
-- 톤: "내 실패를 통계로 보고하는 느낌"
-- "나도 그런데ㅋㅋ" 댓글이 달려야 성공
+---
 
-## 좋은 예시
+## Rules
 
-### 예시 1
+- At least one specific number is **mandatory**
+- There must be contrast between numbers (goal vs reality, plan vs execution)
+- Humor comes from brutally honest data-driven self-reporting
+- Comments like "나도 그런데ㅋㅋ" (same here lol) should be a natural response
+
+---
+
+## Tone
+
+- **Clinical self-destruction** — Reporting your own failure like a quarterly earnings call
+- **"Here are the numbers"** energy — Deadpan statistical delivery
+- **Self-aware, not self-pitying** — Amused by your own data, not wallowing
+- **Colloquial Korean** — Casual sentence endings despite the "data report" framing
+- **The numbers do the heavy lifting** — Let the contrast between numbers create the joke
+
+---
+
+## Good Examples
+
+### Example 1
 ```
 올해 목표 10개 세웠는데
 4월인데 달성한 거 0개
 추가된 거 3개
 ```
-이유: 구체적인 숫자(10, 0, 3)가 더 웃기게 만듦. "추가된 거 3개"가 반전.
 
-### 예시 2
+**Why it works:** Specific numbers (10, 0, 3) make it funnier. "추가된 거 3개" (3 more added) is the twist — not only failing to complete goals but adding more.
+
+### Example 2
 ```
 운동 결심 횟수: 47번
 실제 운동 횟수: 3번
 헬스장 앞 지나간 횟수: 214번
 ```
 
-### 예시 3
+**Why it works:** The report-card format with escalating absurdity. 214 times passing by the gym is the killer detail.
+
+### Example 3
 ```
 저축 목표 100만원
 현재 잔고 3만 2천원
 이번 달 배달비 28만원
 ```
 
-## 채점 기준
+**Why it works:** The delivery fee alone dwarfs the current balance. The numbers tell the entire story without commentary.
 
-- **humor** 와 **relatability** 둘 다 8점 이상이어야 함
-- 숫자가 진짜 같아야 함 (지어낸 느낌이면 안 됨)
-- 목표와 현실의 갭이 클수록 좋음
-- 마지막 줄이 반전 역할을 해야 함
+---
 
-## 호환 플랫폼
+## Bad Examples
 
-threads, x
+```
+운동을 열심히 하려고 했는데
+잘 안 됐다
+```
+
+**Why it fails:** No numbers. Vague. This is just a diary entry, not the self-deprecation-with-numbers style.
+
+```
+나는 항상 실패한다
+정말 한심하다
+```
+
+**Why it fails:** No numbers, no humor, just self-pity. This style needs concrete data to be funny.
+
+---
+
+## Scoring Weights
+
+The most important scoring criteria for this style:
+
+| Priority | Criterion | Reason |
+|----------|-----------|--------|
+| 1 | `humor` | Numbers must generate genuine laughs, not just mild amusement |
+| 2 | `relatability` | Both must score 8+. If nobody shares the experience, the numbers don't land |
+| 3 | `human-feel` | Numbers must feel real, not fabricated. Made-up-feeling stats kill the vibe |
+| 4 | `twist` | The last line should serve as a punchline or reversal |
+| 5 | `brevity` | Tight is good, but the data format naturally takes a few lines |
+
+---
+
+## Compatible Platforms
+
+- **threads** — Confessional tone thrives here; easy to save and share
+- **x** — Short data-report format fits the platform perfectly

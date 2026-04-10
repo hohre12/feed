@@ -1,130 +1,130 @@
-# 인사이트 (Insight)
+# Insight
 
-> 정보성 포스팅. "오늘 알게 된 건데" 형식으로 유용한 정보/팁/인사이트를 공유한다.
-> 딱딱한 정보 전달이 아니라, 사람이 대화하듯 나누는 느낌이어야 한다.
-
----
-
-## 구조
-
-여러 변형이 있다. 매번 같은 구조를 쓰지 말 것.
-
-### 변형 1: TIL (Today I Learned)
-```
-[발견/깨달음 한 줄]
-[구체적 내용 2~3줄]
-[한 줄 결론 or 반응]
-```
-
-### 변형 2: 팁/핵
-```
-[상황 제시]
-[팁/해결책]
-[왜 좋은지 한 줄]
-```
-
-### 변형 3: 반전 정보
-```
-[일반적으로 알려진 것]
-[근데 사실은 다름]
-[진짜 정보]
-```
-
-### 변형 4: 숫자 기반
-```
-[놀라운 숫자/통계 한 줄]
-[맥락 설명 1~2줄]
-[그래서 뭐가 달라지는지]
-```
+> Informational posts. Share useful information, tips, or insights in a "guess what I just learned" format.
+> Not dry information delivery — it should feel like one person casually sharing a discovery with another.
 
 ---
 
-## 팩트 검증 (필수 — 건너뛰지 말 것)
+## Structure
 
-**인사이트 스타일은 사실 기반이어야 한다. 추측/지어낸 정보 금지.**
+Multiple variations exist. Do not use the same structure every time.
 
-### 생성 전 반드시 WebSearch로 검색한다
+### Variation 1: TIL (Today I Learned)
+```
+[Discovery/realization in one line]
+[Specific details in 2-3 lines]
+[One-line conclusion or reaction]
+```
 
-1. 주제에 대해 **WebSearch**로 **오늘 날짜 기준** 최신 정보를 검색한다
-2. 검색 시 날짜 필터를 활용한다 — 최근 1주일~1개월 이내 정보 우선
-3. 검색 결과에서 **검증된 팩트/숫자/사례**를 찾는다
-4. 찾은 팩트를 기반으로 콘텐츠를 작성한다
-5. 출처가 불분명하거나 검증 안 되는 정보는 사용하지 않는다
-6. 트렌딩/신규 도구 주제일 경우 **오늘자 트렌딩**을 검색한다 (어제 트렌딩은 이미 옛날 뉴스)
+### Variation 2: Tip/Hack
+```
+[Situation setup]
+[Tip/solution]
+[Why it's great in one line]
+```
 
-### 절대 하지 말 것
-- 검색 없이 기억에 의존해서 "~라고 한다", "~라는 연구가 있다" 쓰기 → **이러면 거짓 정보가 됨**
-- 그럴듯한 숫자 만들어내기 ("약 80%가..." — 출처 없으면 금지)
-- 존재하지 않는 논문/연구 인용
+### Variation 3: Myth-Busting
+```
+[Something commonly believed]
+[But it's actually wrong]
+[The real information]
+```
 
-### 검색이 필요 없는 경우 (예외)
-- 구체적 기술 팁 (git 명령어, 앱 기능 등 — 본인이 확실히 아는 것)
-- 사용자가 소재 텍스트에 구체적 정보를 직접 제공한 경우
-
----
-
-## 핵심 기준 (이게 안 되면 인사이트가 아님)
-
-**읽기 전에 몰랐던 걸 읽고 나서 알게 되는가?**
-
-이 질문에 "아니오"면 인사이트 스타일이 아니라 공감/자조 스타일이다. 다시 써라.
-
-| 인사이트 O | 인사이트 X |
-|-----------|-----------|
-| "아이폰 계산기에서 숫자 지우려면 쓸어넘기면 됨" (새로운 정보) | "AI가 자신있게 틀린 답 해줌" (관찰/감상) |
-| "물 2리터 근거 없음. 1945년 논문에서 뒷문장이 잘린 거" (팩트) | "운동 해야 하는데 안 하게 됨" (공감) |
-| "git commit --amend 하면 메시지 수정됨" (구체적 팁) | "개발자 퇴근해도 머리가 퇴근 안 함" (자조) |
-
-**정보의 종류:**
-- 구체적 팁/방법 (이거 하면 이렇게 됨)
-- 잘못 알려진 상식의 교정 (사실은 이러함)
-- 놀라운 숫자/통계 (이거 알았음?)
-- 구체적 사례/경험에서 나온 교훈 (이런 일이 있었는데 이걸 배움)
-
-**정보가 아닌 것:**
-- 의견/관찰 ("AI는 이런 것 같다")
-- 철학적 감상 ("결국 아무것도 안 변했다")
-- 뻔한 조언 ("꾸준히 하면 된다")
+### Variation 4: Number-Based
+```
+[Surprising number/statistic in one line]
+[Context in 1-2 lines]
+[What changes because of this]
+```
 
 ---
 
-## 규칙
+## Fact-Checking (mandatory — do NOT skip)
 
-### 반드시 지킬 것
-- **새로운 정보가 있어야 함** — 읽은 사람이 "오 몰랐네"하는 구체적 정보/팁/팩트 1개 필수
-- **구어체 필수** — 정보성이라고 격식체 쓰면 안 됨. "~인데", "~거든", "~임" 유지
-- **한 가지 정보만** — 한 포스트에 정보 1개. 3가지 팁을 나열하지 말 것
-- **"나도 몰랐음" 톤** — 전문가가 가르치는 게 아니라 "나도 방금 알았는데 이거 대박"
-- **짧게** — 정보성이라고 길어도 되는 거 아님. 5줄 이내 권장, 최대 7줄
-- **구체적 숫자/사례** — 추상적 조언 금지. "효율적으로 하세요" (X) → "이거 한 줄이면 됨" (O)
+**The insight style must be fact-based. No speculation or fabricated information.**
 
-### 금지 패턴 (이거 쓰면 블로그 글이 됨)
-- "~하는 방법 3가지" 같은 리스티클 형식
-- "첫째, 둘째, 셋째" 나열
-- "결론적으로" "요약하면" 같은 마무리
-- "여러분도 해보세요" 같은 권유형 종결
-- "~에 대해 알아보겠습니다" 같은 블로그 도입
-- 해시태그로 키워드 나열
+### Always run WebSearch before generating
 
-### AI 티 방지 (정보성에서 특히 주의)
-정보성 글은 AI 티가 나기 가장 쉬움. 특히 주의:
-- 깔끔하게 정리된 구조 → 일부러 거칠게
-- "또한", "그러나", "따라서" 같은 접속사 → 구어체로 ("근데", "그래서", "아 맞다")
-- 완벽한 문법 → 불완전 문장 섞기
+1. Search the topic using **WebSearch** for **today's date** information
+2. Use date filters — prioritize information from the last 1 week to 1 month
+3. Find **verified facts/numbers/examples** from search results
+4. Write content based on confirmed facts
+5. Do not use information with unclear or unverifiable sources
+6. For trending/new tool topics, search for **today's trends** (yesterday's trends are already old news)
+
+### Never do this
+- Write "they say ~" or "a study found ~" based on memory without searching — **this creates misinformation**
+- Make up plausible numbers ("about 80%..." — forbidden without a source)
+- Cite nonexistent papers or studies
+
+### Exceptions (no search needed)
+- Specific technical tips (git commands, app features — things you know for certain)
+- When the user provides specific information directly in their source text
 
 ---
 
-## 톤
+## Core Test (if this fails, it's NOT an insight)
 
-- **"야 이거 알아?"** — 친구한테 신기한 거 알려주는 말투
-- **놀람/발견 감정** — 정보를 전달하는 게 아니라 발견을 공유
-- **약간의 허세 or 자학** — "나만 몰랐나 이거" / "이거 알고 나니까 인생이 바뀜 (거짓말)"
+**Does the reader learn something they didn't know before reading?**
+
+If the answer is "no," this is a relatable/self-deprecation post, not an insight. Rewrite.
+
+| Insight: YES | Insight: NO |
+|-------------|-------------|
+| "아이폰 계산기에서 숫자 지우려면 쓸어넘기면 됨" (new information) | "AI가 자신있게 틀린 답 해줌" (observation/opinion) |
+| "물 2리터 근거 없음. 1945년 논문에서 뒷문장이 잘린 거" (fact) | "운동 해야 하는데 안 하게 됨" (relatability) |
+| "git commit --amend 하면 메시지 수정됨" (specific tip) | "개발자 퇴근해도 머리가 퇴근 안 함" (self-deprecation) |
+
+**Types of valid information:**
+- Specific tips/methods (do this and that happens)
+- Correcting common misconceptions (the truth is actually this)
+- Surprising numbers/statistics (did you know this?)
+- Lessons from specific experiences (this happened and I learned this)
+
+**NOT information:**
+- Opinions/observations ("AI seems like...")
+- Philosophical musings ("in the end nothing changed")
+- Obvious advice ("just be consistent")
 
 ---
 
-## 좋은 예시
+## Rules
 
-### 예시 1: TIL
+### Must follow
+- **Must contain new information** — At least one specific fact/tip/piece of info that makes the reader go "oh, didn't know that"
+- **Colloquial language mandatory** — Informational doesn't mean formal. Keep ~인데, ~거든, ~임 endings
+- **One piece of information only** — One post, one insight. Don't list 3 tips
+- **"I just found out too" tone** — Not an expert lecturing, but "I literally just learned this and it's amazing"
+- **Keep it short** — Informational doesn't mean it can be long. 5 lines recommended, 7 lines max
+- **Specific numbers/examples** — No abstract advice. "효율적으로 하세요" (be efficient) is bad. "이거 한 줄이면 됨" (one line and you're done) is good
+
+### Forbidden patterns (these turn it into a blog post)
+- "~하는 방법 3가지" (3 ways to ~) listicle format
+- "첫째, 둘째, 셋째" (first, second, third) enumeration
+- "결론적으로" "요약하면" (in conclusion, to summarize) wrap-ups
+- "여러분도 해보세요" (you should try it too) call-to-action endings
+- "~에 대해 알아보겠습니다" (let's learn about ~) blog-style introductions
+- Hashtag keyword stuffing
+
+### AI-detection prevention (especially critical for informational content)
+Informational posts are the easiest style for AI tells to slip through. Watch out for:
+- Cleanly organized structure -> Deliberately roughen it up
+- "또한" (furthermore), "그러나" (however), "따라서" (therefore) -> Use colloquial connectors ("근데", "그래서", "아 맞다")
+- Perfect grammar -> Mix in incomplete sentences
+
+---
+
+## Tone
+
+- **"Hey, did you know this?"** — Like telling a friend something cool you just discovered
+- **Surprise/discovery emotion** — Not delivering information, but sharing a discovery
+- **A touch of bravado or self-deprecation** — "나만 몰랐나 이거" (was I the only one who didn't know?) / "이거 알고 나니까 인생이 바뀜 (거짓말)" (life changed after learning this (lie))
+
+---
+
+## Good Examples
+
+### Example 1: TIL
 
 ```
 아이폰 계산기에서
@@ -134,13 +134,13 @@
 10년 동안 C 누르고 있었는데
 ```
 
-**왜 좋은가:**
-- 진짜 유용한 정보
-- "10년 동안 C 누르고 있었는데" — 자학 유머 + 공감
-- 구어체 유지 ("됨", "있었는데")
-- 짧음
+**Why it works:**
+- Genuinely useful information
+- "10년 동안 C 누르고 있었는데" — Self-deprecating humor + relatability
+- Colloquial tone maintained ("됨", "있었는데")
+- Short
 
-### 예시 2: 반전 정보
+### Example 2: Myth-Busting
 
 ```
 매일 물 2리터 마시라는데
@@ -151,12 +151,12 @@
 뒷문장이 잘림
 ```
 
-**왜 좋은가:**
-- "다들 아는 상식"을 뒤집음 → 반전 + 정보
-- 구체적 근거 (1945년 논문)
-- 댓글에서 "진짜?" "헐 몰랐음" 반응 유도
+**Why it works:**
+- Overturns a "known fact" -> Twist + information
+- Specific evidence (1945 paper)
+- Triggers comments like "진짜?" (really?) and "헐 몰랐음" (whoa, didn't know)
 
-### 예시 3: 팁
+### Example 3: Tip
 
 ```
 git commit 메시지 잘못 쓰면
@@ -166,15 +166,15 @@ git commit --amend
 이걸 모르고 reset하고 다시 커밋하고 있었음
 ```
 
-**왜 좋은가:**
-- 개발자 대상, 구체적 명령어
-- "이걸 모르고 ~하고 있었음" — 자학 패턴
+**Why it works:**
+- Developer audience, specific command
+- "이걸 모르고 ~하고 있었음" — Self-deprecation pattern
 
 ---
 
-## 나쁜 예시
+## Bad Examples
 
-### 나쁜 예시 1: 블로그형
+### Bad Example 1: Blog-Style
 
 ```
 효과적인 시간 관리를 위한 팁을 공유합니다.
@@ -183,9 +183,9 @@ git commit --amend
 생산성이 크게 향상됩니다.
 ```
 
-**왜 나쁨:** 격식체, 나열, "~해보세요" 권유, "향상됩니다" 문어체. SNS가 아니라 블로그.
+**Why it fails:** Formal language, enumeration, "~해보세요" call-to-action, "향상됩니다" literary ending. This is a blog, not social media.
 
-### 나쁜 예시 2: 추상적
+### Bad Example 2: Abstract
 
 ```
 코딩할 때 가장 중요한 건
@@ -194,25 +194,27 @@ git commit --amend
 실력이 늘어요
 ```
 
-**왜 나쁨:** 구체성 제로. "꾸준함이 중요하다"는 누구나 알고 있음. 구체적 사례/숫자 없음.
+**Why it fails:** Zero specificity. "Consistency is important" is something everyone already knows. No concrete examples or numbers.
 
 ---
 
-## 채점 가중치
+## Scoring Weights
 
-| 우선순위 | 항목 | 이유 |
-|----------|------|------|
-| 1 | `human-feel` | 정보성은 AI 티 나기 가장 쉬움 |
-| 2 | `relatability` | "오 이거 나한테 필요한 건데" 반응 |
-| 3 | `brevity` | 정보라고 길어지면 안 됨 |
-| 4 | `humor` | 필수는 아니지만 있으면 공유율 급상승 |
-| 5 | `twist` | 반전 정보 변형에서만 해당 |
+The most important scoring criteria for this style:
+
+| Priority | Criterion | Reason |
+|----------|-----------|--------|
+| 1 | `human-feel` | Informational content is the easiest to sound AI-generated |
+| 2 | `relatability` | "Oh, I actually need this" reaction |
+| 3 | `brevity` | Informational doesn't mean it can be long |
+| 4 | `humor` | Not required, but dramatically increases share rate if present |
+| 5 | `twist` | Only applies to the myth-busting variation |
 
 ---
 
-## 호환 플랫폼
+## Compatible Platforms
 
-- **threads** — 짧은 정보 공유, 발견/TIL 톤과 맞음
-- **x** — 정보형 트윗 문화, 짧은 팁 공유
-- **reddit** — 서브레딧 특성에 따라 정보성 환영
-- **devto** — 개발 관련 정보/팁은 여기가 본진
+- **threads** — Short info sharing; discovery/TIL tone fits well
+- **x** — Informational tweet culture; short tips thrive
+- **reddit** — Informational posts welcome depending on subreddit
+- **devto** — Development-related info/tips belong here

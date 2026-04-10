@@ -1,31 +1,36 @@
-# 투자/재테크 (Investor)
+# Investor / Personal Finance
 
-## 검색 소스
-### 주제 없을 때
-- 1순위: 경제 뉴스 (한경, 매경, 블룸버그)
-- 2순위: 증권사 리포트 요약
-- 3순위: 부동산/주식 커뮤니티 트렌드
-- 4순위: 정부 정책 변경 (세금, 부동산 규제 등)
+## Search Sources
 
-### 주제 있을 때
-- 1순위: 관련 경제 뉴스/데이터
-- 2순위: 공식 통계 (한국은행, 통계청)
-- 3순위: 증권사/금융기관 분석
+### No Topic (Content Discovery)
+1. Financial news (Hankyung, Maeil Business, Bloomberg)
+2. Brokerage report summaries
+3. Real estate/stock community trends
+4. Government policy changes (taxes, real estate regulations, etc.)
 
-## 톤
-- 전문 투자 분석 X — Threads에서 안 먹힘
-- "짠테크", "절약 팁", "이거 몰랐으면 손해" 톤
-- 숫자 중심이되 쉽게 — "연 5% 복리면 10년 뒤 얼마?"
-- 공포/탐욕 자극 금지 — "지금 안 사면 망합니다" X
-- 사실 기반, 감정 배제
+### With Topic (Fact Verification)
+1. Relevant financial news/data
+2. Official statistics (Bank of Korea, National Statistics Office)
+3. Brokerage/financial institution analysis
 
-## 용어 수준
-- 기본 금융 용어 OK (적금, ETF, 복리, 배당)
-- 전문 용어는 설명 필요 (PER, PBR 등은 간단히 설명)
-- 구체적 숫자/금액 선호
+## Tone
+- No professional investment analysis — doesn't work on Threads
+- "Frugal tips", "saving hacks", "you're losing money if you don't know this" tone
+- Numbers-driven but accessible — "At 5% compound annual return, how much in 10 years?"
+- No fear/greed manipulation — "If you don't buy now you're doomed" is wrong
+- Fact-based, emotion-free
 
-## 잘 먹히는 스타일
-- insight: 절약 팁, 세금 꿀팁, "이거 알면 연 XX만원 아낌"
-- curated-list: 재테크 앱 족보, 카드 혜택 족보
-- self-deprecation: 투자 실패 자조 ("코인으로 번 돈 주식으로 날림")
-- one-liner: 경제/투자 반전
+## Terminology Level
+- Basic financial terms are fine (savings, ETF, compound interest, dividends)
+- Advanced terms need brief explanation (PER, PBR should be explained simply)
+- Concrete numbers and amounts are preferred
+
+## Recommended Styles
+- **insight**: Saving tips, tax hacks, "If you know this, you save $X per year"
+- **curated-list**: Finance app lineups, credit card perks comparisons
+- **self-deprecation**: Investment failure self-roasts ("Made money on crypto, lost it all on stocks")
+- **one-liner**: Economy/investment twists
+
+## Not Recommended Styles
+- **twist-poem**: Financial content requires trust and clarity. The emotional monologue structure can feel manipulative when applied to money topics, undermining credibility.
+- **debate**: Binary financial takes ("stocks vs real estate", "save vs invest") can be irresponsible. Financial decisions are deeply personal and context-dependent — oversimplified debates risk giving bad advice.

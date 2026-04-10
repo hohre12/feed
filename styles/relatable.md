@@ -1,26 +1,40 @@
-# 공감 (Relatable)
+# Relatable
 
-누구나 하지만 아무도 말 안 하는 행동을 콕 집어서 말하는 스타일.
-핵심은 "나만 그런 줄 알았는데"라는 감정을 불러일으키는 것.
+> Pinpoint a behavior everyone does but nobody talks about. The core is triggering the feeling: "I thought I was the only one."
 
-## 구조
+---
 
-1. 구체적인 행동/상황을 묘사 (모두가 하지만 아무도 말 안 하는 것)
-2. 핵심 트리거: "나만 그런 줄 알았는데" / "나만 그런 거 아니잖아"
-3. 2~5줄. 행동을 구체적으로 묘사.
-4. 반전 불필요 — 유머는 '공감의 순간'에서 나온다.
+## Structure
 
-## 규칙
+1. Describe a specific behavior/situation (something everyone does but nobody mentions)
+2. Core trigger: "I thought I was the only one" / "It's not just me, right?"
+3. 2-5 lines. Describe the behavior concretely.
+4. No twist needed — the humor comes from the "moment of recognition"
 
-- 반드시 **구체적인** 행동을 묘사할 것. "샤워하면서 가상 토론" O, "가끔 이상한 생각" X.
-- 누구나 해봤지만 입 밖으로 꺼내지 않는 행동이어야 한다.
-- 톤: "민망한 걸 고백하는데 사실 다 하잖아"
-- 댓글에 "나도ㅋㅋㅋ", "이거 나인데?" 가 달릴 수 있어야 한다.
-- 마지막은 공감 가는 고백이나 관찰로 끝낸다.
-- 추상적이거나 교훈적인 문장 금지. 감정이 아니라 행동을 써야 한다.
-- 밈이나 유행어 사용 가능하나, 억지스러우면 안 된다.
+---
 
-## 좋은 예시
+## Rules
+
+- Must describe a **specific** behavior. "샤워하면서 가상 토론" (debating in the shower) is good. "가끔 이상한 생각" (having weird thoughts sometimes) is bad.
+- The behavior must be something everyone has done but never said out loud.
+- Comments like "나도ㅋㅋㅋ" (me too lol) and "이거 나인데?" (this is literally me?) should be likely.
+- End with a relatable confession or observation.
+- No abstract or preachy sentences. Write about **actions**, not emotions.
+- Memes or trending expressions are fine, but must not feel forced.
+
+---
+
+## Tone
+
+- **Confessional yet casual** — Like sheepishly admitting something embarrassing to a friend
+- **"I know this is a bit embarrassing but you do it too"** energy
+- **Colloquial Korean** — Spoken-word phrasing, incomplete sentences welcome
+- **Self-aware humor** — Not self-pity, but amused honesty about shared human quirks
+- **Never preachy or inspirational** — Pure observation, zero life lessons
+
+---
+
+## Good Examples
 
 ```
 샤워하면서 가상 토론하는 사람
@@ -39,27 +53,40 @@
 저만 그런 거 아니죠
 ```
 
-## 나쁜 예시
+---
+
+## Bad Examples
 
 ```
 가끔 이상한 생각 할 때 있지 않아?
 다들 그렇잖아
 ```
-왜 나쁜가: 너무 모호하다. "이상한 생각"이 뭔지 구체적으로 안 보인다.
+
+**Why it fails:** Too vague. "이상한 생각" (weird thoughts) — nothing specific is visualized.
 
 ```
 인생은 힘들지만 우리 모두 같은 길을 걷고 있어
 ```
-왜 나쁜가: 교훈적이다. 공감이 아니라 훈화다.
 
-## 채점 기준
+**Why it fails:** Preachy. This is a sermon, not relatability.
 
-- **공감도 (relatability)**: 가장 중요. 반드시 8점 이상이어야 한다.
-- 구체성: 행동이 눈에 그려지는가?
-- 간결함: 불필요한 수식어 없이 핵심만 담겼는가?
-- 톤: 고백하듯 자연스러운가?
+---
 
-## 호환 플랫폼
+## Scoring Weights
 
-- threads
-- x
+The most important scoring criteria for this style:
+
+| Priority | Criterion | Reason |
+|----------|-----------|--------|
+| 1 | `relatability` | The most critical. Must score 8 or above |
+| 2 | `human-feel` | Must read like a real person's casual confession |
+| 3 | `brevity` | No unnecessary modifiers — just the core behavior |
+| 4 | `humor` | Humor comes from recognition, not punchlines. A bonus if present |
+| 5 | `twist` | No twist needed. The "aha, me too" moment is the payoff |
+
+---
+
+## Compatible Platforms
+
+- **threads** — High engagement on relatable confessions
+- **x** — Short, punchy format fits well

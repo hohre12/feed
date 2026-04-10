@@ -1,83 +1,92 @@
-# 논쟁 (Debate)
+# Debate
 
-> 양자택일을 던지고 한쪽을 살짝 도발해서 댓글을 폭발시키는 스타일.
+> Present a binary choice, subtly take a provocative side, and explode the comment section.
 
 ---
 
-## 구조
+## Structure
 
-- **두 가지 선택지** 제시
-- **한쪽에 살짝 기운 의견** 표명
-- 2~4줄. 짧고 세게.
-- 도발은 웃기게. 불쾌하면 안 됨
+- **Two options** presented
+- **A slightly biased opinion** leaning toward one side
+- 2-4 lines. Short and punchy.
+- Provocation must be funny. Never offensive
 
 ```
-[선택지 제시 + 살짝 도발하는 의견]
+[Present choices + slightly provocative opinion]
 ```
 
 ---
 
-## 핵심 규칙
+## Rules
 
-### 양쪽 다 공감 가능해야 한다
+### Both sides must be relatable
 
-정답이 뻔한 논쟁은 논쟁이 아니다. 양쪽 다 "아니 당연히 이거지"라고 생각해야 댓글이 달린다.
+A debate with an obvious answer is not a debate. Both sides must think "obviously mine is right" for comments to flow.
 
-| 구분 | 예시 | 이유 |
-|------|------|------|
-| O | 부먹 vs 찍먹 | 진지하게 싸울 수 있음 |
-| O | 아이스 아메리카노 vs 따뜻한 아메리카노 | 계절 무관 논쟁 |
-| X | 운동 vs 안 운동 | 정답이 뻔함 |
-| X | 책 읽기 vs 유튜브 보기 | 정답 분위기가 남 |
+| Valid? | Example | Reason |
+|--------|---------|--------|
+| O | 부먹 vs 찍먹 (pour vs dip sauce) | People genuinely argue about this |
+| O | 아이스 아메리카노 vs 따뜻한 아메리카노 | Season-independent debate |
+| X | 운동 vs 안 운동 (exercise vs not) | The answer is obvious |
+| X | 책 읽기 vs 유튜브 보기 | One side feels like the "right" answer |
 
-### 도발은 유머로
+### Provocation through humor
 
-"인성"이라고 하면 웃기지만 "바보"라고 하면 불쾌하다. 도발의 레벨은 웃음이 나는 수준까지만.
+Calling someone "인성" (character flaw) is funny because it's an exaggeration. Calling someone "바보" (idiot) is just unpleasant. Provocation should only go as far as it stays funny.
 
-| 구분 | 예시 | 이유 |
-|------|------|------|
-| O | "~은 인성임" | 과장이라서 웃김 |
-| O | "~은 도전하는 거임" | 비약이라서 웃김 |
-| X | "~하는 사람은 이상함" | 그냥 기분 나쁨 |
-| X | "~은 틀림" | 유머 없이 단정만 함 |
+| Valid? | Example | Reason |
+|--------|---------|--------|
+| O | "~은 인성임" (that's a character issue) | Exaggeration makes it funny |
+| O | "~은 도전하는 거임" (that's a bold challenge) | Absurd leap makes it funny |
+| X | "~하는 사람은 이상함" (people who do ~ are weird) | Just unpleasant |
+| X | "~은 틀림" (~ is wrong) | Flat assertion with no humor |
 
-### 약간 억지스러운 논리
+### Slightly absurd logic
 
-말이 되는 듯 안 되는 듯한 논리가 핵심이다. 완전한 논리면 토론이 되고, 완전한 억지면 그냥 헛소리가 된다. "ㅋㅋㅋ 아닌데... 근데 맞는 것도 같고" 이 반응이 목표.
+Logic that almost-but-not-quite makes sense is the key. Perfectly sound logic becomes a lecture; total nonsense becomes gibberish. The target reaction is: "haha no way... but actually maybe?"
 
-### 짧게 끝내기
+### Keep it short
 
-논쟁은 길어지면 피곤해진다. 2~4줄 안에 선택지 + 도발 + 마무리까지 끝나야 한다. 설명하지 말 것. 던지고 끝.
+Debates get exhausting when they drag on. The choices + provocation + wrap-up must fit within 2-4 lines. Don't explain. Drop it and walk away.
 
 ---
 
-## 도발 유형
+## Tone
 
-### 1. 에스컬레이션 (취향 → 인성)
+- **Casual and confident** — Like someone dropping a hot take in a group chat
+- **Playfully confrontational** — Teasing, not attacking
+- **Assertive colloquial Korean** — Uses endings like ~임, ~인데, ~거든
+- **Zero formality** — No polite speech (존댓말), no "~입니다", no "~인가요"
 
-가벼운 주제를 과대하게 격상시키는 패턴.
+---
+
+## Provocation Types
+
+### 1. Escalation (preference -> character flaw)
+
+A pattern that inflates a trivial topic to absurd importance.
 
 ```
 짜장 vs 짬뽕은 취향인데
 부먹 vs 찍먹은 인성임
 ```
 
-**왜 됨:** "취향"에서 "인성"으로 점프. 비약 자체가 웃김. 양쪽 다 "아니 ㅋㅋ" 하면서 댓글 달게 됨.
+**Why it works:** The jump from "preference" to "character" is absurd. The exaggeration itself is funny. Both sides react with "no way haha" and flood the comments.
 
-### 2. 비약적 재정의
+### 2. Absurd Redefinition
 
-일상 행동을 완전히 다른 프레임으로 바꿔버리는 패턴.
+A pattern that reframes an everyday behavior with a completely different lens.
 
 ```
 아침에 알람 5개 맞추는 사람은
 잠을 자는 게 아니라 도전하는 거임
 ```
 
-**왜 됨:** "잠 = 도전"이라는 비약. "나도 그럼ㅋㅋ" 댓글 폭주. 공감 + 자조 유머.
+**Why it works:** "Sleep = challenge" is an absurd leap. Comments flood with "me too lol." Self-deprecating humor meets relatability.
 
-### 3. 편가르기
+### 3. Picking Sides
 
-두 유형으로 나누고 한쪽에 서는 패턴.
+A pattern that divides people into two groups and picks one.
 
 ```
 세상은 두 부류로 나뉨
@@ -85,11 +94,11 @@
 국물 버리는 사이코
 ```
 
-**왜 됨:** "사이코"가 웃기면서 도발적. 국물 버리는 쪽이 "아니 왜ㅋㅋ" 하면서 반박함.
+**Why it works:** "사이코" (psycho) is funny yet provocative in one word. The broth-discarding side will inevitably comment to defend themselves. Ramen is a universally relatable topic in Korea.
 
-### 4. 가짜 진지
+### 4. Fake Seriousness
 
-별거 아닌 주제를 심각하게 다루는 패턴.
+A pattern that treats a trivial subject with deadly gravity.
 
 ```
 에어컨 온도 논쟁은
@@ -97,39 +106,39 @@
 반박 안 받음
 ```
 
-**왜 됨:** 과장된 진지함. "반박 안 받음"이 도발. 실제로 공감되는 커플 있음.
+**Why it works:** Exaggerated seriousness. "반박 안 받음" (not accepting rebuttals) is provocative. Many couples actually relate to this.
 
 ---
 
-## 좋은 예시
+## Good Examples
 
-### 예시 1
+### Example 1
 
 ```
 짜장 vs 짬뽕은 취향인데
 부먹 vs 찍먹은 인성임
 ```
 
-**왜 좋은가:**
-- 2줄. 극도로 짧음
-- "취향 → 인성" 에스컬레이션이 웃김
-- 양쪽 다 할 말 있음
-- 구어체 완벽 ("~인데", "~임")
+**Why it works:**
+- 2 lines. Extremely short
+- The "preference -> character" escalation is funny
+- Both sides have something to say
+- Perfect colloquial tone (~인데, ~임)
 
-### 예시 2
+### Example 2
 
 ```
 아침에 알람 5개 맞추는 사람은
 잠을 자는 게 아니라 도전하는 거임
 ```
 
-**왜 좋은가:**
-- 공감 폭발. 대부분의 사람이 해본 경험
-- "도전"이라는 재정의가 비약적이면서 웃김
-- 댓글에 "나 7개인데" "10개임" 경쟁 시작됨
-- 자조적 톤
+**Why it works:**
+- Massive relatability. Most people have done this
+- "Challenge" as a redefinition is absurd yet funny
+- Comments turn into a competition: "I set 7," "I have 10"
+- Self-deprecating tone
 
-### 예시 3
+### Example 3
 
 ```
 세상은 두 부류로 나뉨
@@ -137,28 +146,28 @@
 국물 버리는 사이코
 ```
 
-**왜 좋은가:**
-- "사이코" 한 단어로 도발 + 유머
-- 국물 버리는 쪽이 반드시 댓글 달게 됨
-- 라면이라는 소재가 한국에서 범용적
+**Why it works:**
+- "사이코" delivers both provocation and humor in one word
+- The broth-discarding side is guaranteed to comment
+- Ramen is a universally relatable topic in Korea
 
 ---
 
-## 나쁜 예시
+## Bad Examples
 
-### 나쁜 예시 1
+### Bad Example 1
 
 ```
 아침형 인간 vs 저녁형 인간
 당신은 어느 쪽인가요?
 ```
 
-**왜 나쁜가:**
-- "당신은 어느 쪽인가요?" — 존댓말 + 설문조사 느낌
-- 도발이 없음. 그냥 질문만 함
-- 웃기지 않음
+**Why it fails:**
+- "당신은 어느 쪽인가요?" — Formal speech + survey vibes
+- Zero provocation. It's just a question
+- Not funny
 
-### 나쁜 예시 2
+### Bad Example 2
 
 ```
 여름을 좋아하는 사람과
@@ -166,84 +175,71 @@
 서로를 이해할 수 없다고 생각합니다
 ```
 
-**왜 나쁜가:**
-- "~합니다" 존댓말
-- 3줄인데 밀도가 낮음. 한 줄로 될 말을 늘림
-- 도발도 유머도 없음. 그냥 관찰
-- "서로를 이해할 수 없다" — 문어체, 딱딱함
+**Why it fails:**
+- "~합니다" — Formal speech
+- 3 lines but low density. A single line's worth of content stretched out
+- No provocation, no humor. Just an observation
+- "서로를 이해할 수 없다" — Literary style, stiff
 
-### 나쁜 예시 3
+### Bad Example 3
 
 ```
 민트초코를 좋아하는 사람들이 있는데
 그것은 개인의 취향이므로 존중해야 합니다
 ```
 
-**왜 나쁜가:**
-- 논쟁을 던져놓고 스스로 해소함. 댓글 달 이유가 없음
-- "~이므로 존중해야 합니다" — 교과서 말투
-- 도발이 아니라 중재. 이건 논쟁 스타일이 아님
+**Why it fails:**
+- Throws out a debate topic then immediately resolves it. No reason to comment
+- "~이므로 존중해야 합니다" — Textbook language
+- This is mediation, not provocation. Not the debate style at all
 
 ---
 
-## 주제 풀 (바로 쓸 수 있는 것들)
+## Topic Pool (ready to use)
 
-### 음식
+### Food
 
-- 부먹 vs 찍먹
-- 민초 vs 반민초
-- 팥붕 vs 슈붕
-- 짜장 vs 짬뽕
-- 순한맛 vs 매운맛
-- 라면 국물 마시기 vs 버리기
+- 부먹 vs 찍먹 (pour vs dip sauce)
+- 민초 vs 반민초 (mint choco lovers vs haters)
+- 팥붕 vs 슈붕 (red bean vs cream bungeoppang)
+- 짜장 vs 짬뽕 (jjajang vs jjamppong)
+- 순한맛 vs 매운맛 (mild vs spicy)
+- 라면 국물 마시기 vs 버리기 (drink vs discard ramen broth)
 
-### 일상
+### Daily Life
 
-- 알람 1개 vs 5개 이상
-- 에어컨 온도 (낮게 vs 높게)
-- 이불 빨래 주기
-- 양말 짝 맞추기 vs 아무거나 신기
-- 계획형 vs 즉흥형 여행
-- 장보기 목록 쓰는 사람 vs 그냥 가는 사람
+- 알람 1개 vs 5개 이상 (1 alarm vs 5+)
+- 에어컨 온도 (낮게 vs 높게) (AC temp low vs high)
+- 이불 빨래 주기 (blanket washing frequency)
+- 양말 짝 맞추기 vs 아무거나 신기 (matching socks vs random)
+- 계획형 vs 즉흥형 여행 (planned vs spontaneous travel)
+- 장보기 목록 쓰는 사람 vs 그냥 가는 사람 (grocery list vs winging it)
 
-### 관계
+### Relationships
 
-- 싸우고 먼저 연락 vs 기다리기
-- 읽씹 vs 씹읽
-- 카톡 답장 바로 vs 나중에
-- 통화 선호 vs 문자 선호
-
----
-
-## 생성 시 체크리스트
-
-- [ ] **양쪽 다 공감 가능한가?** 정답이 보이면 안 됨
-- [ ] **도발이 있는가?** 질문만 던지면 논쟁이 아님
-- [ ] **웃긴가?** 도발인데 안 웃기면 그냥 시비
-- [ ] **4줄 이내인가?** 길면 피곤함
-- [ ] **"아니 ㅋㅋ 그건 아닌데"** 반응이 나오는가?
-- [ ] **존댓말이 없는가?** (~입니다, ~인가요 등)
-- [ ] **문어체가 없는가?** (~하며, ~이므로, ~것이다 등)
-- [ ] **스스로 해소하지 않았는가?** 던지고 끝내야 함
+- 싸우고 먼저 연락 vs 기다리기 (reach out first after fight vs wait)
+- 읽씹 vs 씹읽 (read-then-ignore vs ignore-then-read)
+- 카톡 답장 바로 vs 나중에 (reply immediately vs later)
+- 통화 선호 vs 문자 선호 (call vs text preference)
 
 ---
 
-## 채점 가중치
+## Scoring Weights
 
-이 스타일에서 가장 중요한 채점 항목:
+The most important scoring criteria for this style:
 
-| 우선순위 | 항목 | 이유 |
-|----------|------|------|
-| 1 | `humor` | 안 웃기면 그냥 시비거는 글. 유머가 핵심 |
-| 2 | `relatability` | 공감 안 되는 논쟁은 관심도 안 감 |
-| 3 | `human-feel` | AI가 쓴 티 나면 어떤 스타일이든 실격 |
-| 4 | `brevity` | 짧아야 임팩트. 길면 논쟁이 아니라 에세이 |
-| 5 | `twist` | 이 스타일에선 반전보다 도발이 중요 |
+| Priority | Criterion | Reason |
+|----------|-----------|--------|
+| 1 | `humor` | If it's not funny, it's just picking a fight. Humor is the core |
+| 2 | `relatability` | A debate nobody relates to gets zero attention |
+| 3 | `human-feel` | If it reads like AI wrote it, any style fails |
+| 4 | `brevity` | Must be short for impact. Long debates become essays |
+| 5 | `twist` | In this style, provocation matters more than twist |
 
 ---
 
-## 호환 플랫폼
+## Compatible Platforms
 
-- **threads** — 댓글율 최고, 논쟁 콘텐츠가 알고리즘에 유리
-- **x** — 인용 리트윗으로 의견 표명 문화와 맞음
-- **reddit** — 댓글 기반 플랫폼, 양자택일 토론에 최적
+- **threads** — Highest comment rate; debate content favored by the algorithm
+- **x** — Quote-retweet culture aligns with opinion-expressing format
+- **reddit** — Comment-based platform; optimal for binary-choice debates

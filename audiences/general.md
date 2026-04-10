@@ -1,32 +1,37 @@
-# 일반인 (General)
+# General Audience
 
-## 검색 소스
-### 주제 없을 때
-- 1순위: 포털 실시간 트렌드 (네이버 실검, 구글 트렌드)
-- 2순위: 생활 꿀팁/라이프핵 모음
-- 3순위: 건강/음식 관련 최신 상식
-- 4순위: 소비자 정보 (리콜, 가성비 제품, 할인 정보)
+## Search Sources
 
-### 주제 있을 때
-- 1순위: 일반 웹 검색 (정확한 정보 우선)
-- 2순위: 공신력 있는 매체 (공공기관, 주요 언론)
-- 3순위: 커뮤니티 반응/경험담
+### No Topic (Content Discovery)
+1. Portal real-time trends (Naver trending, Google Trends)
+2. Life hacks and tips collections
+3. Health/food-related common knowledge
+4. Consumer information (recalls, best-value products, deals)
 
-## 톤
-- 가장 쉬운 말 — 전문 용어 0
-- "야 이거 알아?" 친구한테 말하는 톤
-- 누구나 해당되는 주제 (음식, 건강, 생활, 날씨, 쇼핑)
-- "엄마한테 알려줘야 하는" 수준의 유용함
+### With Topic (Fact Verification)
+1. General web search (accuracy first)
+2. Credible sources (government agencies, major news outlets)
+3. Community reactions/experience stories
 
-## 용어 수준
-- 전문 용어 금지 — 모든 사람이 이해할 수 있어야 함
-- 고유명사는 OK (브랜드명, 앱 이름)
-- 숫자는 구체적으로 ("약 몇 퍼센트" X → "87%" O, 단 검증된 숫자만)
+## Tone
+- Simplest possible language — zero jargon
+- "Hey, did you know this?" talking-to-a-friend tone
+- Topics that apply to everyone (food, health, daily life, weather, shopping)
+- Useful enough that "you'd want to tell your mom about it"
 
-## 잘 먹히는 스타일
-- insight: 생활 꿀팁, 건강 상식, "이거 원래 이런 거였음"
-- curated-list: 자취템 족보, 가성비 족보, 앱 추천
-- relatable: 일상 공감 (배달, 대중교통, 날씨)
-- debate: 일상 논쟁 (부먹 vs 찍먹, 민초 vs 반민초)
-- twist-poem: 일상 사물 화자 (알람, 체중계, 냉장고)
-- quote-parody: 유명 속담 비틀기
+## Terminology Level
+- No technical terms — must be understandable by everyone
+- Proper nouns are fine (brand names, app names)
+- Numbers should be specific ("about a few percent" is wrong — "87%" is right, but only verified numbers)
+
+## Recommended Styles
+- **insight**: Life hacks, health facts, "turns out this is how it actually works"
+- **curated-list**: Living-alone essentials, best-value items, app recommendations
+- **relatable**: Everyday life (delivery food, public transit, weather)
+- **debate**: Everyday controversies (탕수육: 부먹 vs 찍먹, 민초 vs 반민초)
+- **twist-poem**: Everyday objects as the speaker (alarm clock, bathroom scale, refrigerator)
+- **quote-parody**: Twisting well-known proverbs
+
+## Not Recommended Styles
+- **self-deprecation**: The numbers-based self-roast format requires a shared professional or niche identity to land (developers roasting their code, investors roasting their portfolio). The general audience lacks this common frame, making the humor feel random rather than relatable.
+- **one-liner**: The two-line twist requires setup and subversion of specific expectations. With such a broad audience, it's hard to find a universal expectation to flip — the punchline risks falling flat for too many readers.

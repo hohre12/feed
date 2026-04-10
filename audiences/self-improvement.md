@@ -1,31 +1,36 @@
-# 자기계발 (Self-Improvement)
+# Self-Improvement
 
-## 검색 소스
-### 주제 없을 때
-- 1순위: 베스트셀러 목록 (교보문고, 알라딘 실시간)
-- 2순위: TED Talks 인기 영상
-- 3순위: 논문/연구 결과 (습관, 생산성, 심리학)
-- 4순위: 유명인 인터뷰/명언 (실제 출처 확인 필수)
+## Search Sources
 
-### 주제 있을 때
-- 1순위: 관련 도서/논문
-- 2순위: 과학적 연구 결과 (PubMed, Google Scholar)
-- 3순위: 전문가 인터뷰/칼럼
+### No Topic (Content Discovery)
+1. Bestseller lists (Kyobo Bookstore, Aladin real-time rankings)
+2. TED Talks popular videos
+3. Research papers (habits, productivity, psychology)
+4. Celebrity interviews/quotes (must verify actual source)
 
-## 톤
-- 가르치는 톤 금지 — "~하세요" X
-- "나도 해봤는데 진짜 됨" 경험 톤
-- 자기계발이지만 가볍게 — 무거우면 스크롤 스킵
-- 뻔한 조언 금지 — "꾸준히 하면 된다" 같은 건 가치 없음
-- 구체적 방법 or 반직관적 인사이트만
+### With Topic (Fact Verification)
+1. Relevant books/research papers
+2. Scientific research results (PubMed, Google Scholar)
+3. Expert interviews/columns
 
-## 용어 수준
-- 일상 용어 위주
-- 심리학/뇌과학 용어는 설명과 함께 ("도파민 디톡스라고 하는데 쉽게 말하면...")
-- 도서 제목, 저자명은 정확하게
+## Tone
+- No lecturing tone — never use "You should do X"
+- "I tried this and it actually worked" experience-based tone
+- Self-improvement but keep it light — if it feels heavy, people scroll past
+- No generic advice — "Just be consistent" has zero value
+- Only specific methods or counterintuitive insights
 
-## 잘 먹히는 스타일
-- insight: 독서 인사이트, 습관 팁, 연구 결과
-- quote-parody: 자기계발 명언 비틀기 (뻔한 명언을 현실적으로)
-- self-deprecation: 자기계발 실패 자조 ("자기계발서 100권 읽고 달라진 건 책장뿐")
-- one-liner: 동기부여 반전
+## Terminology Level
+- Everyday language preferred
+- Psychology/neuroscience terms need brief explanation ("It's called a dopamine detox — basically it means...")
+- Book titles and author names must be accurate
+
+## Recommended Styles
+- **insight**: Reading insights, habit tips, research findings
+- **quote-parody**: Twisting self-help cliches (taking overused motivational quotes and grounding them in reality)
+- **self-deprecation**: Self-improvement failure stories ("Read 100 self-help books, the only thing that changed is my bookshelf")
+- **one-liner**: Motivational twists — set up an inspiring expectation, then flip it
+
+## Not Recommended Styles
+- **curated-list**: Numbered tool/resource lists feel too transactional for an audience seeking personal growth and reflection. Self-improvement content works better as narrative, not catalog.
+- **debate**: Binary "A vs B" framing oversimplifies personal growth topics. "Wake up at 5am vs sleep in" loses the nuance that self-improvement audiences care about.

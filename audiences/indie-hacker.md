@@ -1,30 +1,36 @@
-# 창업가/인디해커 (Indie Hacker)
+# Indie Hacker
 
-## 검색 소스
-### 주제 없을 때
-- 1순위: IndieHackers (성공 사례, 수익 공개)
-- 2순위: ProductHunt (새 런칭 제품)
-- 3순위: X/Twitter 인디해커 커뮤니티
-- 4순위: GitHub Trending (1인 개발 프로젝트)
+## Search Sources
 
-### 주제 있을 때
-- 1순위: 해당 서비스/제품 공식 사이트
-- 2순위: 수익/사용자 수 데이터 (공개된 경우)
-- 3순위: 런칭 후기, 포스트모템
+### No Topic (Content Discovery)
+1. IndieHackers (success stories, revenue reveals)
+2. ProductHunt (newly launched products)
+3. X/Twitter indie hacker community
+4. GitHub Trending (solo developer projects)
 
-## 톤
-- "혼자 만들어서 월 XX만원" 스토리텔링
-- 구체적 숫자 중심 (MRR, 사용자 수, 개발 기간)
-- 솔직한 실패담도 환영
-- "사이드 프로젝트로 시작했는데" 톤
-- 과한 성공 자랑 금지 — 겸손 + 숫자로 말하기
+### With Topic (Fact Verification)
+1. Official site of the relevant service/product
+2. Revenue/user data (if publicly available)
+3. Launch retrospectives, postmortems
 
-## 용어 수준
-- 스타트업 용어 OK (MVP, PMF, MRR, 피벗, 부트스트래핑)
-- 비즈니스 기본 용어 (매출, 구독, 이탈률)
-- 기술 용어는 가볍게만 (풀스택, 노코드, SaaS)
+## Tone
+- "Built it solo, now making $X/month" storytelling
+- Concrete numbers are key (MRR, user count, development timeline)
+- Honest failure stories are welcome
+- "Started as a side project and..." tone
+- No excessive bragging — stay humble, let numbers speak
 
-## 잘 먹히는 스타일
-- insight: 런칭 후기, 수익 공개, 실패에서 배운 것
-- curated-list: 인디해커 필수 도구 족보, 무료 리소스
-- self-deprecation: 1인 창업 자조 ("직원은 나, 대표도 나, CS도 나")
+## Terminology Level
+- Startup terms are fine (MVP, PMF, MRR, pivot, bootstrapping)
+- Basic business terms (revenue, subscriptions, churn rate)
+- Tech terms kept light (full-stack, no-code, SaaS)
+
+## Recommended Styles
+- **insight**: Launch retrospectives, revenue reveals, lessons from failure
+- **curated-list**: Indie hacker essential tool lineups, free resources
+- **self-deprecation**: Solo founder self-roasts ("Employee is me, CEO is also me, customer support is also me")
+- **relatable**: The grind of building alone — shipping at 2am, being your own QA
+
+## Not Recommended Styles
+- **twist-poem**: The emotional monologue format doesn't match the practical, build-and-ship culture of indie hackers. They want tactics and real stories, not poetic personification.
+- **quote-parody**: Famous quotes and proverbs feel disconnected from the indie hacker world, which has its own culture of memes and references (ramen profitability, shipping fast, etc.).

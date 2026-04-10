@@ -1,119 +1,128 @@
-# 족보/큐레이션 리스트 (Curated List)
+# Curated List
 
-> 특정 카테고리에서 직접 써보고 검증한 추천 아이템을 번호 리스트로 정리하는 스타일.
-> 핵심은 "이 사람이 진짜 써봤구나"라는 신뢰감 + 저장/팔로우 욕구를 만드는 것.
+> A numbered list of personally vetted recommendations within a specific category.
+> The core is creating trust through "this person actually used these" + triggering the save/follow impulse.
 >
-> **주의: 이 스타일은 다른 스타일과 규칙이 다르다.**
-> - 번호 리스트 → 다른 스타일에서는 금지지만, 이 스타일의 핵심이다.
-> - CTA(팔로우 유도) → 다른 스타일에서는 금지지만, 이 스타일에서는 필수다.
-> - 긴 포맷 → 다른 스타일은 3~7줄 제한이지만, 이 스타일은 10~15줄 허용.
+> **Note: This style has different rules from other styles.**
+> - Numbered lists -> Forbidden in other styles, but essential here.
+> - CTA (follow prompt) -> Forbidden in other styles, but mandatory here.
+> - Long format -> Other styles cap at 3-7 lines, but this style allows 10-15 lines.
 
 ---
 
-## 구조
+## Structure
 
 ```
-[카테고리 족보 - 세부분류 ver.X.0]          ← 제목: 대괄호 + 족보/리스트 + 버전
-한 줄 설명 or 사용법                         ← 부제: 왜 이 리스트를 만들었는지, 어떻게 쓰면 되는지
-※ 업체에 어떠한 대가도 받지 않음.             ← 면책조항 (선택, 있으면 신뢰도 상승)
-1. 카테고리 : 구체적 추천 (개인 코멘트)       ← 번호 리스트 5~10개
-2. 카테고리 : 구체적 추천 (개인 코멘트)
+[Category Guide - Subcategory ver.X.0]          <- Title: brackets + guide/list + version
+One-line description or usage note              <- Subtitle: why this list exists, how to use it
+※ No compensation received from any brand.      <- Disclaimer (optional, boosts trust)
+1. Category : Specific recommendation (personal comment)    <- Numbered list, 5-10 items
+2. Category : Specific recommendation (personal comment)
 ...
-다음 버전에 추가할 거 있으면 댓글로           ← 댓글 유도 질문 (필수)
-(+) 팔로우 해두면 이런거 계속 볼 수 있음     ← CTA: 팔로우 유도 (필수)
+Anything to add for the next version? Drop a comment       <- Comment prompt (mandatory)
+(+) Follow to keep seeing content like this                <- CTA: follow prompt (mandatory)
 ```
 
-### 각 요소 설명
+### Element Breakdown
 
-- **제목**: `[카테고리 족보 - 세부분류]` 형식. "족보", "리스트", "필수템", "추천" 등의 단어 포함. 버전 표기(ver.2.0) 하면 시리즈 느낌이 나서 팔로우 유도에 효과적.
-- **부제**: 한 줄로 이 리스트의 용도나 톤을 잡아줌. "그냥 메모해두고 할인할 때 풀매수!" 같은 느낌.
-- **면책조항**: "※ 대가 없음", "※ 개인 의견임", "※ 광고 아님" — 있으면 신뢰도가 올라감. 없어도 됨.
-- **번호 리스트**: 5~10개. 각 항목은 `카테고리 : 구체적 브랜드/제품/서비스명` 형식. 괄호 안에 짧은 개인 코멘트 추가하면 인격이 살아남.
-- **댓글 유도**: "더 추가할 거 있나?", "빠진 거 있으면 댓글로", "다음 버전에 뭐 넣을까?" — 참여를 유도하는 질문. 필수.
-- **CTA**: "(+) 팔로우 해두면 이런거 계속 볼 수 있음" — 직접적인 팔로우 유도. 필수.
-
----
-
-## 규칙
-
-### 반드시 지킬 것
-
-- **구체적 이름 필수** — 브랜드명, 제품명, 서비스명, 도구명이 있어야 함. "좋은 노트앱" (X) → "Notion" (O). 모호한 추천은 실패.
-- **번호 리스트 필수** — 이 스타일의 핵심 구조. 다른 스타일에서 리스트가 금지되는 것과 반대로, 여기서는 없으면 안 됨.
-- **긴 포맷 허용** — 10~15줄 OK. 리스트 특성상 길어질 수밖에 없음. 다른 스타일의 3~7줄 제한을 적용하지 않는다.
-- **CTA 필수** — 팔로우 유도 한 줄 필수. 다른 스타일에서 CTA가 금지되는 것과 반대.
-- **댓글 유도 질문 필수** — 리스트 마지막에 "더 있나?", "빠진 거 있으면?" 류의 질문. 이게 있어야 댓글이 달리고, 댓글이 달려야 알고리즘이 밀어줌.
-- **구어체 유지** — 리스트 항목은 간결해도 되지만, 서두(부제)와 말미(댓글 유도, CTA)는 반드시 사람 말투여야 함. "추천드립니다" 같은 존대 금지.
-- **실사용 느낌** — "Top 10" 느낌이 아니라 "내가 진짜 쓰는 것들" 느낌이어야 함. 리스트에 인격이 있어야 한다(아래 핵심 섹션 참고).
-
-### 금지 패턴
-
-- "~추천드립니다", "~해보세요" 같은 블로그형 권유 → "걍 이거 써" 톤으로
-- "TOP 10", "BEST 5" 같은 제목 → "족보", "필수템", "리스트" 가 더 SNS스러움
-- 모든 항목에 같은 길이의 설명 → 어떤 건 짧고 어떤 건 길어야 자연스러움
-- 출처 없는 "1위", "최고" 같은 수식 → 개인 의견으로 쓸 것 ("내 기준 원탑")
+- **Title**: `[Category Guide - Subcategory]` format. Include words like "족보" (guide/bible), "리스트" (list), "필수템" (essentials), "추천" (recommendations). Version numbering (ver.2.0) creates a series feel that encourages follows.
+- **Subtitle**: One line setting the tone or purpose. Something like "그냥 메모해두고 할인할 때 풀매수!" (just save this and go all in when it's on sale).
+- **Disclaimer**: "※ No compensation received", "※ Personal opinion", "※ Not an ad" — Boosts credibility. Optional.
+- **Numbered list**: 5-10 items. Each follows `Category : Specific brand/product/service name` format. Short personal comments in parentheses bring the list to life.
+- **Comment prompt**: "Anything to add?", "What did I miss? Drop a comment", "What should go in the next version?" — A participation-driving question. Mandatory.
+- **CTA**: "(+) Follow to keep seeing content like this" — Direct follow prompt. Mandatory.
 
 ---
 
-## 핵심: 리스트에 인격이 있어야 함
+## Rules
 
-이 스타일의 성패를 가르는 가장 중요한 포인트.
+### Must follow
 
-**Generic list (AI가 추천하는 느낌 — 실패):**
+- **Specific names mandatory** — Brand names, product names, service names, tool names must be present. "좋은 노트앱" (a good note app) is bad -> "Notion" is good. Vague recommendations are failures.
+- **Numbered list mandatory** — The core structure of this style. While lists are banned in other styles, here they are essential.
+- **Long format allowed** — 10-15 lines OK. Lists naturally run longer. The 3-7 line limit from other styles does NOT apply.
+- **CTA mandatory** — One follow-prompt line is required. While CTAs are banned in other styles, here they are essential.
+- **Comment prompt mandatory** — A question like "anything else?", "what did I miss?" at the end of the list. This drives comments, and comments drive the algorithm.
+- **Colloquial tone maintained** — List items can be concise, but the intro (subtitle) and outro (comment prompt, CTA) must use natural human speech. No formal "추천드립니다" (I recommend to you).
+- **Real-use feel** — Not a "Top 10" vibe, but a "things I actually use" vibe. The list must have personality (see key section below).
+
+### Forbidden patterns
+
+- "~추천드립니다" (I'd like to recommend), "~해보세요" (please try) blog-style suggestions -> Use "걍 이거 써" (just use this) tone
+- "TOP 10", "BEST 5" titles -> "족보", "필수템", "리스트" feel more native to social media
+- Identical-length descriptions for every item -> Some should be short, some long, for a natural feel
+- Unsourced superlatives like "#1" or "the best" -> Write as personal opinion: "내 기준 원탑" (my personal top pick)
+
+---
+
+## Key: The List Must Have Personality
+
+The single most important factor that determines success or failure of this style.
+
+**Generic list (feels AI-recommended — failure):**
 ```
 1. 노트앱 : Notion
 2. 일정관리 : Google Calendar
 3. 메모 : Apple Notes
 ```
-→ 어디서든 볼 수 있는 뻔한 리스트. 저장할 이유가 없음.
+-> A list you could find anywhere. No reason to save it.
 
-**Curated list (사람이 추천하는 느낌 — 성공):**
+**Curated list (feels human-recommended — success):**
 ```
 1. 노트앱 : Notion (근데 솔직히 옵시디안으로 갈아탈까 고민 중)
 2. 일정관리 : Google Calendar (유료 앱 다 써봤는데 결국 여기로 돌아옴)
 3. 메모 : Apple Notes (별 기대 없이 쓰기 시작했는데 이게 제일 빠름)
 ```
-→ 개인 의견, 단서, 고민, 실사용 후기가 들어가면 "이 사람이 진짜 써봤구나" 느낌이 남.
+-> Personal opinions, caveats, doubts, and real-use impressions make the reader think "this person actually used these."
 
-### 인격을 넣는 방법
+### How to inject personality
 
-- **갈등/고민**: "근데 솔직히 B로 갈아탈까 고민 중"
-- **실패담**: "C도 써봤는데 나한테는 안 맞았음"
-- **조건부 추천**: "이건 ~하는 사람한테만 추천" / "가격만 아니면 원탑"
-- **비교**: "A랑 B 중에 고민했는데 결국 A" / "다 써봤는데 여기로 돌아옴"
-- **솔직한 단점**: "UI는 구린데 기능은 미침" / "비싸긴 한데 그만한 값어치 함"
-- **사용 기간/맥락**: "3년째 쓰는 중" / "지난달에 발견한 건데 인생템"
-
----
-
-## WebSearch 요구사항
-
-추천 리스트는 정보의 정확성이 생명이다.
-
-### 생성 전 반드시 WebSearch로 오늘 날짜 기준 검색
-
-1. 추천할 제품/서비스/도구의 **현재 판매 여부**를 확인한다 — **오늘 기준**
-2. **단종, 서비스 종료, 리브랜딩** 된 건 추천하지 않는다
-3. 가격이나 스펙을 언급할 경우 **현재 기준** 정보인지 확인한다
-4. 최근 1년 이내에 **큰 변화(품질 저하, 리콜, 개편)** 가 있었는지 확인한다
-5. 개발 도구/앱의 경우 **GitHub star 수, 최신 릴리스 날짜**를 오늘 기준으로 확인한다
-
-### 절대 하지 말 것
-
-- 단종된 제품 추천 (검색 안 하고 기억에 의존하면 이런 일이 생김)
-- 가격을 지어내기 ("약 3만원대" — 확인 안 했으면 쓰지 말 것)
-- 존재하지 않는 제품/서비스명 만들어내기
-
-### 검색이 필요 없는 경우 (예외)
-
-- 사용자가 직접 추천 항목을 소재 텍스트에 제공한 경우
-- 대중적으로 알려진 서비스(Notion, VSCode 등)의 기본 존재 여부는 확인 불필요 (단, 구체적 기능이나 가격 언급 시 검색 필수)
+- **Conflict/doubt**: "근데 솔직히 B로 갈아탈까 고민 중" (honestly thinking about switching to B)
+- **Failure stories**: "C도 써봤는데 나한테는 안 맞았음" (tried C too, didn't work for me)
+- **Conditional recommendations**: "이건 ~하는 사람한테만 추천" (only recommend this for people who ~) / "가격만 아니면 원탑" (would be #1 if not for the price)
+- **Comparisons**: "A랑 B 중에 고민했는데 결국 A" (debated between A and B, went with A) / "다 써봤는데 여기로 돌아옴" (tried everything, kept coming back here)
+- **Honest downsides**: "UI는 구린데 기능은 미침" (UI sucks but features are insane) / "비싸긴 한데 그만한 값어치 함" (pricey but worth it)
+- **Usage duration/context**: "3년째 쓰는 중" (been using for 3 years) / "지난달에 발견한 건데 인생템" (discovered last month, life-changer)
 
 ---
 
-## 좋은 예시
+## Tone
 
-### 예시 1: 패션/기본템
+- **"Here's everything I actually use"** — Sharing a personal collection, not making a recommendation list
+- **Opinionated and honest** — Has clear preferences, admits downsides, shows real decision-making
+- **Generous but casual** — Genuinely helpful but never formal or lecture-like
+- **Authority through specificity** — Trust comes from detailed personal comments, not credentials
+
+---
+
+## WebSearch Requirements
+
+The accuracy of recommended items is critical for this style.
+
+### Always run WebSearch before generating (today's date)
+
+1. Verify the **current availability** of recommended products/services/tools — **as of today**
+2. Do not recommend anything that has been **discontinued, shut down, or rebranded**
+3. If mentioning prices or specs, verify they are **current**
+4. Check for **major changes (quality drops, recalls, overhauls)** within the last year
+5. For dev tools/apps, verify **GitHub star count, latest release date** as of today
+
+### Never do this
+
+- Recommend discontinued products (relying on memory without searching causes this)
+- Fabricate prices ("about 30,000 won" — don't write it if you haven't verified)
+- Invent nonexistent product/service names
+
+### Exceptions (no search needed)
+
+- When the user directly provides the recommended items in their source text
+- For widely known services (Notion, VSCode, etc.), basic existence doesn't need verification (but specific features or pricing require a search)
+
+---
+
+## Good Examples
+
+### Example 1: Fashion/Basics
 
 ```
 [평생 재구매할 족보 - 기본템편 ver.2.0]
@@ -131,15 +140,15 @@
 (+) 팔로우 해두면 이런거 계속 볼 수 있음.
 ```
 
-**왜 좋은가:**
-- 모든 항목에 구체적 브랜드 + 제품명
-- 괄호 안 코멘트가 항목마다 다름 (어떤 건 비교, 어떤 건 체감, 어떤 건 경고)
-- "다른 거 다 써봤는데 결국 여기" — 실사용 신뢰감
-- "에어리즘 아님. 히트텍이 진짜임" — 흔한 혼동을 짚어줌 = 진짜 아는 사람
-- 댓글 유도 + CTA 둘 다 있음
-- 저장해두고 나중에 살 때 꺼내볼 수 있는 실용적 리스트
+**Why it works:**
+- Every item has a specific brand + product name
+- Parenthetical comments vary per item (some are comparisons, some are personal impressions, some are warnings)
+- "다른 거 다 써봤는데 결국 여기" — Real-use credibility
+- "에어리즘 아님. 히트텍이 진짜임" — Corrects a common mix-up = someone who actually knows
+- Comment prompt + CTA both present
+- A practical list worth saving to reference when shopping later
 
-### 예시 2: 개발자 생산성 도구
+### Example 2: Developer Productivity Tools
 
 ```
 [개발자 생산성 족보 - 매일 쓰는 도구편]
@@ -156,16 +165,16 @@
 (+) 팔로우하면 개발자 생산성 관련 계속 올림.
 ```
 
-**왜 좋은가:**
-- "다 무료이거나 무료 플랜으로 충분한 것들만" — 명확한 큐레이션 기준
-- 각 항목에 왜 이걸 쓰는지 이유가 있음 (갈아탄 경험, 비교, 조건)
-- "Postman 유료화 이후 갈아탐" — 시의성 있는 맥락
-- "이건 유료인데 값어치 함. 무료 대안은 DBeaver" — 솔직함 + 대안 제시 = 신뢰
-- 제목에 "매일 쓰는 도구" — 실사용 강조
+**Why it works:**
+- "다 무료이거나 무료 플랜으로 충분한 것들만" — Clear curation criteria
+- Each item explains why it's recommended (switching experience, comparisons, conditions)
+- "Postman 유료화 이후 갈아탐" — Timely context
+- "이건 유료인데 값어치 함. 무료 대안은 DBeaver" — Honesty + alternative = trust
+- Title says "매일 쓰는 도구" — Emphasizes real daily use
 
 ---
 
-## 나쁜 예시
+## Bad Examples
 
 ```
 [추천 앱 TOP 10]
@@ -183,55 +192,57 @@
 이상입니다. 감사합니다.
 ```
 
-**왜 나쁜가:**
-- 제목이 "TOP 10" — 블로그/유튜브 썸네일 느낌. SNS스럽지 않음
-- "소개해드리겠습니다" — 격식체. 사람이 SNS에서 이렇게 안 씀
-- 모든 항목에 코멘트가 없음 — 왜 이걸 추천하는지 알 수 없음
-- 누구나 아는 서비스만 나열 — 큐레이션이 아니라 위키피디아
-- 개인 의견, 비교, 단점, 경험이 전혀 없음 — 인격이 없는 리스트
-- 댓글 유도 없음, CTA 없음
-- "이상입니다. 감사합니다." — SNS가 아니라 발표 자료
+**Why it fails:**
+- Title is "TOP 10" — Blog/YouTube thumbnail vibe. Not social-media-native
+- "소개해드리겠습니다" — Formal speech. Nobody writes like this on social media
+- Zero comments on any item — No way to know why these are recommended
+- Only universally known services listed — This isn't curation, it's a Wikipedia page
+- No personal opinions, comparisons, downsides, or experience — A list with no personality
+- No comment prompt, no CTA
+- "이상입니다. 감사합니다." — This is a presentation slide, not a social media post
 
 ---
 
-## 채점 가중치
+## Scoring Weights
 
-이 스타일은 일반 채점 기준과 다른 가중치를 적용한다.
+> **Note:** The general scoring rules from `scoring.md` apply to this style, BUT with the following exceptions for `twist` and `brevity`.
 
-| 우선순위 | 항목 | 적용 방식 | 이유 |
-|----------|------|-----------|------|
-| 1 | `relatability` | 일반 기준 적용 | "이 리스트가 진짜 쓸모있나?" — 실용성이 가장 중요 |
-| 2 | `human-feel` | 일반 기준 적용 | 리스트에 인격이 있는가? AI가 생성한 느낌이면 실격 |
-| 3 | `humor` | 일반 기준 적용, 필수 아님 | 웃기면 좋지만, 정보성 리스트에서 유머는 보너스 |
-| 4 | `twist` | **고정 7점 (N/A)** | 이 스타일에 반전은 해당 없음. 채점에서 제외 |
-| 5 | `brevity` | **길이 패널티 없음** | 10~15줄이어도 감점하지 않음. 리스트가 길어야 가치가 있음 |
+This style uses different scoring weights from the general criteria.
 
-### brevity 특별 규칙
+| Priority | Criterion | How it applies | Reason |
+|----------|-----------|---------------|--------|
+| 1 | `relatability` | Standard rules apply | "Is this list actually useful?" — Practicality is the top priority |
+| 2 | `human-feel` | Standard rules apply | Does the list have personality? If it feels AI-generated, it fails |
+| 3 | `humor` | Standard rules apply, not required | Funny is a bonus, but informational lists don't need humor |
+| 4 | `twist` | **Fixed at 7 (N/A)** | Twist is not applicable to this style. Excluded from scoring |
+| 5 | `brevity` | **Scored on density, not length** | 10-15 lines with no length penalty. Lists need length to deliver value |
 
-- 일반 스타일: 줄 수가 많으면 감점
-- 이 스타일: **정보 밀도**로 평가. 10줄이어도 모든 줄에 구체적 정보가 있으면 8점 가능
-- 군더더기(불필요한 수식, 빈 줄 남용, 의미 없는 반복)만 감점 대상
+### Brevity special rule
 
-### twist 특별 규칙
+- Standard styles: More lines = lower score
+- This style: Scored on **information density**. Even 10 lines can score 8 if every line contains specific, useful information
+- Only penalize filler (unnecessary modifiers, excessive blank lines, meaningless repetition)
 
-- 반전력은 이 스타일의 목적과 무관하므로 **고정 7점**으로 처리
-- 채점 시 twist 점수로 인한 FAIL이 발생하지 않도록 함
+### Twist special rule
 
-### 추가 채점 항목: 큐레이션 품질
+- Twist is irrelevant to this style's purpose, so it is **fixed at 7**
+- This prevents a FAIL judgment caused by the twist score
 
-일반 채점 5항목 외에, 이 스타일에서만 추가로 확인할 것:
+### Additional scoring criterion: Curation Quality
 
-- **구체성**: 모든 항목에 브랜드/제품/서비스명이 있는가?
-- **코멘트 다양성**: 괄호 안 코멘트가 항목마다 다른 유형인가? (비교, 체감, 조건, 단점 등)
-- **큐레이션 기준**: 왜 이것들을 골랐는지 기준이 느껴지는가?
-- **댓글 유도 + CTA**: 둘 다 있는가?
+Beyond the standard 5 scoring criteria, check these for this style only:
 
-위 4개 중 2개 이상 미달이면, `human-feel`에서 -1점 감점.
+- **Specificity**: Does every item include a brand/product/service name?
+- **Comment variety**: Are parenthetical comments different types per item? (comparisons, impressions, conditions, downsides, etc.)
+- **Curation criteria**: Is there a clear sense of WHY these items were chosen?
+- **Comment prompt + CTA**: Are both present?
+
+If 2 or more of these 4 are below standard, deduct -1 from `human-feel`.
 
 ---
 
-## 호환 플랫폼
+## Compatible Platforms
 
-- **threads** (primary) — 저장/공유 문화가 강함. 족보형 리스트가 가장 잘 먹히는 플랫폼. 저장 수가 알고리즘에 직접 영향.
-- **x** — 스레드(트위터 스레드) 형식으로 풀어도 좋음. 리스트형 콘텐츠 RT 많이 됨.
-- **reddit** — 관련 서브레딧에 추천 포스트로 올리기 적합. 댓글에서 추가 추천이 달리면서 콘텐츠가 확장됨.
+- **threads** (primary) — Strong save/share culture. Curated lists perform best here. Save count directly impacts the algorithm.
+- **x** — Can be expanded into a thread (Twitter thread) format. List-style content gets high retweets.
+- **reddit** — Great for recommendation posts in relevant subreddits. Comments add more recommendations, extending the content organically.

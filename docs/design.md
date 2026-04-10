@@ -1,155 +1,167 @@
-# Feed — SNS 콘텐츠 생성 & 발행 플러그인
+# Feed -- SNS Content Generator & Publisher Plugin
 
-> 피드에 올릴 글을 만들어주는 Claude Code 플러그인.
-> 플랫폼별 맞춤 콘텐츠를 인터뷰 기반으로 생성하고, 저장하고, 발행한다.
-
----
-
-## 1. 프로젝트 개요
-
-### 문제
-
-- SNS 플랫폼마다 톤, 포맷, 잘 먹히는 스타일이 다름
-- AI가 만든 글은 "AI 티"가 나서 반응이 안 됨
-- 매번 플랫폼별로 따로 글을 쓰는 건 비효율적
-- 어떤 주제/스타일이 반응이 좋았는지 추적이 안 됨
-
-### 해결
-
-- 플랫폼별 프로필 + 스타일 템플릿으로 맞춤 콘텐츠 생성
-- 사람이 쓴 것 같은 입말/구어체 규칙 강제
-- 인터뷰 기반 UX로 빠르게 생성 → 저장 → 발행
-- 포스팅 히스토리 + 반응 데이터 축적
-
-### 핵심 원칙
-
-1. **사람 냄새** — AI 티 나면 실패. 구어체, 불완전 문장, 변주 필수.
-2. **인프라 제로** — DB 없음, 서버 없음. Claude Code + 로컬 파일만.
-3. **3번 선택이면 끝** — 인터뷰는 최대 3~4단계. 길어지면 안 씀.
-4. **데이터가 쌓인다** — 모든 포스팅과 반응이 저장되어 추후 분석/추천에 활용.
+> A Claude Code plugin that creates posts for your feed.
+> Generates platform-optimized content via interview-driven workflow, saves it, and publishes it.
 
 ---
 
-## 2. 아키텍처
+## 1. Project Overview
 
-### 설계 원칙
+### Problem
 
-- **플러그인 코드와 사용자 데이터 분리** — 플러그인은 read-only 템플릿, 사용자 데이터는 `~/.config/feed/`
-- **계층적 분산 + 필요 시 로드** — SKILL.md는 라우터만, 실제 지침은 분산된 파일에서 필요한 것만 로드
-- **파일 추가만으로 확장** — 새 플랫폼/스타일/규칙/플로우 추가 시 기존 파일 수정 불필요
+- Each SNS platform has different tones, formats, and styles that perform well
+- AI-generated text has an obvious "AI feel" that kills engagement
+- Writing separate posts for each platform is inefficient
+- No way to track which topics/styles get the best reactions
 
-### 분리 기준
+### Solution
 
-| 기준 | 분리 | 합침 |
-|------|------|------|
-| 요청마다 다른 조합으로 로드 | O (platforms/, styles/) | |
-| 항상 같이 로드되지만 독립적으로 성장 | O (rules/ 내 개별 파일) | |
-| 항상 같이 로드되고 양이 적음 | | O (하나의 파일) |
+- Platform profiles + style templates for tailored content generation
+- Enforced colloquial/spoken-language rules to sound human-written
+- Interview-based UX for rapid generate -> save -> publish workflow
+- Post history + engagement data accumulation
+
+### Core Principles
+
+1. **Human feel** -- If it reads like AI, it's a failure. Colloquial tone, incomplete sentences, and variation are mandatory.
+2. **Zero infrastructure** -- No database, no server. Claude Code + local files only.
+3. **Done in 3 choices** -- The interview is 7 steps max. If it feels long, people won't use it.
+4. **Data accumulates** -- Every post and its engagement is saved for future analysis and recommendations.
 
 ---
 
-## 3. 프로젝트 구조
+## 2. Architecture
 
-### 플러그인 (GitHub에 올라감 — read-only 템플릿)
+### Design Principles
+
+- **Separate plugin code from user data** -- Plugin is read-only templates, user data lives in `~/.config/feed/`
+- **Hierarchical distribution + load on demand** -- SKILL.md is a router only; actual instructions are loaded from distributed files as needed
+- **Extend by adding files** -- New platforms/styles/rules/flows require no modifications to existing files
+
+### Separation Criteria
+
+| Criterion | Separate | Merge |
+|-----------|----------|-------|
+| Loaded in different combinations per request | O (platforms/, styles/, audiences/) | |
+| Always loaded together but grow independently | O (individual files in rules/) | |
+| Always loaded together and small in volume | | O (single file) |
+
+---
+
+## 3. Project Structure
+
+### Plugin (committed to GitHub -- read-only templates)
 
 ```
 feed/
-├── .claude-plugin/
-│   └── plugin.json                        # 플러그인 매니페스트
-│
-├── settings.json                          # 기본 권한 설정
-├── CLAUDE.md                              # 플러그인 개발 가이드
-├── README.md                              # 사용자 설치/사용 가이드
-├── LICENSE
-├── CHANGELOG.md
-│
-├── skills/                                # 스킬 (공식 플러그인 구조)
-│   ├── feed/                              #   /feed — 메인 라우터
-│   │   ├── SKILL.md                       #     라우터 + 인자 파싱
-│   │   ├── interview.md                   #     인터뷰 플로우 상세
-│   │   └── reference.md                   #     라우팅 가이드 (어떤 상황에 어떤 파일을 읽을지)
-│   │
-│   ├── feed-publish/                      #   /feed-publish — 미발행 포스트 발행
-│   │   └── SKILL.md
-│   │
-│   ├── feed-report/                       #   /feed-report — 리포트
-│   │   └── SKILL.md
-│   │
-│   └── feed-recommend/                    #   /feed-recommend — 주제 추천
-│       └── SKILL.md
-│
-├── rules/                                 # 작성 규칙
-│   ├── common.md                          #   AI 티 방지, 공통 작성 규칙
-│   ├── scoring.md                         #   채점 기준 + 통과 조건
-│   ├── ko.md                              #   한글 작성 규칙
-│   └── en.md                              #   영어 작성 규칙
-│
-├── platforms/                             # 플랫폼 프로필
-│   ├── threads.md
-│   ├── x.md
-│   ├── reddit.md
-│   └── devto.md
-│
-├── styles/                                # 스타일 템플릿
-│   ├── twist-poem.md                      #   반전시
-│   ├── debate.md                          #   논쟁
-│   ├── relatable.md                       #   공감
-│   ├── one-liner.md                       #   한줄반전
-│   ├── quote-parody.md                    #   명언패러디
-│   └── self-deprecation.md                #   자조
-│
-├── flows/                                 # 작업 플로우
-│   ├── save.md                            #   저장 형식 + frontmatter 스펙
-│   └── publish.md                         #   발행 분기 로직 (API/클립보드)
-│
-└── docs/
-    └── design.md                          # 이 문서
++-- .claude-plugin/
+|   +-- plugin.json                        # Plugin manifest
+|
++-- settings.json                          # Default permission settings
++-- CLAUDE.md                              # Plugin development guide
++-- README.md                              # User installation/usage guide
++-- LICENSE
++-- CHANGELOG.md
+|
++-- skills/                                # Skills (official plugin structure)
+|   +-- feed/                              #   /feed -- Main router
+|   |   +-- SKILL.md                       #     Router + argument parsing
+|   |   +-- interview.md                   #     Interview flow details
+|   |   +-- reference.md                   #     Routing guide (which files to read in which situation)
+|   |
+|   +-- feed-publish/                      #   /feed-publish -- Publish unpublished posts
+|   |   +-- SKILL.md
+|   |
+|   +-- feed-report/                       #   /feed-report -- Report
+|   |   +-- SKILL.md
+|   |
+|   +-- feed-recommend/                    #   /feed-recommend -- Topic recommendation
+|       +-- SKILL.md
+|
++-- rules/                                 # Writing rules
+|   +-- common.md                          #   AI prevention, common writing rules
+|   +-- scoring.md                         #   Scoring criteria + pass conditions
+|   +-- ko.md                              #   Korean writing rules
+|   +-- en.md                              #   English writing rules
+|
++-- platforms/                             # Platform profiles
+|   +-- threads.md
+|   +-- x.md
+|   +-- reddit.md
+|   +-- devto.md
+|
++-- styles/                                # Style templates
+|   +-- twist-poem.md                      #   Twist poem
+|   +-- debate.md                          #   Debate
+|   +-- relatable.md                       #   Relatable
+|   +-- one-liner.md                       #   One-liner
+|   +-- quote-parody.md                    #   Quote parody
+|   +-- self-deprecation.md                #   Self-deprecation
+|   +-- insight.md                         #   Insight
+|   +-- curated-list.md                    #   Curated list
+|
++-- audiences/                             # Target audience profiles
+|   +-- developer.md                       #   Developers
+|   +-- designer.md                        #   Designers
+|   +-- marketer.md                        #   Marketers
+|   +-- indie-hacker.md                    #   Indie hackers / founders
+|   +-- worker.md                          #   Office workers
+|   +-- self-improvement.md                #   Self-improvement enthusiasts
+|   +-- investor.md                        #   Investors / personal finance
+|   +-- general.md                         #   General audience
+|
++-- flows/                                 # Workflow definitions
+|   +-- save.md                            #   Save format + frontmatter spec
+|   +-- publish.md                         #   Publish branching logic (API/clipboard)
+|
++-- docs/
+    +-- design.md                          # This document
 ```
 
-### 사용자 데이터 (`~/.config/feed/` — 플러그인 밖, git 밖)
+### User Data (`~/.config/feed/` -- outside plugin, outside git)
 
 ```
 ~/.config/feed/
-├── config/
-│   ├── accounts.json                      # 실제 API 키/토큰
-│   └── preferences.json                   # 사용자 설정
-│
-├── posts/                                 # 생성된 포스팅
-│   └── {platform}/
-│       └── {YYYY}/
-│           └── {MM}/
-│               └── {DD}/
-│                   └── {HHMMSS}-{style}-{NNN}.md
-│
-└── analytics/
-    ├── engagement.json                    # 플랫폼별 반응 데이터
-    └── topics.json                        # 주제별 성과 추적
++-- config/
+|   +-- accounts.json                      # Actual API keys/tokens
+|   +-- preferences.json                   # User preferences
+|
++-- posts/                                 # Generated posts
+|   +-- {platform}/
+|       +-- {YYYY}/
+|           +-- {MM}/
+|               +-- {DD}/
+|                   +-- {HHMMSS}-{style}-{NNN}.md
+|
++-- analytics/
+    +-- engagement.json                    # Per-platform engagement data
+    +-- topics.json                        # Per-topic performance tracking
 ```
 
-### 초기화 플로우
+### Initialization Flow
 
 ```
-/feed 최초 실행
-  │
-  ├── ~/.config/feed/ 존재 확인
-  │
-  ├── 없으면:
-  │   ├── ~/.config/feed/config/ 생성
-  │   ├── accounts.json 빈 템플릿 생성
-  │   ├── preferences.json 기본값 생성
-  │   ├── ~/.config/feed/posts/ 생성
-  │   ├── ~/.config/feed/analytics/ 생성 (빈 JSON)
-  │   └── "Feed 초기 설정 완료" 메시지
-  │
-  └── 있으면:
-      └── 기존 설정 로드 → 정상 진행
+/feed first run
+  |
+  +-- Check if ~/.config/feed/ exists
+  |
+  +-- If not:
+  |   +-- Create ~/.config/feed/config/
+  |   +-- Create empty accounts.json template
+  |   +-- Create preferences.json with defaults
+  |   +-- Create ~/.config/feed/posts/
+  |   +-- Create ~/.config/feed/analytics/ (empty JSON files)
+  |   +-- "Feed 초기 설정 완료" message
+  |
+  +-- If exists:
+      +-- Load existing config -> proceed normally
 ```
 
 ---
 
-## 4. 스킬 설계
+## 4. Skill Design
 
-### 4.1 공통 — SKILL.md frontmatter (Claude Code 공식 스펙)
+### 4.1 Common -- SKILL.md Frontmatter (Claude Code Official Spec)
 
 ```yaml
 ---
@@ -161,365 +173,409 @@ allowed-tools: Read Write Glob Grep Bash AskUserQuestion
 ---
 ```
 
-| 필드 | 용도 |
-|------|------|
-| `name` | 스킬 이름. `/name`으로 호출 |
-| `description` | 스킬 설명. 250자 이내 |
-| `disable-model-invocation` | `true` → 사용자만 호출 가능 (자동 실행 방지) |
-| `argument-hint` | 자동완성 시 인자 힌트 |
-| `allowed-tools` | 허가 없이 사용 가능한 도구 |
+| Field | Purpose |
+|-------|---------|
+| `name` | Skill name. Invoked via `/name` |
+| `description` | Skill description. Max 250 characters |
+| `disable-model-invocation` | `true` -> Only user can invoke (prevents auto-execution) |
+| `argument-hint` | Argument hint for autocomplete |
+| `allowed-tools` | Tools usable without additional permission |
 
-### 4.2 스킬 목록
+### 4.2 Skill List
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/feed` | `skills/feed/SKILL.md` | 메인. 인터뷰 → 생성 → 저장 → 발행 |
-| `/feed-publish` | `skills/feed-publish/SKILL.md` | 미발행 포스트 발행 |
-| `/feed-report` | `skills/feed-report/SKILL.md` | 기간별 통계 리포트 |
-| `/feed-recommend` | `skills/feed-recommend/SKILL.md` | 주제 추천 |
+| Skill | Path | Purpose |
+|-------|------|---------|
+| `/feed` | `skills/feed/SKILL.md` | Main. Interview -> generate -> save -> publish |
+| `/feed-publish` | `skills/feed-publish/SKILL.md` | Publish unpublished posts |
+| `/feed-report` | `skills/feed-report/SKILL.md` | Period-based analytics report |
+| `/feed-recommend` | `skills/feed-recommend/SKILL.md` | Topic recommendation |
 
-### 4.3 `/feed` — 메인 스킬
+### 4.3 `/feed` -- Main Skill
 
-#### 구조
+#### Structure
 
 ```
 skills/feed/
-├── SKILL.md          # 라우터: 인자 파싱 → 어떤 파일 읽을지 분기
-├── interview.md      # 인터뷰 플로우 상세 (Step 1~6)
-└── reference.md      # 라우팅 가이드 (상황별 로드할 파일 매핑)
++-- SKILL.md          # Router: argument parsing -> branch to appropriate files
++-- interview.md      # Interview flow details (Steps 1-7)
++-- reference.md      # Routing guide (file mapping per situation)
 ```
 
-#### SKILL.md 역할 (라우터만)
+#### SKILL.md Role (Router Only)
 
 ```
-1. $ARGUMENTS 파싱
-2. ~/.config/feed/ 존재 확인 → 없으면 초기화
-3. 인자 부족 시 → interview.md 읽고 인터뷰 진행
-4. reference.md 읽고 → 상황에 맞는 파일 로드
-5. 생성 → 저장 → 발행 여부 인터뷰
+1. Parse $ARGUMENTS
+2. Check if ~/.config/feed/ exists -> initialize if not
+3. If arguments incomplete -> read interview.md and run interview
+4. Read reference.md -> load situation-appropriate files
+5. Generate -> save -> interview for publish decision
 ```
 
-#### reference.md 라우팅 테이블
+#### reference.md Routing Table
 
 ```
-생성 시 로드:
-  - rules/common.md (항상)
-  - rules/scoring.md (항상)
-  - rules/{language}.md (선택된 언어)
-  - platforms/{platform}.md (선택된 플랫폼)
-  - styles/{style}.md (선택된 스타일)
+On generation, load:
+  - rules/common.md (always)
+  - rules/scoring.md (always)
+  - rules/{language}.md (selected language)
+  - platforms/{platform}.md (selected platform)
+  - styles/{style}.md (selected style)
+  - audiences/{audience}.md (selected target audience)
 
-저장 시 로드:
+On save, load:
   - flows/save.md
 
-발행 시 로드:
+On publish, load:
   - flows/publish.md
 ```
 
-#### 컨텍스트 로드 흐름
+#### Context Loading Flow
 
-`/feed threads twist-poem 알람` 실행 시:
-
-```
-SKILL.md 로드 (자동)
-  │
-  ├── Read reference.md              ← 라우팅 가이드
-  ├── Read rules/common.md           ← 공통 규칙
-  ├── Read rules/scoring.md          ← 채점 기준
-  ├── Read rules/ko.md               ← 한글 규칙
-  ├── Read platforms/threads.md      ← Threads 프로필
-  ├── Read styles/twist-poem.md      ← 반전시 스타일
-  │
-  ▼ 생성 + 채점
-  │
-  ├── Read flows/save.md             ← 저장 형식
-  ├── Write ~/.config/feed/posts/...        ← 포스트 저장
-  │
-  ▼ 발행 선택 시
-  │
-  └── Read flows/publish.md          ← 발행 로직
-```
-
-#### 인자 파싱 규칙
+When `/feed threads twist-poem 알람` is executed:
 
 ```
-/feed                              → 풀 인터뷰
-/feed threads                      → 플랫폼 지정, 나머지 인터뷰
-/feed threads twist-poem           → 플랫폼+스타일 지정, 주제만 인터뷰
-/feed threads twist-poem 알람      → 전부 지정, 바로 생성
+SKILL.md loaded (automatic)
+  |
+  +-- Read reference.md              <- Routing guide
+  +-- Read rules/common.md           <- Common rules
+  +-- Read rules/scoring.md          <- Scoring criteria
+  +-- Read rules/ko.md               <- Korean rules
+  +-- Read platforms/threads.md      <- Threads profile
+  +-- Read styles/twist-poem.md      <- Twist poem style
+  +-- Read audiences/{audience}.md   <- Target audience profile
+  |
+  v Generate + score
+  |
+  +-- Read flows/save.md             <- Save format
+  +-- Write ~/.config/feed/posts/... <- Save post
+  |
+  v If publish selected
+  |
+  +-- Read flows/publish.md          <- Publish logic
 ```
 
-#### 인터뷰 플로우 (interview.md)
+#### Argument Parsing Rules
 
 ```
-Step 1. 언어
-  → [1] 한글  [2] English
-  (preferences.json에 기본값 있으면 스킵)
-
-Step 2. 플랫폼
-  → Glob platforms/*.md로 사용 가능한 플랫폼 목록 조회
-  → [1] Threads  [2] X  [3] Reddit  [4] Dev.to  [5] 전체
-  (전체 선택 시 모든 플랫폼용으로 각각 생성)
-
-Step 3. 스타일
-  → 선택한 플랫폼 프로필에서 추천 스타일 확인
-  → Glob styles/*.md로 사용 가능한 스타일 목록 조회
-  → 해당 플랫폼 호환 스타일만 필터링해서 표시
-
-Step 4. 주제
-  → [1] 직접 입력  [2] 추천받기
-  → 추천받기: ~/.config/feed/analytics/topics.json 기반 3개 제시 (데이터 없으면 트렌드 기반)
-  → 직접 입력: 자유 텍스트
-
-Step 5. 생성
-  → 콘텐츠 생성 + 자체 평가
-  → 점수 미달 시 자동 재생성 (최대 2회)
-  → 결과 표시
-
-Step 6. 발행
-  → [1] 발행  [2] 나중에  [3] 수정 요청
-  → 발행/나중에 → ~/.config/feed/posts/에 저장
-  → 발행 선택 시 → flows/publish.md 로직 실행
-  → 수정 요청 → 수정 지시 입력 → Step 5로
+/feed                              -> Full interview
+/feed threads                      -> Platform specified, interview for the rest
+/feed threads twist-poem           -> Platform+style specified, interview for topic only
+/feed threads twist-poem 알람      -> All specified, generate immediately
 ```
 
-### 4.4 `/feed-publish` — 발행 스킬
+#### Interview Flow (interview.md)
 
 ```
-/feed-publish                      → 미발행 목록 표시 → 선택 → 발행
-/feed-publish today                → 오늘 미발행분만
-/feed-publish all                  → 전체 미발행분
+Step 1. Language
+  -> [1] 한글  [2] English
+  (Skip if preferences.json has a default)
+
+Step 2. Platform
+  -> Glob platforms/*.md to list available platforms
+  -> [1] Threads  [2] X  [3] Reddit  [4] Dev.to  [5] 전체
+  (Selecting 전체 generates for all platforms individually)
+
+Step 3. Style
+  -> Check recommended styles from selected platform profile
+  -> Glob styles/*.md to list available styles
+  -> Filter for styles compatible with the selected platform
+
+Step 4. Target Audience
+  -> Glob audiences/*.md to list available audiences
+  -> [1] 개발자  [2] 디자이너  [3] 마케터  [4] 창업가/인디해커
+     [5] 직장인  [6] 자기계발  [7] 투자/재테크  [8] 일반인
+  (Dynamically constructed from Glob results)
+
+Step 5. Topic
+  -> [1] 직접 입력  [2] 추천받기
+  -> Recommendations: based on ~/.config/feed/analytics/topics.json (or trends if no data)
+  -> Direct input: free text
+
+Step 6. Generation
+  -> Generate content + self-evaluate
+  -> Auto-regenerate on score failure (max 2 retries)
+  -> Display result
+
+Step 7. Publish Decision
+  -> [1] 발행  [2] 나중에  [3] 수정 요청
+  -> Publish/Save later -> save to ~/.config/feed/posts/
+  -> Publish -> execute flows/publish.md logic
+  -> Request edits -> receive instructions -> back to Step 6
 ```
 
-- `~/.config/feed/posts/`에서 `published: false`인 파일 검색
-- 목록 표시 → 사용자 선택
-- `flows/publish.md` 로직 실행
-
-### 4.5 `/feed-report` — 리포트 스킬
+### 4.4 `/feed-publish` -- Publish Skill
 
 ```
-/feed-report                       → 이번 주 요약
-/feed-report month                 → 이번 달 요약
-/feed-report threads               → 특정 플랫폼만
+/feed-publish                      -> Show unpublished list -> select -> publish
+/feed-publish today                -> Today's unpublished only
+/feed-publish all                  -> All unpublished
 ```
 
-리포트 내용:
-- 기간 내 생성/발행 수
-- 플랫폼별 분포
-- 스타일별 분포
-- 반응 데이터 (`~/.config/feed/analytics/engagement.json` 기반)
-- 가장 반응 좋았던 포스트 Top 3
-- API 지원 플랫폼: 자동으로 반응 데이터 갱신
-- API 미지원: 인터뷰로 수동 입력 가능
+- Search `~/.config/feed/posts/` for files with `published: false`
+- Display list -> user selects
+- Execute `flows/publish.md` logic
 
-### 4.6 `/feed-recommend` — 추천 스킬
+### 4.5 `/feed-report` -- Report Skill
 
 ```
-/feed-recommend                    → 인터뷰로 추천
-/feed-recommend threads            → 특정 플랫폼용 추천
+/feed-report                       -> This week's summary
+/feed-report month                 -> This month's summary
+/feed-report threads               -> Specific platform only
 ```
 
-추천 로직:
-1. `~/.config/feed/analytics/topics.json`에서 과거 반응 데이터 확인
-2. 잘 먹힌 주제 카테고리 분석
-3. 비슷하지만 아직 안 다룬 주제 3~5개 제시
-4. 데이터 없으면: 플랫폼 특성 + 현재 트렌드 기반 추천
+Report contents:
+- Posts generated/published in the period
+- Distribution by platform
+- Distribution by style
+- Engagement data (based on `~/.config/feed/analytics/engagement.json`)
+- Top 3 highest-engagement posts
+- API-supported platforms: automatically refresh engagement data
+- Non-API platforms: manual input via interview
+
+### 4.6 `/feed-recommend` -- Recommendation Skill
+
+```
+/feed-recommend                    -> Interview-based recommendation
+/feed-recommend threads            -> Recommendation for a specific platform
+```
+
+Recommendation logic:
+1. Check past engagement data from `~/.config/feed/analytics/topics.json`
+2. Analyze which topic categories performed well
+3. Suggest 3-5 similar but uncovered topics
+4. If no data: recommend based on platform characteristics + current trends
 
 ---
 
-## 5. 플랫폼 프로필
+## 5. Platform Profiles
 
-### 파일 위치
+### File Location
 
 `platforms/{platform}.md`
 
-### 포함 내용
+### Contents
 
 ```markdown
 # {Platform Name}
 
 ## Spec
-- 글자 수 제한
-- 지원 포맷 (텍스트, 이미지, 링크 등)
-- 해시태그 사용 여부
+- Character limits
+- Supported formats (text, image, link, etc.)
+- Hashtag usage
 
 ## Algorithm
-- 반응 가중치 (댓글 > 리포스트 > 좋아요 등)
-- 노출 방식 (팔로워 기반, 추천 기반 등)
+- Engagement weights (comments > reposts > likes, etc.)
+- Exposure method (follower-based, recommendation-based, etc.)
 
 ## What Works
-- 톤 (감성, 정보, 유머 등)
-- 길이
-- 구조
+- Tone (emotional, informational, humorous, etc.)
+- Length
+- Structure
 
 ## What Doesn't Work
-- 피해야 할 패턴
+- Patterns to avoid
 
 ## Recommended Styles
-- 이 플랫폼에서 효과적인 스타일 파일명 목록
+- List of style filenames effective on this platform
 
 ## API Publishing
-- 가능 여부: true/false
-- 인증 방식
-- 필요한 키 필드 (accounts.json 참조)
+- Supported: true/false
+- Auth method
+- Required key fields (see accounts.json)
 ```
 
-### 플랫폼별 API 발행 가능 여부
+### Per-Platform API Publishing Support
 
-| 플랫폼 | 파일명 | API 발행 | 비고 |
-|--------|--------|:---:|------|
-| Threads | `threads.md` | △ | Meta Threads API — 제한적 |
-| X (Twitter) | `x.md` | O | Twitter API v2 |
-| Reddit | `reddit.md` | O | Reddit API (PRAW) |
-| Dev.to | `devto.md` | O | Dev.to REST API |
+| Platform | Filename | API Publish | Notes |
+|----------|----------|:-----------:|-------|
+| Threads | `threads.md` | Partial | Meta Threads API -- limited |
+| X (Twitter) | `x.md` | Yes | Twitter API v2 |
+| Reddit | `reddit.md` | Yes | Reddit API (PRAW) |
+| Dev.to | `devto.md` | Yes | Dev.to REST API |
 
 ---
 
-## 6. 스타일 템플릿
+## 6. Style Templates
 
-### 파일 위치
+### File Location
 
 `styles/{style}.md`
 
-### 포함 내용
+### Contents
 
 ```markdown
 # {Style Name}
 
 ## Structure
-- 줄 수, 호흡, 반전 위치 등
+- Line count, pacing, twist placement, etc.
 
 ## Rules
-- 스타일별 고유 규칙
+- Style-specific rules
 
 ## Tone
-- 감정, 말투
+- Emotion, voice
 
 ## Good Examples
-- 레퍼런스 (이 수준을 목표로)
+- Reference material (target this quality level)
 
 ## Bad Examples
-- AI 티 나는 예시 + 왜 나쁜지
+- AI-sounding examples + why they are bad
 
 ## Scoring
-- 스타일별 채점 항목과 가중치 (rules/scoring.md의 기본 기준 위에 추가)
+- Style-specific scoring items and weights (on top of the base criteria in rules/scoring.md)
 
 ## Compatible Platforms
-- 이 스타일이 잘 먹히는 플랫폼 파일명 목록
+- List of platform filenames where this style works well
 ```
 
-### 스타일 매핑 (v1)
+### Style Mapping
 
-| 한글 이름 | 파일명 | 설명 | 호환 플랫폼 |
-|----------|--------|------|------------|
-| 반전시 | `twist-poem.md` | 감성 독백 → 마지막 줄 화자 반전 | threads, x |
-| 논쟁 | `debate.md` | 양자택일 도발. 댓글 유도 | threads, x, reddit |
-| 공감 | `relatable.md` | "나만 그런 줄 알았는데" 형 | threads, x |
-| 한줄반전 | `one-liner.md` | 2줄. 기대 → 반전 | x, threads |
-| 명언패러디 | `quote-parody.md` | 유명 격언 비틀기 | threads, x, reddit |
-| 자조 | `self-deprecation.md` | 숫자 + 자기비하 유머 | threads, x |
-
----
-
-## 7. 규칙 (rules/)
-
-### 파일 구조
-
-| 파일 | 내용 | 로드 시점 |
-|------|------|----------|
-| `common.md` | AI 티 방지, 구조 변주, 금지 패턴, 입말 강제 | 생성 시 항상 |
-| `scoring.md` | 채점 항목, 통과 기준, 재생성 조건 | 생성 시 항상 |
-| `ko.md` | 한글 작성 규칙 (반말, 축약, 구어체) | 언어=ko 시 |
-| `en.md` | 영어 작성 규칙 (casual, contractions) | 언어=en 시 |
-
-### 확장 시
-
-새 언어 추가: `rules/ja.md` 추가 → 기존 파일 수정 불필요
-새 규칙 카테고리: `rules/brand-voice.md` 추가 → reference.md에 로드 조건 추가
+| Name | Filename | Description | Compatible Platforms |
+|------|----------|-------------|---------------------|
+| Twist Poem | `twist-poem.md` | Emotional monologue -> last line reveals a twist in the speaker/subject | threads, x |
+| Debate | `debate.md` | Binary-choice provocation. Drives comments | threads, x, reddit |
+| Relatable | `relatable.md` | "I thought it was just me" type | threads, x |
+| One-liner | `one-liner.md` | 2 lines. Expectation -> twist | x, threads |
+| Quote Parody | `quote-parody.md` | Twisting famous quotes/sayings | threads, x, reddit |
+| Self-deprecation | `self-deprecation.md` | Numbers + self-deprecating humor | threads, x |
+| Insight | `insight.md` | Sharp observation or non-obvious insight | threads, x, devto |
+| Curated List | `curated-list.md` | Curated list of resources/tips/tools | threads, devto, reddit |
 
 ---
 
-## 8. 플로우 (flows/)
+## 7. Target Audiences
 
-### 파일 구조
+### File Location
 
-| 파일 | 내용 | 로드 시점 |
-|------|------|----------|
-| `save.md` | frontmatter 스펙, 파일 경로 규칙, 저장 프로세스 | 생성 완료 후 |
-| `publish.md` | API/클립보드 분기, 실패 처리, 상태 업데이트 | 발행 선택 시 |
+`audiences/{audience}.md`
 
-### 확장 시
+### Contents
 
-예약 발행: `flows/schedule.md` 추가
-멀티 플랫폼 동시 발행: `flows/multi-publish.md` 추가
+Each audience profile defines the tone, terminology level, and search sources used during content generation. The audience influences both what topics are recommended and how the content is written.
+
+### Audience Mapping
+
+| Name | Filename | Description |
+|------|----------|-------------|
+| Developer | `developer.md` | Software developers -- technical terms OK, references to GitHub/Stack Overflow |
+| Designer | `designer.md` | Designers -- visual/UX terminology, design tool references |
+| Marketer | `marketer.md` | Marketers -- growth/funnel terminology, campaign references |
+| Indie Hacker | `indie-hacker.md` | Founders/indie hackers -- startup terminology, bootstrapping context |
+| Worker | `worker.md` | Office workers -- workplace humor, corporate life references |
+| Self-improvement | `self-improvement.md` | Self-improvement enthusiasts -- productivity, habit-building context |
+| Investor | `investor.md` | Investors / personal finance -- financial terminology, market references |
+| General | `general.md` | General audience -- no jargon, universally relatable topics |
+
+### Flexible Handling
+
+Unlike platforms/styles, target audience handling is flexible. If the user enters a value not in the list, load the closest matching profile as a base and apply additional context:
+- "Frontend developer" -> `developer.md` base + frontend context
+- "College student" -> `general.md` base + student context
+- "PM" -> `worker.md` base + product management context
 
 ---
 
-## 9. 발행 플로우
+## 8. Rules (rules/)
+
+### File Structure
+
+| File | Contents | Loaded When |
+|------|----------|-------------|
+| `common.md` | AI prevention, structure variation, forbidden patterns, colloquial tone enforcement | Always during generation |
+| `scoring.md` | Scoring items, pass criteria, regeneration conditions | Always during generation |
+| `ko.md` | Korean writing rules (casual speech, abbreviations, spoken style) | When language=ko |
+| `en.md` | English writing rules (casual tone, contractions) | When language=en |
+
+### Extending
+
+New language: Add `rules/ja.md` -> no existing file modifications needed
+New rule category: Add `rules/brand-voice.md` -> add load condition in reference.md
+
+---
+
+## 9. Flows (flows/)
+
+### File Structure
+
+| File | Contents | Loaded When |
+|------|----------|-------------|
+| `save.md` | Frontmatter spec, file path convention, save process | After generation completes |
+| `publish.md` | API/clipboard branching, failure handling, status update | When publish is selected |
+
+### Extending
+
+Scheduled publishing: Add `flows/schedule.md`
+Multi-platform simultaneous publishing: Add `flows/multi-publish.md`
+
+---
+
+## 10. Publish Flow
 
 ```
-사용자: [발행] 선택
-         │
-         ▼
-    ~/.config/feed/posts/에 저장 (published: false)
-         │
-         ▼
-    ~/.config/feed/config/accounts.json에서
-    해당 플랫폼 enabled 확인
-         │
-    ┌────┴────┐
-    │         │
+User: selects [Publish]
+         |
+         v
+    Save to ~/.config/feed/posts/ (published: false)
+         |
+         v
+    Check enabled in
+    ~/.config/feed/config/accounts.json
+    for the target platform
+         |
+    +----+----+
+    |         |
   enabled    disabled
   = true     = false
-    │         │
-    ▼         ▼
- 인터뷰:    "클립보드에 복사했습니다"
- "자동      published: true
+    |         |
+    v         v
+ Interview:  "클립보드에 복사했습니다"
+ "자동       published: true
   발행       publish_method: clipboard
   할까요?"
-    │
-  ┌─┴─┐
-  │   │
- 예  아니오
-  │   │
-  ▼   ▼
- API  클립보드
- 발행  복사
-  │   │
-  ▼   ▼
+    |
+  +-+-+
+  |   |
+ Yes  No
+  |   |
+  v   v
+ API  Clipboard
+ pub  copy
+  |   |
+  v   v
  published: true
  publish_method: api | clipboard
 ```
 
-### 발행 실패 처리
+### Failure Handling
 
-- API 발행 실패 → 에러 표시 → 자동으로 클립보드 복사 폴백
-- 파일에 `publish_method: failed`, `error: {메시지}` 기록
+- API publish failure -> display error -> automatically fall back to clipboard copy
+- Record `publish_method: failed`, `error: {message}` in the file
 
 ---
 
-## 10. 포스트 저장 형식
+## 11. Post Save Format
 
-### 파일 경로
+### File Path
 
 ```
 ~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/{HHMMSS}-{style}-{NNN}.md
 ```
 
-예시:
+Examples:
 
 ```
 ~/.config/feed/posts/threads/2026/04/09/143022-twist-poem-001.md
 ~/.config/feed/posts/x/2026/04/09/201500-one-liner-001.md
 ```
 
-### 파일 내용 (frontmatter + 본문)
+### File Contents (frontmatter + body)
 
 ```markdown
 ---
 platform: threads
 style: twist-poem
 topic: alarm
+audience: developer
 language: ko
 created_at: 2026-04-09T14:30:22
 published: true
@@ -554,7 +610,7 @@ engagement:
 
 ---
 
-## 11. 사용자 데이터
+## 12. User Data
 
 ### ~/.config/feed/config/preferences.json
 
@@ -646,14 +702,14 @@ engagement:
 }
 ```
 
-### 반응 데이터 수집
+### Engagement Data Collection
 
-- API 지원 플랫폼: `/feed-report` 실행 시 자동으로 API 호출 → engagement.json 업데이트
-- API 미지원: `/feed-report` 실행 시 인터뷰로 수동 입력 가능
+- API-supported platforms: Automatically call API on `/feed-report` -> update engagement.json
+- Non-API platforms: Manual input via interview on `/feed-report`
 
 ---
 
-## 12. 플러그인 설정 파일
+## 13. Plugin Configuration Files
 
 ### .claude-plugin/plugin.json
 
@@ -690,76 +746,87 @@ engagement:
 
 ---
 
-## 13. 크론 / 스케줄
+## 14. Scheduling
 
-Claude Code의 `/schedule` 기능 활용.
+Leverages Claude Code's `/schedule` feature.
 
-| 스케줄 | 커맨드 | 설명 |
-|--------|--------|------|
-| 매일 오전 9시 | `/feed-recommend` | 오늘의 주제 추천 |
-| 매주 월요일 | `/feed-report week` | 주간 리포트 |
-| 매월 1일 | `/feed-report month` | 월간 리포트 |
-
----
-
-## 14. 확장성 매트릭스
-
-| 확장 시나리오 | 추가할 파일 | 기존 파일 수정 |
-|-------------|-----------|:---:|
-| 새 플랫폼 (LinkedIn) | `platforms/linkedin.md` | X |
-| 새 스타일 (정보공유) | `styles/informative.md` | X |
-| 새 언어 (일본어) | `rules/ja.md` | X |
-| 새 플로우 (예약발행) | `flows/schedule.md` | X |
-| 새 스킬 (A/B 테스트) | `skills/feed-ab-test/SKILL.md` | X |
-| 채점 기준 변경 | `rules/scoring.md` 수정 | O (해당 파일만) |
-| 사용자 커스텀 스타일 | `~/.config/feed/styles/custom.md` | X |
+| Schedule | Command | Description |
+|----------|---------|-------------|
+| Daily 9 AM | `/feed-recommend` | Today's topic recommendation |
+| Every Monday | `/feed-report week` | Weekly report |
+| 1st of each month | `/feed-report month` | Monthly report |
 
 ---
 
-## 15. 구현 순서
+## 15. Extensibility Matrix
 
-### Phase 1: 핵심 (Threads 중심)
+| Scenario | File to Add | Modify Existing Files |
+|----------|-------------|:---------------------:|
+| New platform (LinkedIn) | `platforms/linkedin.md` | No |
+| New style (informative) | `styles/informative.md` | No |
+| New audience (students) | `audiences/student.md` | No |
+| New language (Japanese) | `rules/ja.md` | No |
+| New flow (scheduled publish) | `flows/schedule.md` | No |
+| New skill (A/B test) | `skills/feed-ab-test/SKILL.md` | No |
+| Change scoring criteria | `rules/scoring.md` edit | Yes (that file only) |
+| User custom style | `~/.config/feed/styles/custom.md` | No |
 
-- [ ] `.claude-plugin/plugin.json` 매니페스트
-- [ ] `settings.json` 기본 권한
-- [ ] `CLAUDE.md` 플러그인 개발 가이드
-- [ ] `rules/common.md` AI 티 방지 규칙
-- [ ] `rules/scoring.md` 채점 기준
-- [ ] `rules/ko.md` 한글 규칙
-- [ ] `platforms/threads.md` Threads 프로필
-- [ ] `styles/twist-poem.md` 반전시
-- [ ] `styles/debate.md` 논쟁
-- [ ] `styles/relatable.md` 공감
-- [ ] `styles/one-liner.md` 한줄반전
-- [ ] `styles/quote-parody.md` 명언패러디
-- [ ] `styles/self-deprecation.md` 자조
-- [ ] `flows/save.md` 저장 형식
-- [ ] `flows/publish.md` 발행 로직
-- [ ] `skills/feed/SKILL.md` 메인 라우터
-- [ ] `skills/feed/interview.md` 인터뷰 플로우
-- [ ] `skills/feed/reference.md` 라우팅 가이드
-- [ ] `~/.config/feed/` 초기화 로직
+---
 
-### Phase 2: 발행 & 분석
+## 16. Implementation Order
 
-- [ ] `skills/feed-publish/SKILL.md` 발행 스킬
-- [ ] `skills/feed-report/SKILL.md` 리포트 스킬
-- [ ] `skills/feed-recommend/SKILL.md` 추천 스킬
-- [ ] 반응 수동 입력 인터뷰
-- [ ] `README.md` 사용자 가이드
+### Phase 1: Core (Threads-centric)
 
-### Phase 3: 플랫폼 확장
+- [ ] `.claude-plugin/plugin.json` manifest
+- [ ] `settings.json` default permissions
+- [ ] `CLAUDE.md` plugin development guide
+- [ ] `rules/common.md` AI prevention rules
+- [ ] `rules/scoring.md` scoring criteria
+- [ ] `rules/ko.md` Korean rules
+- [ ] `platforms/threads.md` Threads profile
+- [ ] `styles/twist-poem.md` twist poem
+- [ ] `styles/debate.md` debate
+- [ ] `styles/relatable.md` relatable
+- [ ] `styles/one-liner.md` one-liner
+- [ ] `styles/quote-parody.md` quote parody
+- [ ] `styles/self-deprecation.md` self-deprecation
+- [ ] `styles/insight.md` insight
+- [ ] `styles/curated-list.md` curated list
+- [ ] `audiences/developer.md` developer profile
+- [ ] `audiences/designer.md` designer profile
+- [ ] `audiences/marketer.md` marketer profile
+- [ ] `audiences/indie-hacker.md` indie hacker profile
+- [ ] `audiences/worker.md` worker profile
+- [ ] `audiences/self-improvement.md` self-improvement profile
+- [ ] `audiences/investor.md` investor profile
+- [ ] `audiences/general.md` general profile
+- [ ] `flows/save.md` save format
+- [ ] `flows/publish.md` publish logic
+- [ ] `skills/feed/SKILL.md` main router
+- [ ] `skills/feed/interview.md` interview flow
+- [ ] `skills/feed/reference.md` routing guide
+- [ ] `~/.config/feed/` initialization logic
 
-- [ ] `platforms/x.md` X 프로필
-- [ ] `platforms/reddit.md` Reddit 프로필
-- [ ] `platforms/devto.md` Dev.to 프로필
-- [ ] `rules/en.md` 영어 규칙
-- [ ] API 발행 연동 (X, Reddit, Dev.to)
+### Phase 2: Publishing & Analytics
 
-### Phase 4: 고도화
+- [ ] `skills/feed-publish/SKILL.md` publish skill
+- [ ] `skills/feed-report/SKILL.md` report skill
+- [ ] `skills/feed-recommend/SKILL.md` recommendation skill
+- [ ] Manual engagement input interview
+- [ ] `README.md` user guide
 
-- [ ] 크론 스케줄 설정 가이드
-- [ ] 반응 데이터 기반 추천 고도화
-- [ ] 사용자 커스텀 스타일 지원 (`~/.config/feed/styles/`)
+### Phase 3: Platform Expansion
+
+- [ ] `platforms/x.md` X profile
+- [ ] `platforms/reddit.md` Reddit profile
+- [ ] `platforms/devto.md` Dev.to profile
+- [ ] `rules/en.md` English rules
+- [ ] API publish integration (X, Reddit, Dev.to)
+
+### Phase 4: Advanced
+
+- [ ] Cron schedule setup guide
+- [ ] Engagement-based recommendation improvements
+- [ ] User custom style support (`~/.config/feed/styles/`)
 - [ ] `LICENSE`, `CHANGELOG.md`
-- [ ] 플러그인 배포 (GitHub)
+- [ ] Plugin distribution (GitHub)

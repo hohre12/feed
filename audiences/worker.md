@@ -1,31 +1,36 @@
-# 직장인 (Worker)
+# Office Worker
 
-## 검색 소스
-### 주제 없을 때
-- 1순위: 직장인 커뮤니티 트렌드 (블라인드, 잡플래닛 인기글)
-- 2순위: 취업/이직 관련 뉴스
-- 3순위: 업무 생산성 도구 트렌드
-- 4순위: 노동법/복지 관련 최신 뉴스
+## Search Sources
 
-### 주제 있을 때
-- 1순위: 관련 커뮤니티 반응/경험담
-- 2순위: 노동부/공식 기관 자료
-- 3순위: 일반 뉴스
+### No Topic (Content Discovery)
+1. Workplace community trends (Blind, Glassdoor popular posts)
+2. Job/career change news
+3. Productivity tool trends
+4. Labor law/benefits-related news
 
-## 톤
-- 회사원 공감 톤 — "월요일", "야근", "회의", "상사"
-- 적당한 불만 + 자조 — 너무 심각하지 않게
-- "퇴근하고 이거 봄", "점심시간에 몰래 보는 중" 톤
-- 직급/부서 특화 가능 ("신입은...", "개발팀은...", "마케팅팀은...")
+### With Topic (Fact Verification)
+1. Relevant community reactions/experience stories
+2. Government labor department/official agency resources
+3. General news outlets
 
-## 용어 수준
-- 직장 일상 용어 (보고서, 회의, KPI, OKR)
-- 과한 비즈니스 전문 용어 X
-- 누구나 아는 직장 생활 용어
+## Tone
+- Office worker empathy tone — "Monday", "overtime", "meetings", "the boss"
+- Moderate complaints + self-deprecation — keep it light, not bitter
+- "Saw this after clocking out", "Sneaking a look during lunch break" tone
+- Can target specific roles/departments ("As a new hire...", "The dev team...", "Marketing team be like...")
 
-## 잘 먹히는 스타일
-- relatable: 직장인 일상 공감 (회의, 야근, 점심 메뉴)
-- self-deprecation: 직장인 자조 ("연봉은 그대로인데 물가만...")
-- twist-poem: 출근/퇴근/월급을 화자로
-- debate: 직장 논쟁 ("재택 vs 출근", "칼퇴 vs 야근")
-- insight: 업무 팁, 이직 팁, 연차 활용법
+## Terminology Level
+- Everyday workplace terms (reports, meetings, KPI, OKR)
+- No heavy business jargon
+- Common office life vocabulary that everyone knows
+
+## Recommended Styles
+- **relatable**: Office worker daily life (meetings, overtime, what to eat for lunch)
+- **self-deprecation**: Worker self-roasts ("Salary stays the same but prices keep going up...")
+- **twist-poem**: Commute/paycheck/clock as the speaker — works perfectly because mundane work objects become unexpectedly emotional
+- **debate**: Workplace controversies ("remote vs office", "leave on time vs overtime culture")
+- **insight**: Productivity tips, job-switching tips, how to use your PTO wisely
+
+## Not Recommended Styles
+- **curated-list**: Tool recommendation lists feel like homework to office workers scrolling during break time. This audience wants emotional relief, not another to-do list.
+- **quote-parody**: Famous quotes land awkwardly when the audience's humor is rooted in specific, shared workplace suffering rather than literary references.

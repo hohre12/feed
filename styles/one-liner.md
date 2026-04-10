@@ -1,30 +1,47 @@
-# 한줄반전 (One-Liner Twist)
+# One-Liner Twist
 
-딱 2줄. 첫 줄이 기대를 만들고, 둘째 줄이 완전히 뒤집는다.
+> Exactly 2 lines. The first line sets an expectation; the second line completely destroys it.
 
-## 구조
+---
 
-1. **1줄**: 기대를 만든다 (긍정적이든 진지하든 방향을 잡아준다)
-2. **2줄**: 그 기대를 완전히 부순다
-3. 짧을수록 좋다
+## Structure
 
-## 규칙
+1. **Line 1**: Set up an expectation (positive, serious, or directional)
+2. **Line 2**: Completely shatter that expectation
+3. Shorter is always better
 
-- **최대 2줄** (절대 불변. 3줄 이상은 이 스타일이 아니다.)
-- 1줄은 명확한 기대를 심어야 한다.
-- 2줄은 그 기대를 유머로 박살내야 한다.
-- 기대와 현실의 간극 = 웃음 포인트.
-- 화자 표시 금지 ("엄마:", "친구:" 같은 거 쓰지 않는다. twist-poem과 다른 점.)
-- 구체적이고 구체적인 상황일수록 좋다.
-- 감성적이거나 교훈적인 마무리 금지. 반전이 곧 끝이다.
+---
 
-## 좋은 예시
+## Rules
+
+- **Maximum 2 lines** (absolute and non-negotiable. 3+ lines means this is no longer a one-liner twist)
+- Line 1 must plant a clear expectation
+- Line 2 must demolish that expectation with humor
+- The gap between expectation and reality = the humor
+- No speaker labels ("엄마:", "친구:" — this is NOT twist-poem)
+- The more specific and concrete the situation, the better
+- No sentimental or preachy endings. The twist IS the ending
+
+---
+
+## Tone
+
+- **Deadpan delivery** — The humor comes from the gap, not the tone
+- **Matter-of-fact** — State the setup plainly, as if reporting a fact
+- **Self-deprecating** — The twist usually lands on the writer's own failure or absurdity
+- **Colloquial Korean** — Casual endings like ~임, ~함, ~됨. Never formal
+- **Zero padding** — Every single word must earn its place
+
+---
+
+## Good Examples
 
 ```
 운동 3일차 몸이 달라졌다
 계단 못 올라감
 ```
-"몸이 달라졌다"가 긍정적 기대 -> "계단 못 올라감"이 완전히 뒤집는다.
+
+"몸이 달라졌다" creates a positive expectation -> "계단 못 올라감" completely flips it.
 
 ```
 올해 목표 10개 세웠는데
@@ -41,13 +58,16 @@
 내가 계발된 건 독서량뿐
 ```
 
-## 나쁜 예시
+---
+
+## Bad Examples
 
 ```
 오늘 열심히 살았다
 내일도 열심히 살자
 ```
-왜 나쁜가: 반전이 없다. 그냥 다짐이다.
+
+**Why it fails:** No twist. It's just an affirmation.
 
 ```
 아침에 일어나서
@@ -55,16 +75,26 @@
 출근을 했는데
 상사가 화를 냈다
 ```
-왜 나쁜가: 4줄이다. 이 스타일은 2줄이 최대다.
 
-## 채점 기준
+**Why it fails:** 4 lines. This style's maximum is 2 lines.
 
-- **유머 (humor)**: 가장 중요. 반전에서 웃음이 나와야 한다.
-- **간결함 (brevity)**: 가장 중요. 짧아야 한다.
-- 반전 강도: 기대와 결과의 낙차가 클수록 좋다.
-- 구체성: 상황이 구체적일수록 웃기다.
+---
 
-## 호환 플랫폼
+## Scoring Weights
 
-- x (짧은 포맷이 X에 가장 잘 맞는다)
-- threads
+The most important scoring criteria for this style:
+
+| Priority | Criterion | Reason |
+|----------|-----------|--------|
+| 1 | `humor` | The most critical. The twist must land a laugh |
+| 2 | `brevity` | Equally critical. It MUST be short — that's the entire format |
+| 3 | `twist` | The drop between expectation and result must be steep |
+| 4 | `relatability` | The more specific and concrete the situation, the funnier |
+| 5 | `human-feel` | Must sound natural, but less of a differentiator in this ultra-short format |
+
+---
+
+## Compatible Platforms
+
+- **x** — The short format fits X best
+- **threads** — Works well as a quick-scroll stop

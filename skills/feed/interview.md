@@ -1,18 +1,18 @@
-# 인터뷰 플로우
+# Interview Flow
 
-> `/feed` 스킬의 인터뷰 단계별 상세 지침.
-> 모든 사용자 상호작용은 AskUserQuestion 도구를 사용한다.
-> $ARGUMENTS로 이미 제공된 값이 있으면 해당 단계를 건너뛴다.
+> Detailed step-by-step instructions for the `/feed` skill interview.
+> All user interactions use the AskUserQuestion tool.
+> If a value has already been provided via $ARGUMENTS, skip that step.
 
 ---
 
-## Step 1. 언어 선택
+## Step 1. Language Selection
 
-### 스킵 조건
-- `~/.config/feed/config/preferences.json`을 읽는다.
-- `interview.skip_language`가 `true`이고 `default_language`가 설정되어 있으면 → 해당 언어를 사용하고 이 단계를 건너뛴다.
+### Skip Condition
+- Read `~/.config/feed/config/preferences.json`.
+- If `interview.skip_language` is `true` and `default_language` is set → use that language and skip this step.
 
-### 질문
+### Question
 ```
 AskUserQuestion:
   "언어를 선택해주세요.
@@ -21,23 +21,23 @@ AskUserQuestion:
   [2] English"
 ```
 
-### 처리
-- `1` 또는 `한글` → `language = "ko"` → `rules/ko.md` 로드 대상
-- `2` 또는 `English` → `language = "en"` → `rules/en.md` 로드 대상
+### Processing
+- `1` or `한글` → `language = "ko"` → load target: `rules/ko.md`
+- `2` or `English` → `language = "en"` → load target: `rules/en.md`
 
 ---
 
-## Step 2. 플랫폼 선택
+## Step 2. Platform Selection
 
-### 스킵 조건
-- `$ARGUMENTS[0]`이 유효한 플랫폼 ID이면 → 해당 플랫폼을 사용하고 이 단계를 건너뛴다.
+### Skip Condition
+- If `$ARGUMENTS[0]` is a valid platform ID → use that platform and skip this step.
 
-### 목록 구성
-1. `Glob platforms/*.md`로 사용 가능한 플랫폼 파일 목록을 가져온다.
-2. 각 파일명에서 `.md`를 제거하여 플랫폼 ID 목록을 만든다.
-3. 번호 목록 + "전체" 옵션을 구성한다.
+### List Construction
+1. Run `Glob platforms/*.md` to get the list of available platform files.
+2. Remove `.md` from each filename to build the platform ID list.
+3. Construct a numbered list with an "all" option.
 
-### 질문
+### Question
 ```
 AskUserQuestion:
   "플랫폼을 선택해주세요.
@@ -50,29 +50,32 @@ AskUserQuestion:
   [N] 전체 (모든 플랫폼용으로 각각 생성)"
 ```
 
-실제 목록은 Glob 결과에 따라 동적으로 구성한다. 위는 예시.
+The actual list is dynamically constructed from the Glob results. The above is an example.
 
-### 처리
-- 번호 또는 플랫폼 이름 입력 → 해당 플랫폼 선택
-- `전체` 선택 시 → 모든 플랫폼에 대해 각각 콘텐츠를 생성한다. Step 3~7을 플랫폼별로 반복.
-- **목록에 없는 플랫폼 입력 시** (예: "인스타그램", "링크드인") → 해당 플랫폼에 대한 LLM 지식을 기반으로 동적 대응한다. 글자 수 제한, 톤, 알고리즘 특성을 추론하여 생성에 반영한다. 단, `rules/common.md`, `rules/scoring.md` 등 공통 규칙은 동일하게 적용한다.
+### Processing
+- Number or platform name input → select that platform
+- Selecting `전체` → generate content for each platform individually. Repeat Steps 3-7 per platform.
+- **If a platform not in the list is entered** (e.g., "인스타그램", "링크드인") → dynamically adapt using LLM knowledge about that platform. Infer character limits, tone, and algorithm characteristics for content generation. Common rules such as `rules/common.md` and `rules/scoring.md` still apply.
+
+### Error Handling
+- If `$ARGUMENTS[0]` is provided but does not match any valid platform ID or Korean alias → show the available platform list and ask the user to select again via AskUserQuestion.
 
 ---
 
-## Step 3. 스타일 선택
+## Step 3. Style Selection
 
-### 스킵 조건
-- `$ARGUMENTS[1]`이 유효한 스타일 ID이면 → 해당 스타일을 사용하고 이 단계를 건너뛴다.
+### Skip Condition
+- If `$ARGUMENTS[1]` is a valid style ID → use that style and skip this step.
 
-### 목록 구성
-1. 선택된 플랫폼 파일(`platforms/{platform}.md`)을 읽어서 **"Recommended Styles"** 섹션에서 추천 스타일 목록을 가져온다.
-2. `Glob styles/*.md`로 전체 스타일 파일 목록을 가져온다.
-3. 각 스타일 파일의 **"호환 플랫폼"** 섹션을 확인하여, 선택된 플랫폼과 호환되는 스타일을 필터링한다.
-4. **반드시 호환되는 모든 스타일을 하나의 질문에 전부 번호 매겨서 보여준다.** 일부만 보여주고 나머지를 "추가 옵션"으로 분리하지 않는다.
-5. 표시 순서: 추천 스타일에 ⭐ 표시를 붙이되, 비추천도 같은 목록에 번호를 매긴다.
+### List Construction
+1. Read the selected platform file (`platforms/{platform}.md`) and extract the recommended style list from the **"Recommended Styles"** section.
+2. Run `Glob styles/*.md` to get the full list of style files.
+3. Check the **"Compatible Platforms"** section of each style file and filter for styles compatible with the selected platform.
+4. **All compatible styles must be listed in a single question with numbered options.** Do not show only some and separate the rest as "additional options".
+5. Display order: Mark recommended styles with a star, but include non-recommended styles in the same numbered list.
 
-### 질문
-**중요: 모든 호환 스타일을 하나의 AskUserQuestion에 번호 매겨서 전부 나열한다. 4개 이상이어도 나눠서 보여주지 않는다.**
+### Question
+**Important: List all compatible styles in a single AskUserQuestion with numbered options. Do not split into multiple messages even if there are 4 or more.**
 
 ```
 AskUserQuestion:
@@ -86,23 +89,26 @@ AskUserQuestion:
   [6] 논쟁 (debate) ⭐"
 ```
 
-실제 목록은 Glob 결과와 플랫폼 추천에 따라 동적으로 구성한다. 위는 Threads 선택 시 예시.
+The actual list is dynamically constructed from Glob results and platform recommendations. The above is an example for Threads.
 
-### 처리
-- 번호 또는 스타일 이름/ID 입력 → 해당 스타일 선택
-- **목록에 없는 스타일 입력 시** (예: "스토리텔링", "뉴스") → 해당 스타일에 대한 LLM 지식을 기반으로 동적 대응한다. 사용자가 설명한 스타일의 구조와 톤을 추론하여 생성에 반영한다. 단, `rules/common.md`, `rules/scoring.md` 등 공통 규칙은 동일하게 적용한다.
+### Processing
+- Number or style name/ID input → select that style
+- **If a style not in the list is entered** (e.g., "스토리텔링", "뉴스") → dynamically adapt using LLM knowledge about that style. Infer the structure and tone described by the user and reflect it in generation. Common rules such as `rules/common.md` and `rules/scoring.md` still apply.
+
+### Error Handling
+- If `$ARGUMENTS[1]` is provided but does not match any valid style ID or Korean alias → show the available style list and ask the user to select again via AskUserQuestion.
 
 ---
 
-## Step 4. 타겟 독자 선택
+## Step 4. Target Audience Selection
 
-### 목록 구성
-1. `Glob audiences/*.md`로 사용 가능한 타겟 목록을 가져온다.
-2. 파일명에서 `.md`를 제거하여 타겟 ID 목록을 만든다.
-3. 한글 표시명과 함께 번호 매겨서 전부 나열한다.
+### List Construction
+1. Run `Glob audiences/*.md` to get the list of available targets.
+2. Remove `.md` from each filename to build the target ID list.
+3. Display all targets in a single numbered list with Korean display names.
 
-### 질문
-**모든 타겟을 하나의 AskUserQuestion에 번호 매겨서 전부 나열한다.**
+### Question
+**List all targets in a single AskUserQuestion with numbered options.**
 
 ```
 AskUserQuestion:
@@ -118,31 +124,31 @@ AskUserQuestion:
   [8] 일반인 (general)"
 ```
 
-실제 목록은 Glob 결과에 따라 동적으로 구성한다. 위는 예시.
+The actual list is dynamically constructed from Glob results. The above is an example.
 
-### 처리
-- 번호 또는 타겟 이름/ID 입력 → 해당 타겟 선택
-- 선택된 타겟의 `audiences/{audience}.md` 파일을 로드한다
-- 이 파일의 **검색 소스**가 Step 5(주제 입력)의 검색 방향을 결정한다
-- 이 파일의 **톤/용어 수준**이 Step 6(생성)의 문체를 결정한다
+### Processing
+- Number or target name/ID input → select that target
+- Load the selected target's `audiences/{audience}.md` file
+- The **search sources** in this file determine the search direction for Step 5 (topic input)
+- The **tone/terminology level** in this file determines the writing style for Step 6 (generation)
 
-### 목록에 없는 타겟 입력 시
-플랫폼/스타일과 달리, 타겟 독자는 **유연하게 대응**한다:
-- "프론트엔드 개발자" → `developer.md` 기반 + 프론트엔드 맥락 반영 (검색 시 React/Vue/CSS 등 가중)
-- "대학생" → `general.md` 기반 + 대학생 맥락 반영 (검색 시 대학 커뮤니티, 학생 할인 등 가중)
-- "PM" → `worker.md` 기반 + PM 맥락 반영 (검색 시 제품 관리, 애자일 등 가중)
-- 가장 가까운 프로필 파일을 로드하되, 사용자가 입력한 구체적 맥락을 톤/검색에 추가 반영한다
-- 어떤 프로필을 기반으로 했는지 사용자에게 알려준다: "개발자(developer) 프로필 기반으로 프론트엔드에 맞춰 조정합니다."
+### Handling Targets Not in the List
+Unlike platforms/styles, target audience handling is **flexible**:
+- "프론트엔드 개발자" → based on `developer.md` + frontend context applied (weight toward React/Vue/CSS in searches)
+- "대학생" → based on `general.md` + college student context applied (weight toward campus communities, student discounts in searches)
+- "PM" → based on `worker.md` + PM context applied (weight toward product management, agile in searches)
+- Load the closest matching profile file, but additionally reflect the specific context the user entered in tone/search
+- Inform the user which profile was used as the base: "개발자(developer) 프로필 기반으로 프론트엔드에 맞춰 조정합니다."
 
 ---
 
-## Step 5. 주제 입력
+## Step 5. Topic Input
 
-### 스킵 조건
-- 스마트 파싱에서 topic이 결정되었으면 → 해당 값을 주제로 사용하고 이 단계를 건너뛴다.
-- topic이 긴 문장(10자 이상)이면 → "소재 텍스트"로 취급한다. 키워드가 아니라 사용자가 쓴 원본 글이므로, 이 내용을 선택된 스타일에 맞게 가공/재해석하여 콘텐츠를 만든다.
+### Skip Condition
+- If topic was determined from smart parsing → use that value as the topic and skip this step.
+- If the topic is a long sentence (10+ characters) → treat it as "source material text". Since it is original text written by the user (not a keyword), process and reinterpret this content to create content fitting the selected style.
 
-### 질문 (방식 선택)
+### Question (Method Selection)
 ```
 AskUserQuestion:
   "주제를 어떻게 정할까요?
@@ -151,20 +157,20 @@ AskUserQuestion:
   [2] 추천받기"
 ```
 
-### [1] 직접 입력 선택 시
+### [1] Direct Input
 ```
 AskUserQuestion:
   "주제를 입력해주세요.
   키워드(예: 알람, 다이어트)도 되고, 하고 싶은 말을 길게 써도 됩니다."
 ```
 
-긴 텍스트가 입력되면 → 해당 내용을 **소재 텍스트**로 취급한다. 사용자가 쓴 원본의 핵심 메시지를 추출하여 선택된 스타일에 맞게 가공한다. 원본의 감정/의도는 살리되 스타일 규칙에 맞게 변환한다.
+If long text is entered → treat as **source material text**. Extract the core message from the user's original text and process it to fit the selected style. Preserve the original emotion/intent but transform according to style rules.
 
-### [2] 추천받기 선택 시
-1. `~/.config/feed/analytics/topics.json`을 읽는다.
-2. 선택된 타겟 독자의 `audiences/{audience}.md`에서 **검색 소스**를 확인한다.
-3. **데이터가 있으면**: 과거 engagement 데이터를 분석하여 반응이 좋았던 카테고리에서 아직 다루지 않았거나 반응이 좋았던 주제 3개를 추천한다.
-4. **데이터가 없으면**: 타겟 독자의 검색 소스(1순위부터)에서 **WebSearch**로 실제 트렌딩/인기 주제를 검색하여 3개를 추천한다. (예: 타겟=개발자 → GitHub Trending 검색 → 실제 트렌딩 프로젝트 추천)
+### [2] Get Recommendations
+1. Read `~/.config/feed/analytics/topics.json`.
+2. Check the **search sources** in the selected target audience's `audiences/{audience}.md`.
+3. **If data exists**: Analyze past engagement data to recommend 3 topics from categories that performed well but haven't been covered yet (or performed well previously).
+4. **If no data exists**: Search for actual trending/popular topics from the target audience's search sources (starting from priority 1) using **WebSearch**. (e.g., target=developer → search GitHub Trending → recommend actual trending projects)
 
 ```
 AskUserQuestion:
@@ -177,56 +183,56 @@ AskUserQuestion:
   번호를 선택하거나, 다른 주제를 직접 입력해주세요."
 ```
 
-### 처리
-- 번호 선택 → 해당 추천 주제 사용
-- 자유 텍스트 입력 → 입력된 텍스트를 주제로 사용
+### Processing
+- Number selection → use that recommended topic
+- Free text input → use the entered text as the topic
 
 ---
 
-## Step 6. 콘텐츠 생성
+## Step 6. Content Generation
 
-이 단계에서는 사용자와 상호작용하지 않고, 수집된 정보를 바탕으로 콘텐츠를 생성한다.
+This step involves no user interaction. Content is generated based on the collected information.
 
-### 파일 로드
-`reference.md`의 라우팅 테이블에 따라 필요한 파일을 모두 읽는다:
-- `rules/common.md` (항상)
-- `rules/scoring.md` (항상)
-- `rules/{language}.md` (선택된 언어)
-- `platforms/{platform}.md` (선택된 플랫폼)
-- `styles/{style}.md` (선택된 스타일)
-- `audiences/{audience}.md` (선택된 타겟 독자)
+### File Loading
+Load all required files according to the routing table in `reference.md`:
+- `rules/common.md` (always)
+- `rules/scoring.md` (always)
+- `rules/{language}.md` (selected language)
+- `platforms/{platform}.md` (selected platform)
+- `styles/{style}.md` (selected style)
+- `audiences/{audience}.md` (selected target audience)
 
-### 검색 (정보성 스타일 또는 팩트 필요 시)
-- 타겟 독자 파일의 **검색 소스** 섹션을 확인한다.
-- 주제에 맞는 검색 소스에서 **WebSearch**로 최신 정보를 검색한다.
-- 검색 소스 우선순위를 따른다 (1순위부터 순서대로).
-- 검증된 팩트/숫자/사례를 수집한 뒤 콘텐츠에 반영한다.
+### Search (For Informational Styles or When Facts Are Needed)
+- Check the **search sources** section of the target audience file.
+- Use **WebSearch** to find the latest information from search sources relevant to the topic.
+- Follow search source priority order (starting from priority 1).
+- Collect verified facts/numbers/examples and incorporate them into the content.
 
-### 생성
-- 로드된 모든 규칙, 플랫폼 특성, 스타일 템플릿을 준수하여 콘텐츠를 생성한다.
-- 스타일 파일의 구조, 규칙, 톤, 좋은 예시를 참고한다.
-- 플랫폼 파일의 글자 수 제한, What Works/Doesn't Work를 준수한다.
-- **타겟 독자 파일의 톤/용어 수준을 반영한다.** (예: 개발자 → 기술 용어 그대로, 일반인 → 전문 용어 금지)
+### Generation
+- Generate content adhering to all loaded rules, platform characteristics, and style templates.
+- Reference the style file's structure, rules, tone, and good examples.
+- Comply with the platform file's character limits, What Works/Doesn't Work guidelines.
+- **Reflect the target audience file's tone/terminology level.** (e.g., developer → use technical terms as-is; general → no jargon)
 
-### 자체 평가
-- `rules/scoring.md`의 채점 기준에 따라 생성된 콘텐츠를 엄격하게 채점한다.
-- 스타일 파일에 채점 가중치가 있으면 해당 우선순위를 반영한다.
-- 점수표를 `rules/scoring.md`의 출력 형식대로 작성한다.
+### Self-Evaluation
+- Score the generated content strictly according to the criteria in `rules/scoring.md`.
+- If the style file has scoring weight overrides, apply those priorities.
+- Write the score table in the output format specified by `rules/scoring.md`.
 
-### 통과/재생성 판정
-- **모든 항목 7점 이상** → PASS
-- **하나라도 7점 미만** → FAIL → 자동 재생성
-- `human-feel` 7점 미만 → 무조건 재생성 (다른 점수 무관)
-- `humor` + `twist` 둘 다 6점 이하 → 재생성
-- **재생성 최대 2회**. 이전 버전의 부족한 항목을 명시적으로 개선한다.
-- 2회 재생성 후에도 통과 못하면 → 가장 높은 점수의 버전을 채택하되, FAIL 사실을 표시한다.
+### Pass/Regenerate Decision
+- **All items 7+ points** → PASS
+- **Any item below 7** → FAIL → automatic regeneration
+- `human-feel` below 7 → unconditional regeneration (regardless of other scores)
+- `humor` + `twist` both 6 or below → regeneration
+- **Maximum 2 regenerations**. Explicitly improve the weak areas from the previous version.
+- If still failing after 2 regenerations → adopt the version with the highest score, but mark the FAIL status.
 
-### 결과 표시
-생성된 콘텐츠 + 점수표를 사용자에게 보여준다:
+### Result Display
+Show the generated content + score table to the user:
 
 ```
 ---
-[생성된 콘텐츠]
+[Generated Content]
 ---
 
 | 항목 | 점수 | 근거 |
@@ -242,9 +248,9 @@ AskUserQuestion:
 
 ---
 
-## Step 7. 발행 선택
+## Step 7. Publish Decision
 
-### 질문
+### Question
 ```
 AskUserQuestion:
   "어떻게 할까요?
@@ -254,26 +260,26 @@ AskUserQuestion:
   [3] 수정 요청"
 ```
 
-### [1] 발행 선택 시
-1. `flows/save.md`를 읽고 포스트를 `~/.config/feed/posts/`에 저장한다. (`published: false`로 우선 저장)
-2. `flows/publish.md`를 읽고 발행 로직을 실행한다.
-   - `accounts.json`에서 해당 플랫폼의 `enabled` 확인
-   - `enabled = true` → API 발행 여부 인터뷰 → 발행 또는 클립보드 복사
-   - `enabled = false` → 클립보드에 자동 복사
-3. 발행 결과에 따라 포스트 파일의 frontmatter를 업데이트한다.
+### [1] Publish
+1. Read `flows/save.md` and save the post to `~/.config/feed/posts/`. (Save initially with `published: false`)
+2. Read `flows/publish.md` and execute the publish logic.
+   - Check `enabled` for the platform in `accounts.json`
+   - `enabled = true` → interview for API publish → publish or copy to clipboard
+   - `enabled = false` → automatically copy to clipboard
+3. Update the post file's frontmatter based on the publish result.
 
-### [2] 나중에 선택 시
-1. `flows/save.md`를 읽고 포스트를 `~/.config/feed/posts/`에 저장한다. (`published: false`)
-2. 저장 완료 메시지와 파일 경로를 표시한다.
-3. `/feed-publish`로 나중에 발행할 수 있음을 안내한다.
+### [2] Save for Later
+1. Read `flows/save.md` and save the post to `~/.config/feed/posts/`. (`published: false`)
+2. Display the save confirmation message and file path.
+3. Inform the user that they can publish later with `/feed-publish`.
 
 ```
 저장 완료: ~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/{HHMMSS}-{style}-{NNN}.md
 나중에 /feed-publish로 발행할 수 있습니다.
 ```
 
-### [3] 수정 요청 선택 시
-1. 수정 지시를 입력받는다.
+### [3] Request Edits
+1. Receive editing instructions.
 
 ```
 AskUserQuestion:
@@ -281,5 +287,5 @@ AskUserQuestion:
   (예: 반전을 더 세게, 톤을 더 가볍게, 주제를 바꿔서)"
 ```
 
-2. 수정 지시를 반영하여 Step 5(콘텐츠 생성)로 돌아간다.
-3. 재생성된 콘텐츠에 대해 다시 자체 평가 + 결과 표시 후 Step 6을 반복한다.
+2. Apply the editing instructions and return to Step 6 (content generation).
+3. Repeat self-evaluation + result display for the regenerated content, then repeat Step 7.
