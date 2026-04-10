@@ -78,22 +78,70 @@ This step runs automatically after platform selection. **No step number is shown
 AskUserQuestion:
   "{platform}에서 사용할 프로필을 설정합니다. (최초 1회만)
 
-  SNS 프로필을 그대로 붙여넣거나, 역할과 자기소개를 입력해주세요.
+  [1] 직접 입력 (SNS 프로필 복붙 가능)
+  [2] 질문으로 만들기"
+```
 
-  (예1 - 간단히) 개발자. AI 도구와 자동화에 관심 많음.
-  (예2 - 프로필 복붙)
+### Option 1: Direct Input
+
+```
+AskUserQuestion:
+  "프로필을 입력해주세요. SNS 프로필을 그대로 붙여넣어도 됩니다.
+
+  (예)
   개발 10년차, AI로 일하는 방식을 바꾸는 중
   Claude Code 헤비유저
   AI × 개발 실무 이야기를 검증하고 나눕니다."
 ```
 
-### Profile Parsing
-
 From the user's input, extract:
 - **persona**: The core role/identity (e.g., "developer" from "개발 10년차")
 - **description**: The full input text as-is (preserve everything the user typed)
 
-If the user pastes their full SNS profile, use ALL of it as the description. The richer the profile, the more specific and authentic the generated content voice will be.
+### Option 2: Guided Questions
+
+Step-by-step interview to build a profile:
+
+```
+AskUserQuestion:
+  "역할/직업이 무엇인가요?
+  (예: 개발자, 디자이너, 마케터, 학생, 프리랜서 등)"
+```
+
+```
+AskUserQuestion:
+  "경력은 어느 정도인가요?
+  (예: 3년차, 10년차, 신입, 취준생 등)"
+```
+
+```
+AskUserQuestion:
+  "주로 어떤 주제로 포스팅하고 싶으신가요?
+  (예: AI 도구, 프론트엔드, 자기계발, 재테크 등)"
+```
+
+```
+AskUserQuestion:
+  "본인을 한 줄로 소개한다면?
+  (예: AI로 일하는 방식을 바꾸는 개발자)"
+```
+
+Combine the answers into a profile:
+- **persona**: From role answer (e.g., "developer")
+- **description**: Assembled from all answers (e.g., "개발 10년차. AI 도구 주제. AI로 일하는 방식을 바꾸는 개발자.")
+
+Show the assembled profile and ask for confirmation:
+
+```
+AskUserQuestion:
+  "이렇게 프로필이 만들어졌어요:
+
+  [역할] 개발자
+  [소개] 개발 10년차. AI 도구 주제. AI로 일하는 방식을 바꾸는 개발자.
+
+  [1] 확인
+  [2] 다시 입력"
+```
 
 ### Save to preferences.json
 
