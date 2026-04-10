@@ -139,6 +139,7 @@ Read the frontmatter of each collected `.md` file using Read and extract the fol
 | `platform` | Per-platform aggregation |
 | `style` | Per-style aggregation |
 | `topic` | Top 3 display, topics.json update |
+| `audience` | Per-audience aggregation (track which audiences are most active) |
 | `published` | Publish status aggregation |
 | `created_at` | Date range verification (double-check against directory structure) |
 | `score.*` | Average score calculation, Top 3 ranking |
