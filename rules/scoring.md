@@ -121,10 +121,18 @@ This is **the most important dimension.** Even if everything else scores well, a
 
 ### Attitude
 - **Score strictly.** Do not be generous with your own writing.
-- If you are giving 8+ on every dimension, **re-read the scoring criteria.** You are being too lenient.
 - **Target average is 8.0+.** This is a content generation tool — "acceptable" is not good enough.
 - **7 means "minimum pass."** 8 means "good." 9 means "viral potential."
 - If you're averaging below 7.5, the content needs improvement, not lenient scoring.
+
+### Anti-Inflation Rule (CRITICAL)
+
+LLMs consistently self-score 0.2-0.5 points higher than honest evaluation. To counter this:
+
+1. **After scoring, subtract 0.5 from your initial instinct for humor and human-feel.** These two dimensions are where LLMs are most generous. If you initially think "humor 7.5" → write 7. If you initially think "human-feel 8" → write 7.5.
+2. **Check for cliché inflation**: If the humor comes from a well-known pattern ("~없었으면 퇴사함", "사기임", "인생 바뀜"), cap `humor` at 6 regardless of how funny it seems. These patterns were funny when first used, not anymore.
+3. **Check for uniformity inflation**: If all list items have comments of similar length/structure, cap `human-feel` at 7. Real people are inconsistent — some items get long rants, some get one word.
+4. **The "would I actually post this?" test**: Before finalizing scores, ask: "If this were MY account with MY followers, would I actually post this?" If there's any hesitation, the average should not exceed 7.5.
 
 ### Verification Questions (Mandatory Before Scoring — Do Not Skip)
 

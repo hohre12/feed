@@ -118,6 +118,19 @@ Intentionally breaking grammar:
 - **Two or more posts starting with the same word** is forbidden
   - When generating multiple posts, opening words must not overlap
 
+- **Uniform comment length in lists** is forbidden (curated-list style)
+  - If every list item has a comment of similar length (e.g., all 10-15 characters), it looks AI-generated
+  - Real people write some comments long ("GPT는 매번 톤 달라지는데 이건 브랜드 톤 한번 세팅하면 기억해줌"), some short ("그냥 좋음"), some are just a reaction ("사기임")
+  - X: all items have 1-sentence comments of similar length
+  - O: item 1 has 2 sentences, item 3 has 1 word, item 5 has a comparison, item 7 has nothing
+
+- **Overused self-deprecation patterns** are forbidden
+  - "~없었으면 퇴사함" — was funny in 2024, now a cliché
+  - "~없이 어떻게 살았지" — same pattern, overdone
+  - "인생 바뀜" — too generic
+  - If a self-deprecation phrase could be the top comment on ANY product review, it's too cliché
+  - Instead, make self-deprecation SPECIFIC: "이거 쓰고 나서 팀장이 나보고 일 빨라졌다는데 비밀임" — this is specific and fresh
+
 ---
 
 ## Tone
