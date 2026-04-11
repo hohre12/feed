@@ -145,6 +145,72 @@ Last resort        -> CSS gradient background with tool name in large text
 | Accepted formats | JPG, PNG, WebP |
 | Watermarks | Exclude watermarked images |
 
+### Image Validation (MANDATORY — Do Not Skip)
+
+Every sourced image MUST be validated before use. An invalid image in the final output is worse than no image at all.
+
+#### Step 1: File Integrity Check
+
+After downloading/sourcing each image, verify it is a valid image file:
+
+```
+Bash: file {image_path}
+```
+
+- Must contain "image data" (PNG, JPEG, WebP) — NOT "HTML document", "XML", "ASCII text"
+- If the file is HTML/text → the download was blocked or redirected. **Re-source immediately** with a different URL or search query.
+
+#### Step 2: Visual Content Check
+
+After confirming the file is a valid image, **read the image using the Read tool** to visually inspect it:
+
+```
+Read: {image_path}
+```
+
+Check for these failure conditions:
+
+| Condition | Action |
+|-----------|--------|
+| Image is mostly white/blank/empty | **Re-source** — this is likely a logo on transparent background or a failed capture |
+| Image shows a login page, CAPTCHA, or security check | **Re-source** — the website blocked the request |
+| Image shows a cookie consent popup covering the content | **Re-source** — the actual content is hidden |
+| Image is a generic placeholder or icon (< 100x100 effective content) | **Re-source** — too small to be meaningful |
+| Image content is unrelated to the tool/topic | **Re-source** — wrong image |
+
+#### Step 3: Resolution Check
+
+```
+Bash: file {image_path} | grep -oE '[0-9]+ x [0-9]+'
+```
+
+- Width must be ≥ 800px for background images
+- Width must be ≥ 400px for inline/thumbnail images
+- If below threshold → re-source with "{tool name} screenshot HD" or "{tool name} hero image"
+
+#### Step 4: Re-source Protocol
+
+When an image fails validation:
+
+```
+1. Try: WebSearch "{tool name} screenshot 2026"
+2. Try: WebSearch "{tool name} UI interface preview"
+3. Try: WebFetch on the tool's official website → extract og:image URL
+4. Try: WebSearch "{tool name} review" → find blog posts with embedded screenshots
+5. Last resort: Use CSS gradient background with tool name + emoji as visual placeholder
+```
+
+**Maximum 3 re-source attempts per image.** After 3 failures, use the last-resort CSS fallback and log a warning.
+
+#### Validation Summary
+
+All image validation must complete BEFORE the render pipeline starts. Do not render slides with unvalidated images. The validation checklist:
+
+- [ ] File is a valid image format (not HTML/XML/text)
+- [ ] Visual content is meaningful (not blank/login/CAPTCHA)
+- [ ] Resolution meets minimum threshold
+- [ ] Content is relevant to the tool/topic
+
 ---
 
 ## Section 3: Template Variable Injection
