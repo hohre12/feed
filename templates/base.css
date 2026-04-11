@@ -178,44 +178,13 @@ body.light .brand-header {
   opacity: 0.9;
 }
 
-/* ─── Carousel Dots ─────────────────────────────────────────────────────────── */
-.carousel-dots {
-  position: absolute;
-  bottom: 22px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.carousel-dot {
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.25);
-  transition: all 0.2s ease;
-}
-
-body.light .carousel-dot {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* 비활성 닷 */
-.carousel-dot {
-  width: 6px;
-}
-
-/* 활성 닷 — pill 형태, 액센트 컬러 */
-.carousel-dot.active {
-  width: 22px;
-  background: var(--accent);
-}
+/* ─── Carousel Dots: REMOVED ──────────────────────────────────────────────── */
+/* Instagram automatically adds carousel dots. Do not include in templates.   */
 
 /* ─── Source Credit ─────────────────────────────────────────────────────────── */
 .source-credit {
   position: absolute;
-  bottom: 44px;
+  bottom: 20px;
   right: 20px;
   z-index: 20;
   font-size: 17px;

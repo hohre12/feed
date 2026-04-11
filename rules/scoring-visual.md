@@ -32,7 +32,7 @@ Instagram carousel posts receive two separate evaluations:
 | Slide Flow | `slide-flow` | Do slides progress logically? Is the Cover → Body → CTA arc natural? Can each individual slide be understood in isolation? |
 | Swipe Hook | `swipe-hook` | Is there a reason to swipe at the end of each slide? Are visual/text hooks present — numbering (e.g., 3/7), incomplete sentences, "continued on next slide" cues? |
 | Save Trigger | `save-trigger` | Is this carousel worth bookmarking? Does it contain practical information or reference value the reader will want to return to later? |
-| Visual Consistency | `visual-consistency` | Are colors, fonts, spacing, and layout consistent across all slides? Is the brand header/footer identical on every slide? |
+| Visual Consistency | `visual-consistency` | Are colors, fonts, spacing, and layout consistent across all slides? Is the brand header/footer identical on every slide? Do content slides include sourced images (screenshots, logos, product visuals)? Text-only slides without images automatically cap this score at 5. |
 
 ---
 
@@ -82,10 +82,11 @@ Instagram carousel posts receive two separate evaluations:
 
 | Score | Criteria |
 |-------|----------|
-| 1-3 | Each slide feels designed separately. Colors, fonts, or layouts shift between slides. The reader questions whether this is the same carousel. |
-| 4-6 | Mostly consistent, but at least one slide breaks the system — a different accent color, a shifted font weight, an inconsistent margin. Noticeable on inspection. |
-| 7-8 | All slides follow the same design system. Brand header and footer are identical. The carousel feels like a single cohesive piece. |
-| 9-10 | Professional design level. Every element — spacing, hierarchy, color usage, iconography — is unified. Removing the platform branding, it still reads as a branded asset. |
+| 1-3 | Each slide feels designed separately. Colors, fonts, or layouts shift between slides. No sourced images at all — text-only slides on a visual platform. |
+| 4-5 | Some slides have images but others are text-only. Inconsistent use of visuals. **Any content slide without a sourced image (screenshot, logo, or product visual) caps this score at 5.** |
+| 6 | All content slides have images but visual treatment is inconsistent (different sizes, placements, or overlay styles). |
+| 7-8 | All slides follow the same design system with sourced images consistently placed. Brand header and footer are identical. The carousel feels like a single cohesive piece. |
+| 9-10 | Professional design level. Every element — spacing, hierarchy, color usage, image treatment, iconography — is unified. Sourced images enhance rather than distract. |
 
 ---
 

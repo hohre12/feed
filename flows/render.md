@@ -95,31 +95,47 @@ Exceeding these limits requires splitting the slide.
 
 ---
 
-## Section 2: Image Sourcing
+## Section 2: Image Sourcing (MANDATORY for Instagram)
 
-### When to Source Images
+Image sourcing is **mandatory** for Instagram carousel posts. Every carousel must include sourced images — screenshots, logos, or product visuals. Text-only slides without any visual element are not acceptable for Instagram.
 
-- Cover slide background image
-- Topic-related screenshots, person photos, or product images
-- Content slides that need a visual element to support the text
+### What to Source (Required)
+
+- **Cover slide**: Background image related to the topic (screenshot, hero image, or product visual)
+- **Content slides**: Tool/product screenshots, logos, or UI captures for each recommended item
+- **CTA slide**: No image needed (uses decorative CSS background)
 
 ### Sourcing Steps
 
 ```
-1. WebSearch: "{topic} {related keyword}" (e.g., "알람 아침 루틴", "vibe coding IDE")
-2. Collect image URLs from search results
-3. Store each image URL with its source domain
-4. Append attribution to slide: "*출처:{domain}" at bottom-right
+1. WebSearch: "{tool/product name} screenshot" or "{tool name} UI" for each item
+2. WebSearch: "{topic} {related keyword}" for cover background
+3. Collect image URLs from search results
+4. Store each image URL with its source domain
+5. Append attribution to slide: "*출처:{domain}" at bottom-right
+6. For curated-list style: source at least 1 image per slide (tool screenshot or logo)
 ```
+
+### Image Placement
+
+| Slide Type | Image Placement | Required |
+|------------|----------------|----------|
+| Cover | Full background with gradient overlay | **Yes** |
+| Content (list-item) | Top portion of slide or beside item | **Yes** — at least 1 per slide |
+| Content (text/insight) | Background or inline | **Yes** |
+| CTA | None (CSS decorative background) | No |
 
 ### Fallback on Sourcing Failure
 
-If no suitable image is found or the URL fails to load:
+If a specific image URL fails to load at render time:
 
 ```
-Primary fallback   -> CSS gradient background (no image)
-Secondary fallback -> Emoji + icon combination for visual accent
+Primary fallback   -> Try alternative search query for the same item
+Secondary fallback -> Use tool/brand logo instead of screenshot
+Last resort        -> CSS gradient background with tool name in large text
 ```
+
+**Note**: The fallback is for individual image failures only. You must still attempt to source images for every content slide. Skipping image sourcing entirely is not allowed.
 
 ### Image Quality Requirements
 
@@ -158,7 +174,6 @@ All template variables use double curly braces: `{{variable_name}}`
 | `{{cover_label}}` | Top label badge (e.g., `AI NEWS`) |
 | `{{cover_image_url}}` | Background image URL |
 | `{{author_line}}` | Author attribution line (empty string if not needed) |
-| `{{carousel_dots}}` | HTML block of `.carousel-dot` divs; active class on current slide |
 
 ### Content Slide Variables
 
@@ -177,7 +192,6 @@ All template variables use double curly braces: `{{variable_name}}`
 | `{{cta_subtitle}}` | CTA supporting line |
 | `{{cta_button}}` | Button label text |
 | `{{cta_emoji}}` | Emoji icon above CTA text (empty string hides the element) |
-| `{{carousel_dots}}` | HTML block of `.carousel-dot` divs; active class on current slide |
 
 ### Injection Steps
 

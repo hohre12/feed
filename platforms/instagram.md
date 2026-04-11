@@ -32,9 +32,11 @@ Platform profile for Instagram. Loaded when the user selects Instagram as the ta
 - **Last-slide CTA** — "Follow for more", "Save this", "Drop your answer in the comments"
 - **First slide as thumbnail** — the cover must work as a standalone image in the profile grid
 - **Bold typography + dark backgrounds** — readability + premium aesthetic
+- **Real screenshots / logos / product images on every slide** — visual proof builds credibility. Text-only slides feel empty on Instagram. Sourced images with attribution are mandatory.
 
 ## What Doesn't Work
 
+- **Text-only slides without images** — Instagram is a visual platform. Slides with only text and a dark background look like a presentation, not a social media post. Always include screenshots, logos, or product images.
 - **Text-dense slides** — ~30 characters per line, 5–7 lines per slide is the ceiling. More = drop-off.
 - **Hashtag spam** — using all 30 slots signals bot behavior and triggers reach penalty
 - **Inconsistent design across slides** — visual language must be uniform throughout the carousel
