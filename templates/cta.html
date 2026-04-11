@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=540, height=675">
+  <title>CTA Slide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    /*
+     * [렌더 시 교체] {{accent_color}} → 실제 액센트 컬러 hex
+     * 아래 #58a6ff 는 브라우저 직접 열람용 fallback 값입니다.
+     */
+    :root {
+      --accent: #58a6ff;
+    }
+
+    /* ── 배경 장식 ────────────────────────────────────────────────── */
+
+    /* 중앙 글로우 */
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(88, 166, 255, 0.14) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    /* 좌측 하단 장식 원 */
+    .cta-deco-circle {
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 1px solid rgba(88, 166, 255, 0.1);
+      pointer-events: none;
+    }
+
+    /* 우측 상단 장식 원 */
+    .cta-deco-circle-sm {
+      position: absolute;
+      top: 60px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 1px solid rgba(88, 166, 255, 0.08);
+      pointer-events: none;
+    }
+
+    /* ── 중앙 콘텐츠 래퍼 ────────────────────────────────────────── */
+    .cta-body {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 36px 80px;
+      z-index: 10;
+      gap: 0;
+    }
+
+    /* ── 이모지 ───────────────────────────────────────────────────── */
+    .cta-emoji {
+      font-size: 64px;
+      line-height: 1;
+      margin-bottom: 24px;
+      /* 이모지 없으면 .cta-emoji:empty { display: none } 으로 처리 */
+    }
+
+    .cta-emoji:empty {
+      display: none;
+    }
+
+    /* ── 메인 문구 ────────────────────────────────────────────────── */
+    .cta-title {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -2px;
+      color: var(--text);
+      word-break: keep-all;
+      margin-bottom: 16px;
+    }
+
+    /* 긴 문구일 때 축소 */
+    .cta-title.long {
+      font-size: 40px;
+      letter-spacing: -1.5px;
+    }
+
+    /* ── 부가 설명 ────────────────────────────────────────────────── */
+    .cta-subtitle {
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.6;
+      letter-spacing: -0.2px;
+      color: var(--text-muted);
+      word-break: keep-all;
+      margin-bottom: 36px;
+      max-width: 400px;
+    }
+
+    .cta-subtitle:empty {
+      display: none;
+    }
+
+    /* ── 버튼 그룹 ────────────────────────────────────────────────── */
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    /* cta-button 스타일은 components.css 참조 */
+    .cta-button {
+      width: 100%;
+      max-width: 340px;
+      font-size: 27px;
+    }
+
+    /* 아웃라인 버튼 (보조) */
+    .cta-button--outline {
+      width: 100%;
+      max-width: 340px;
+      font-size: 24px;
+    }
+
+    /* ── 브랜드 서명 (하단 작은 텍스트) ──────────────────────────── */
+    .cta-signature {
+      position: absolute;
+      bottom: 64px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      z-index: 20;
+    }
+
+    .cta-signature-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--text-subtle);
+    }
+
+    .cta-signature-text {
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--text-subtle);
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    /* ── 슬라이드 카운터 ──────────────────────────────────────────── */
+    .cta-counter {
+      position: absolute;
+      top: 72px;
+      right: 28px;
+      z-index: 20;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-subtle);
+      line-height: 1;
+    }
+
+    .cta-counter .current {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body class="{{theme}}">
+  <div class="card">
+
+    <!-- 배경 장식 -->
+    <div class="cta-glow"></div>
+    <div class="cta-deco-circle"></div>
+    <div class="cta-deco-circle-sm"></div>
+
+    <!-- 브랜드 헤더 -->
+    <header class="brand-header">
+      <span class="brand-name">{{brand_name}}</span>
+      <span class="brand-tagline">{{brand_tagline}}</span>
+    </header>
+
+    <!-- 슬라이드 카운터 -->
+    <div class="cta-counter">
+      <span class="current">{{slide_number}}</span>/{{total_slides}}
+    </div>
+
+    <!-- 메인 CTA 콘텐츠 -->
+    <div class="cta-body">
+
+      <!-- 이모지 -->
+      <!--
+        {{cta_emoji}} 가 비어있으면 display: none 처리됩니다.
+        예: 💾  /  👇  /  🔔
+      -->
+      <div class="cta-emoji">{{cta_emoji}}</div>
+
+      <!-- CTA 메인 문구 -->
+      <!--
+        짧고 임팩트 있게. 20자 이내 권장.
+        줄바꿈이 필요하면 <br> 사용.
+      -->
+      <h2 class="cta-title">{{cta_title}}</h2>
+
+      <!-- CTA 부가 설명 -->
+      <p class="cta-subtitle">{{cta_subtitle}}</p>
+
+      <!-- 버튼 그룹 -->
+      <div class="cta-buttons">
+        <!-- 메인 버튼 (components.css .cta-button) -->
+        <div class="cta-button">{{cta_button}}</div>
+
+        <!--
+          보조 버튼이 필요하면 아래 주석 해제:
+          <div class="cta-button cta-button--outline">팔로우하기</div>
+        -->
+      </div>
+
+    </div>
+
+    <!-- 브랜드 서명 -->
+    <div class="cta-signature">
+      <span class="cta-signature-text">{{brand_name}}</span>
+      <div class="cta-signature-dot"></div>
+      <span class="cta-signature-text">{{brand_tagline}}</span>
+    </div>
+
+    <!-- 출처 -->
+    <span class="source-credit">{{source_credit}}</span>
+
+    <!-- 캐러셀 닷 -->
+    <!--
+      마지막 슬라이드이므로 마지막 닷이 active 입니다.
+    -->
+    <div class="carousel-dots">
+      {{carousel_dots}}
+    </div>
+
+  </div>
+</body>
+</html>

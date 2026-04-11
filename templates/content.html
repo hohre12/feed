@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=540, height=675">
+  <title>Content Slide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    /*
+     * [렌더 시 교체] {{accent_color}} → 실제 액센트 컬러 hex
+     * 아래 #58a6ff 는 브라우저 직접 열람용 fallback 값입니다.
+     */
+    :root {
+      --accent: #58a6ff;
+    }
+
+    /* ── 공통 콘텐츠 레이아웃 ────────────────────────────────────── */
+    .content-wrapper {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 72px 32px 68px;  /* top: 브랜드헤더 높이 확보, bottom: 닷 확보 */
+    }
+
+    /* ── 슬라이드 카운터 + 제목 헤더 ─────────────────────────────── */
+    .content-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .content-counter {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-subtle);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .content-counter .current {
+      color: var(--accent);
+    }
+
+    .content-title {
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -1.2px;
+      color: var(--text);
+      word-break: keep-all;
+      flex: 1;
+    }
+
+    /* 제목이 길면 폰트 축소 */
+    .content-title.long {
+      font-size: 32px;
+      letter-spacing: -0.8px;
+    }
+
+    /* ── 구분선 ───────────────────────────────────────────────────── */
+    .content-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ── 본문 공통 ────────────────────────────────────────────────── */
+    .content-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    /* ─────────────────────────────────────────────────────────────── */
+    /* variant: list-item                                              */
+    /* curated-list 스타일 — 아이템 2~3개, 번호+카테고리+이름+코멘트 */
+    /* ─────────────────────────────────────────────────────────────── */
+    .variant-list-item .content-body {
+      gap: 18px;
+    }
+
+    /* list-item 컴포넌트는 components.css 참조 */
+
+    /* list-item 내 구분선 */
+    .variant-list-item .item-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─────────────────────────────────────────────────────────────── */
+    /* variant: text                                                   */
+    /* insight / debate 스타일 — 센터 정렬 텍스트 + 선택적 이미지    */
+    /* ─────────────────────────────────────────────────────────────── */
+    .variant-text .text-slide-body {
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+      color: var(--text);
+      word-break: keep-all;
+      /* .highlight, <br> 사용 가능 */
+    }
+
+    /* 선택적 이미지 */
+    .variant-text .content-image {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 16px;
+      flex-shrink: 0;
+      max-height: 200px;
+    }
+
+    .variant-text .content-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 이미지 없을 때 숨김 */
+    .variant-text .content-image:empty,
+    .variant-text .content-image.hidden {
+      display: none;
+    }
+
+    /* ─────────────────────────────────────────────────────────────── */
+    /* variant: number                                                 */
+    /* self-deprecation 스타일 — 큰 숫자 중앙 + 설명 텍스트          */
+    /* ─────────────────────────────────────────────────────────────── */
+    .variant-number .content-wrapper {
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .variant-number .number-display {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 8px;
+    }
+
+    .variant-number .number-big {
+      font-size: 148px;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -8px;
+      color: var(--accent);
+      /* 약간 좌측 정렬 — AI 느낌 상쇄용 비대칭 */
+      margin-left: -6px;
+    }
+
+    .variant-number .number-unit {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: var(--accent);
+      opacity: 0.5;
+      margin-left: 4px;
+      align-self: flex-end;
+      margin-bottom: 18px;
+    }
+
+    .variant-number .number-desc {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.8px;
+      color: var(--text);
+      word-break: keep-all;
+      max-width: 400px;
+    }
+
+    .variant-number .number-sub {
+      margin-top: 12px;
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--text-muted);
+      word-break: keep-all;
+    }
+
+    /* ─────────────────────────────────────────────────────────────── */
+    /* variant: quote                                                  */
+    /* quote-parody 스타일 — 큰 인용 부호 + 텍스트 + 출처            */
+    /* ─────────────────────────────────────────────────────────────── */
+    .variant-quote .content-wrapper {
+      justify-content: center;
+    }
+
+    /* quote-block 컴포넌트는 components.css 참조 */
+
+    .variant-quote .quote-block__text {
+      font-size: 36px;
+      letter-spacing: -1px;
+    }
+
+    /* 인용 텍스트가 짧을 때 더 크게 */
+    .variant-quote .quote-block__text.short {
+      font-size: 48px;
+      letter-spacing: -2px;
+    }
+
+    /* 배경 장식 — 우측 상단 반투명 큰따옴표 */
+    .variant-quote .quote-deco {
+      position: absolute;
+      top: 70px;
+      right: 24px;
+      font-size: 200px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.05;
+      font-family: Georgia, serif;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── 배경 이미지 (콘텐츠 슬라이드 — 선택적) ──────────────────── */
+    .slide-bg-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    .slide-bg-image .image-overlay {
+      /* 다크 오버레이로 텍스트 가독성 확보 */
+    }
+
+    /* 배경 이미지 없을 때 — 단색 배경만 */
+    .slide-bg-image.no-image {
+      display: none;
+    }
+  </style>
+</head>
+<!--
+  {{theme}}         → "dark" 또는 "light"
+  {{layout_variant}} → "list-item" | "text" | "number" | "quote"
+  body 에 두 클래스가 모두 적용됩니다.
+-->
+<body class="{{theme}} variant-{{layout_variant}}">
+  <div class="card">
+
+    <!-- 선택적 배경 이미지 (있을 때만 style 속성 포함) -->
+    <!--
+      content_image_url 이 비어 있으면 no-image 클래스 추가 또는 블록 제거.
+    -->
+    <div
+      class="slide-bg-image no-image"
+      style="background-image: url('{{content_image_url}}');"
+    >
+      <div class="image-overlay"></div>
+    </div>
+
+    <!-- 브랜드 헤더 -->
+    <header class="brand-header">
+      <span class="brand-name">{{brand_name}}</span>
+      <span class="brand-tagline">{{brand_tagline}}</span>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="content-wrapper">
+
+      <!-- 슬라이드 헤더: 카운터 + 제목 -->
+      <div class="content-head">
+        <div class="content-counter">
+          <span class="current">{{slide_number}}</span>/{{total_slides}}
+        </div>
+        <h2 class="content-title">{{content_title}}</h2>
+      </div>
+
+      <!-- 액센트 구분선 -->
+      <div class="content-divider"></div>
+
+      <!-- ── variant: list-item ──────────────────────────────────── -->
+      <!--
+        layout_variant == "list-item" 일 때 아래 블록을 사용하세요.
+        아이템은 2~3개 반복합니다.
+        content_body 는 아래 구조의 HTML로 주입됩니다.
+      -->
+      <div class="content-body">
+
+        <!-- list-item variant 예시 구조 -->
+        <!--
+        <div class="list-item">
+          <div class="number-badge">01</div>
+          <div class="list-item__body">
+            <span class="label">카테고리</span>
+            <p class="list-item__name">도구명 / 아이템명</p>
+            <p class="list-item__comment">한 줄 코멘트 설명 텍스트</p>
+          </div>
+        </div>
+        <div class="item-divider"></div>
+        <div class="list-item">
+          <div class="number-badge">02</div>
+          <div class="list-item__body">
+            <span class="label">카테고리</span>
+            <p class="list-item__name">도구명 / 아이템명</p>
+            <p class="list-item__comment">한 줄 코멘트 설명 텍스트</p>
+          </div>
+        </div>
+        -->
+
+        <!-- text variant 예시 구조 -->
+        <!--
+        <p class="text-slide-body">{{content_body}}</p>
+        <div class="content-image hidden">
+          <img src="{{content_image_url}}" alt="">
+        </div>
+        -->
+
+        <!-- number variant 예시 구조 -->
+        <!--
+        <div class="number-display">
+          <span class="number-big">03</span>
+          <span class="number-unit">번째</span>
+        </div>
+        <p class="number-desc">{{content_title}}</p>
+        <p class="number-sub">{{content_body}}</p>
+        -->
+
+        <!-- quote variant 예시 구조 -->
+        <!--
+        <div class="quote-deco">"</div>
+        <div class="quote-block">
+          <p class="quote-block__text">{{content_body}}</p>
+          <p class="quote-block__source">{{content_title}}</p>
+        </div>
+        -->
+
+        <!--
+          실제 렌더 시 layout_variant 에 따라 위 구조 중 하나를 선택하여
+          {{content_body}} 를 주입합니다.
+        -->
+        {{content_body}}
+
+      </div>
+    </div>
+
+    <!-- 출처 -->
+    <span class="source-credit">{{source_credit}}</span>
+
+    <!-- 캐러셀 닷 -->
+    <div class="carousel-dots">
+      {{carousel_dots}}
+    </div>
+
+  </div>
+</body>
+</html>

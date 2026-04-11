@@ -1,0 +1,240 @@
+/*
+ * base.css — Feed Plugin / Instagram Card News
+ *
+ * 카드 크기: 540 × 675 px (viewport)
+ * 캡처: DPR 2x → 출력 1080 × 1350 px
+ *
+ * --accent-color 기본값: #58a6ff
+ * 실제 사용 시 {{accent_color}} 로 교체됩니다.
+ * 예: sed 's/{{accent_color}}/#ff6b35/g' cover.html
+ */
+
+/* ─── Google Fonts ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Theme Variables ───────────────────────────────────────────────────────── */
+
+/*
+ * [주의] --accent-color 는 렌더 시 {{accent_color}} 로 교체됩니다.
+ * 아래 #58a6ff 는 브라우저 직접 열람용 기본값(fallback)입니다.
+ */
+
+body.dark {
+  --bg:           #0d1117;
+  --bg-card:      #0d1117;
+  --bg-elevated:  #161b22;
+  --bg-surface:   #21262d;
+  --text:         #f0f6fc;
+  --text-muted:   #8b949e;
+  --text-subtle:  #484f58;
+  --accent:       #58a6ff;   /* fallback — replaced by {{accent_color}} at render time */
+  --accent-dim:   rgba(88, 166, 255, 0.15);
+  --accent-mid:   rgba(88, 166, 255, 0.35);
+  --border:       rgba(240, 246, 252, 0.08);
+  --border-accent: rgba(88, 166, 255, 0.4);
+  --shadow:       0 8px 32px rgba(0, 0, 0, 0.6);
+  --gradient-bg:  linear-gradient(145deg, #0d1117 0%, #161b22 60%, #0d1117 100%);
+}
+
+body.light {
+  --bg:           #fafafa;
+  --bg-card:      #ffffff;
+  --bg-elevated:  #f3f4f6;
+  --bg-surface:   #e5e7eb;
+  --text:         #1a1a1a;
+  --text-muted:   #6b7280;
+  --text-subtle:  #9ca3af;
+  --accent:       #58a6ff;   /* fallback — replaced by {{accent_color}} at render time */
+  --accent-dim:   rgba(88, 166, 255, 0.12);
+  --accent-mid:   rgba(88, 166, 255, 0.3);
+  --border:       rgba(26, 26, 26, 0.08);
+  --border-accent: rgba(88, 166, 255, 0.5);
+  --shadow:       0 8px 32px rgba(0, 0, 0, 0.1);
+  --gradient-bg:  linear-gradient(145deg, #fafafa 0%, #f3f4f6 60%, #fafafa 100%);
+}
+
+/* ─── Base Body ─────────────────────────────────────────────────────────────── */
+html, body {
+  width: 540px;
+  height: 675px;
+  overflow: hidden;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ─── Card Container ────────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 540px;
+  height: 675px;
+  overflow: hidden;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Typography Scale ──────────────────────────────────────────────────────── */
+
+/* Title — 커버 메인 헤드라인 */
+.text-title {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: var(--text);
+}
+
+/* Heading — 콘텐츠 슬라이드 제목 */
+.text-heading {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+  color: var(--text);
+}
+
+/* Subheading — 소제목 */
+.text-subheading {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+/* Body — 본문 */
+.text-body {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+  color: var(--text);
+}
+
+/* Caption — 캡션 / 주석 */
+.text-caption {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+/* ─── Brand Header ──────────────────────────────────────────────────────────── */
+.brand-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 16px;
+  /* 상단 페이드 아웃 — 이미지 위에서도 가독성 확보 */
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 17, 23, 0.92) 0%,
+    rgba(13, 17, 23, 0.0) 100%
+  );
+}
+
+body.light .brand-header {
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 250, 250, 0.92) 0%,
+    rgba(250, 250, 250, 0.0) 100%
+  );
+}
+
+.brand-name {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* ─── Carousel Dots ─────────────────────────────────────────────────────────── */
+.carousel-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carousel-dot {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+body.light .carousel-dot {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* 비활성 닷 */
+.carousel-dot {
+  width: 6px;
+}
+
+/* 활성 닷 — pill 형태, 액센트 컬러 */
+.carousel-dot.active {
+  width: 22px;
+  background: var(--accent);
+}
+
+/* ─── Source Credit ─────────────────────────────────────────────────────────── */
+.source-credit {
+  position: absolute;
+  bottom: 44px;
+  right: 20px;
+  z-index: 20;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  letter-spacing: 0;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.source-credit:empty {
+  display: none;
+}
+
+/* ─── Author Line ───────────────────────────────────────────────────────────── */
+.author-line {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  line-height: 1;
+}

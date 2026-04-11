@@ -1,0 +1,347 @@
+/*
+ * components.css — Feed Plugin / Instagram Card News
+ *
+ * 재사용 가능한 UI 컴포넌트 모음.
+ * base.css 이후에 로드하세요.
+ */
+
+/* ─── Label / Badge ─────────────────────────────────────────────────────────── */
+/*
+ * 사용: <span class="label">AI NEWS</span>
+ *       <span class="label label--solid">NEW</span>
+ */
+.label {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--border-accent);
+}
+
+.label:empty {
+  display: none;
+}
+
+/* 솔리드 배리언트 — 강조 뱃지 */
+.label--solid {
+  background: var(--accent);
+  color: #000;
+  border-color: transparent;
+}
+
+/* ─── Speech Bubble ─────────────────────────────────────────────────────────── */
+/*
+ * 사용: <div class="speech-bubble">말풍선 텍스트</div>
+ *       하단 중앙에 꼬리가 달립니다.
+ */
+.speech-bubble {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 22px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 32px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 14px solid var(--bg-elevated);
+}
+
+/* ─── Highlight (인라인 텍스트 강조) ─────────────────────────────────────────── */
+/*
+ * 사용: <span class="highlight">핵심 키워드</span>
+ */
+.highlight {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* 밑줄 강조 배리언트 */
+.highlight--underline {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+
+/* 배경 하이라이트 배리언트 */
+.highlight--bg {
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ─── Number Badge ──────────────────────────────────────────────────────────── */
+/*
+ * 사용: <div class="number-badge">01</div>
+ *       리스트 아이템 넘버링, 대형 숫자 강조에 사용.
+ */
+.number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-accent);
+  flex-shrink: 0;
+  letter-spacing: -1px;
+}
+
+/* 대형 숫자 배리언트 — number 레이아웃 중앙 배치용 */
+.number-badge--xl {
+  width: auto;
+  height: auto;
+  border-radius: 24px;
+  font-size: 140px;
+  padding: 12px 32px;
+  letter-spacing: -6px;
+  background: transparent;
+  border: none;
+  color: var(--accent);
+}
+
+/* ─── Tool Icon Card ────────────────────────────────────────────────────────── */
+/*
+ * 사용: <div class="tool-icon"><span class="tool-icon__emoji">🛠</span><span class="tool-icon__label">Claude</span></div>
+ */
+.tool-icon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+.tool-icon__emoji {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.tool-icon__label {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+/* ─── Divider ───────────────────────────────────────────────────────────────── */
+/*
+ * 사용: <hr class="divider">
+ *       <hr class="divider divider--accent">
+ */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  border: none;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.divider--accent {
+  background: var(--accent);
+  height: 2px;
+  width: 40px;
+}
+
+.divider--short {
+  width: 48px;
+  background: var(--border);
+  height: 1px;
+}
+
+/* ─── Quote Block ───────────────────────────────────────────────────────────── */
+/*
+ * 사용:
+ * <div class="quote-block">
+ *   <p class="quote-block__text">인용 텍스트</p>
+ *   <p class="quote-block__source">— 출처</p>
+ * </div>
+ */
+.quote-block {
+  position: relative;
+  padding: 24px 28px 24px 36px;
+}
+
+.quote-block::before {
+  content: '\201C';   /* 여는 큰따옴표 " */
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  font-size: 100px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.5;
+  font-family: Georgia, serif;
+}
+
+.quote-block__text {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  position: relative;
+  z-index: 1;
+}
+
+.quote-block__source {
+  margin-top: 14px;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Image Overlay ─────────────────────────────────────────────────────────── */
+/*
+ * 사용: 이미지 컨테이너 안에 배치.
+ * <div class="cover-image" style="background-image: url(...)">
+ *   <div class="image-overlay"></div>
+ * </div>
+ */
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 17, 23, 0.3) 0%,
+    rgba(13, 17, 23, 0.0) 30%,
+    rgba(13, 17, 23, 0.0) 50%,
+    rgba(13, 17, 23, 0.75) 80%,
+    rgba(13, 17, 23, 0.95) 100%
+  );
+}
+
+body.light .image-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 250, 250, 0.2) 0%,
+    rgba(250, 250, 250, 0.0) 30%,
+    rgba(250, 250, 250, 0.0) 50%,
+    rgba(250, 250, 250, 0.7) 80%,
+    rgba(250, 250, 250, 0.95) 100%
+  );
+}
+
+/* ─── Source Credit ─────────────────────────────────────────────────────────── */
+/*
+ * base.css 의 .source-credit 과 동일 계층.
+ * 컴포넌트 파일에서도 참조할 수 있도록 정의.
+ */
+
+/* ─── Slide Counter ─────────────────────────────────────────────────────────── */
+/*
+ * 사용: <div class="slide-counter">02 / 07</div>
+ */
+.slide-counter {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-subtle);
+  line-height: 1;
+}
+
+.slide-counter .slide-counter__current {
+  color: var(--accent);
+}
+
+/* ─── CTA Button ────────────────────────────────────────────────────────────── */
+/*
+ * 사용: <button class="cta-button">저장해두기</button>
+ *       <button class="cta-button cta-button--outline">팔로우하기</button>
+ */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 40px;
+  border-radius: 100px;   /* pill 형태 */
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.3px;
+  color: #000;
+  background: var(--accent);
+  border: none;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.cta-button--outline {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+/* ─── List Item (콘텐츠 슬라이드 리스트용) ──────────────────────────────────── */
+/*
+ * 사용:
+ * <div class="list-item">
+ *   <div class="list-item__number">01</div>
+ *   <div class="list-item__body">
+ *     <span class="label">카테고리</span>
+ *     <p class="list-item__name">도구명 / 아이템명</p>
+ *     <p class="list-item__comment">코멘트 텍스트</p>
+ *   </div>
+ * </div>
+ */
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.list-item__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.list-item__name {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  color: var(--text);
+}
+
+.list-item__comment {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-muted);
+}

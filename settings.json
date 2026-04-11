@@ -4,7 +4,17 @@
       "Read(*)",
       "Write(~/.config/feed/*)",
       "Glob(*)",
-      "Bash(pbcopy)"
+      "Bash(pbcopy)",
+      "Bash(mkdir -p ~/.config/feed/*)",
+      "Bash(open *)",
+      "Bash(python3 -m http.server *)",
+      "Bash(kill *)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_run_code",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_snapshot"
     ]
   }
 }

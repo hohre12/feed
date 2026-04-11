@@ -42,11 +42,18 @@ Today's date is determined from the current time (run `date +%Y/%m/%d` via Bash)
 
 ### 3-1. File Search
 
-Use Glob to search for all `.md` files under `~/.config/feed/posts/`.
+Use Glob to search for all post files under `~/.config/feed/posts/`.
+
+Posts exist in two formats:
+- **Text posts**: single `.md` files (e.g., `143022-twist-poem-001.md`)
+- **Visual posts**: directories containing `post.md` (e.g., `143022-curated-list-001/post.md`)
+
+Search for both:
 
 - For `today` argument:
   ```
   ~/.config/feed/posts/*/{YYYY}/{MM}/{DD}/*.md
+  ~/.config/feed/posts/*/{YYYY}/{MM}/{DD}/*/post.md
   ```
   (substitute with today's date)
 
@@ -54,6 +61,11 @@ Use Glob to search for all `.md` files under `~/.config/feed/posts/`.
   ```
   ~/.config/feed/posts/**/*.md
   ```
+  This catches both `{name}.md` files and `{name}/post.md` files.
+
+**Post identifier extraction:**
+- Text posts: identifier = filename without `.md` (e.g., `143022-twist-poem-001`)
+- Visual posts: identifier = parent directory name (e.g., `143022-curated-list-001`)
 
 ### 3-2. Filter Unpublished
 
@@ -182,8 +194,19 @@ Ask via AskUserQuestion:
 
 Copy to clipboard.
 
+**For text posts:**
+
 1. Extract **body only** from the post file, excluding frontmatter.
    - The body is everything after the second `---`.
+
+**For visual posts (Instagram):**
+
+1. Extract the **`## Caption`** section from `post.md` (not the full body).
+2. Copy caption text to clipboard via `pbcopy`.
+3. Open the post directory in Finder: `open {post_directory_path}`
+4. Display slide file paths and manual upload instructions.
+
+**For text posts (continued):**
 
 2. Use `pbcopy` via Bash to copy to clipboard:
    ```bash

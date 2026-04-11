@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=540, height=675">
+  <title>Cover Slide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    /*
+     * [렌더 시 교체] {{accent_color}} → 실제 액센트 컬러 hex
+     * 아래 #58a6ff 는 브라우저 직접 열람용 fallback 값입니다.
+     */
+    :root {
+      --accent: #58a6ff;
+    }
+
+    /* ── 배경 이미지 영역 ─────────────────────────────────────────── */
+    .cover-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--bg);   /* 이미지 없을 때 단색 fallback */
+    }
+
+    /* cover_image_url 이 비어있을 때 그라데이션 배경 */
+    .cover-image.no-image {
+      background-image: none !important;
+      background: radial-gradient(
+        ellipse 120% 80% at 70% 40%,
+        rgba(88, 166, 255, 0.18) 0%,
+        transparent 65%
+      ),
+      linear-gradient(
+        160deg,
+        #0d1117 0%,
+        #0f1923 45%,
+        #0d1117 100%
+      );
+    }
+
+    body.light .cover-image.no-image {
+      background: radial-gradient(
+        ellipse 120% 80% at 70% 40%,
+        rgba(88, 166, 255, 0.12) 0%,
+        transparent 65%
+      ),
+      linear-gradient(
+        160deg,
+        #f8fafc 0%,
+        #eef2f8 45%,
+        #f8fafc 100%
+      );
+    }
+
+    /* ── 액센트 컬러 선 — 이미지 없을 때 시각적 장치 ──────────────── */
+    .cover-accent-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--accent) 30%,
+        var(--accent) 70%,
+        transparent 100%
+      );
+      opacity: 0.6;
+    }
+
+    /* ── 우측 상단 장식 원 ──────────────────────────────────────── */
+    .cover-deco-circle {
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(88, 166, 255, 0.12);
+      pointer-events: none;
+    }
+
+    .cover-deco-circle::after {
+      content: '';
+      position: absolute;
+      inset: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(88, 166, 255, 0.08);
+    }
+
+    /* ── 콘텐츠 래퍼 ──────────────────────────────────────────────── */
+    .cover-body {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 32px 66px;    /* 하단 패딩: 닷(22px) + 여유 */
+      z-index: 10;
+    }
+
+    /* ── 라벨 ─────────────────────────────────────────────────────── */
+    .cover-label-wrap {
+      margin-bottom: 18px;
+    }
+
+    /* ── 메인 타이틀 ──────────────────────────────────────────────── */
+    .cover-title {
+      font-size: 68px;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2.5px;
+      color: var(--text);
+      word-break: keep-all;
+      /* 강조 키워드가 .highlight 클래스로 래핑되어 올 수 있음 */
+    }
+
+    /* ── 서브타이틀 ───────────────────────────────────────────────── */
+    .cover-subtitle {
+      margin-top: 14px;
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: -0.2px;
+      color: var(--text-muted);
+      word-break: keep-all;
+      max-width: 430px;  /* 라인 너비 제한으로 가독성 확보 */
+    }
+
+    .cover-subtitle:empty {
+      display: none;
+    }
+
+    /* ── 구분선 + 작성자 ──────────────────────────────────────────── */
+    .cover-meta {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cover-meta-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .cover-author {
+      font-size: 21px;
+      font-weight: 400;
+      color: var(--text-subtle);
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .cover-author:empty {
+      display: none;
+    }
+
+    /* ── 우측 슬라이드 카운터 ─────────────────────────────────────── */
+    .cover-slide-counter {
+      position: absolute;
+      bottom: 66px;
+      left: 32px;
+      z-index: 20;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-subtle);
+      line-height: 1;
+    }
+
+    .cover-slide-counter .current {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<!--
+  {{theme}} → "dark" 또는 "light"
+  렌더 시 body 클래스로 주입됩니다.
+-->
+<body class="{{theme}}">
+  <div class="card">
+
+    <!-- 배경 이미지 / 그라데이션 -->
+    <!--
+      cover_image_url 이 비어 있으면 아래 style 속성을 제거하고
+      no-image 클래스를 추가하세요.
+      예: <div class="cover-image no-image">
+    -->
+    <div
+      class="cover-image"
+      style="background-image: url('{{cover_image_url}}');"
+    >
+      <div class="image-overlay"></div>
+    </div>
+
+    <!-- 좌측 액센트 선 -->
+    <div class="cover-accent-line"></div>
+
+    <!-- 우측 상단 장식 원 -->
+    <div class="cover-deco-circle"></div>
+
+    <!-- 브랜드 헤더 (base.css) -->
+    <header class="brand-header">
+      <span class="brand-name">{{brand_name}}</span>
+      <span class="brand-tagline">{{brand_tagline}}</span>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <div class="cover-body">
+
+      <!-- 라벨 -->
+      <div class="cover-label-wrap">
+        <span class="label">{{cover_label}}</span>
+      </div>
+
+      <!-- 메인 타이틀 -->
+      <!--
+        {{cover_title}} 안에 <span class="highlight">키워드</span> 로
+        강조 텍스트를 포함시킬 수 있습니다.
+      -->
+      <h1 class="cover-title">{{cover_title}}</h1>
+
+      <!-- 서브타이틀 -->
+      <p class="cover-subtitle">{{cover_subtitle}}</p>
+
+      <!-- 구분선 + 작성자 -->
+      <div class="cover-meta">
+        <div class="cover-meta-divider"></div>
+        <span class="cover-author">{{author_line}}</span>
+      </div>
+
+    </div>
+
+    <!-- 슬라이드 카운터 -->
+    <!--
+      slide_number: "01", total_slides: "07"
+      비어 있으면 이 블록 전체를 제거하세요.
+    -->
+    <div class="cover-slide-counter">
+      <span class="current">{{slide_number}}</span> / {{total_slides}}
+    </div>
+
+    <!-- 출처 표기 (base.css) -->
+    <span class="source-credit">{{source_credit}}</span>
+
+    <!-- 캐러셀 닷 (base.css) -->
+    <!--
+      total_slides 수에 맞게 .carousel-dot 을 생성하세요.
+      현재 슬라이드(커버)에 해당하는 닷에 active 클래스를 추가하세요.
+      예: total 7장이면 닷 7개, 첫 번째에 active
+
+      <div class="carousel-dots">
+        <div class="carousel-dot active"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+      </div>
+    -->
+    <div class="carousel-dots">
+      {{carousel_dots}}
+    </div>
+
+  </div>
+</body>
+</html>

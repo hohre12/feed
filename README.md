@@ -5,7 +5,7 @@ Interview-driven workflow that creates platform-optimized posts.
 
 ## Supported Platforms
 
-- **Threads** / **X (Twitter)** / **Reddit** / **Dev.to**
+- **Threads** / **X (Twitter)** / **Reddit** / **Dev.to** / **Instagram** (carousel card news)
 
 ## Supported Styles
 
@@ -55,6 +55,7 @@ Korean aliases are supported:
 
 ```
 /feed 스레드 반전시 알람
+/feed 인스타 족보 AI 디자인 도구
 ```
 
 ### Other Commands
@@ -65,12 +66,23 @@ Korean aliases are supported:
 | `/feed-report` | Generate analytics report |
 | `/feed-recommend` | Get topic recommendations |
 
+## Prerequisites (Instagram only)
+
+Instagram card news generation requires Playwright MCP server:
+
+```bash
+claude mcp add playwright npx @playwright/mcp@latest
+```
+
+Text-only platforms (Threads, X, Reddit, Dev.to) work without Playwright.
+
 ## How It Works
 
 1. **Interview** -- Asks about platform, style, audience, language, and topic
 2. **Generate** -- Creates platform-optimized content following style rules
-3. **Save** -- Stores post to `~/.config/feed/posts/`
-4. **Publish** -- Publishes to the selected platform via API
+3. **Render** -- (Instagram) Converts text to visual card news via HTML/CSS + Playwright
+4. **Save** -- Stores post to `~/.config/feed/posts/`
+5. **Publish** -- Publishes to the selected platform via API or clipboard
 
 ## Data Storage
 
@@ -78,9 +90,12 @@ All user data is stored locally at `~/.config/feed/`:
 
 ```
 ~/.config/feed/
-  config.json       # User preferences
-  posts/            # Generated posts
-  analytics/        # Publishing analytics
+  config/
+    preferences.json  # User preferences + brand settings
+    accounts.json     # Platform API keys
+  posts/              # Generated posts (text + card news images)
+  analytics/          # Engagement & topic analytics
+  tmp/                # Temporary render files
 ```
 
 ## License

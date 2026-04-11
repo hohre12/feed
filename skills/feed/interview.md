@@ -55,7 +55,8 @@ The actual list is dynamically constructed from the Glob results. The above is a
 ### Processing
 - Number or platform name input → select that platform
 - Selecting `전체` → generate content for each platform individually. Repeat Steps 3-7 per platform.
-- **If a platform not in the list is entered** (e.g., "인스타그램", "링크드인") → dynamically adapt using LLM knowledge about that platform. Infer character limits, tone, and algorithm characteristics for content generation. Common rules such as `rules/common.md` and `rules/scoring.md` still apply.
+- **If a platform not in the list is entered** (e.g., "링크드인") → dynamically adapt using LLM knowledge about that platform. Infer character limits, tone, and algorithm characteristics for content generation. Common rules such as `rules/common.md` and `rules/scoring.md` still apply.
+- **Selecting `전체` excludes Instagram.** Instagram generates fundamentally different output (images) and must be selected explicitly.
 
 ### Error Handling
 - If `$ARGUMENTS[0]` is provided but does not match any valid platform ID or Korean alias → show the available platform list and ask the user to select again via AskUserQuestion.
@@ -171,6 +172,106 @@ The author profile determines the **voice and credibility angle** of the content
 - Once saved, the profile is permanent for that platform until the user manually changes it
 - The profile is loaded automatically on every subsequent `/feed` execution for that platform
 - To change: user edits `~/.config/feed/config/preferences.json` directly
+
+---
+
+## Step 2.6. Format Selection (Instagram only)
+
+This step only runs when `platform = instagram`. For all other platforms, skip to Step 3.
+
+### Question
+
+```
+AskUserQuestion:
+  "인스타그램 포맷을 선택해주세요.
+
+  [1] 캐러셀 (카드뉴스) — 여러 장의 슬라이드
+  [2] 단일 이미지 — 한 장짜리 카드"
+```
+
+### Processing
+- `1` or `캐러셀` → `format = "carousel"`
+- `2` or `단일` → `format = "single"`
+
+The selected format affects which styles are shown in Step 3:
+- `carousel` → show styles from the "Carousel (Multi-Slide)" section of `platforms/instagram.md`
+- `single` → show styles from the "Single Image" section of `platforms/instagram.md`
+
+---
+
+## Step 2.7. Brand Profile Check (Instagram only)
+
+This step only runs when `platform = instagram`. Runs automatically — no step number shown to the user.
+
+### Logic
+1. Read `~/.config/feed/config/preferences.json`.
+2. Check if `brand.name` exists and is non-empty.
+3. **If brand exists** → load silently and continue.
+4. **If brand does NOT exist** → run the brand setup interview below.
+
+### First-Time Interview (only runs once)
+
+```
+AskUserQuestion:
+  "인스타그램 브랜드를 설정합니다. (최초 1회만)
+
+  채널명을 입력해주세요. (카드 상단에 표시됩니다)"
+```
+
+```
+AskUserQuestion:
+  "태그라인/슬로건을 입력해주세요. (선택사항, 채널명 옆에 표시)
+  (예: #AI세컨드브레인, 클로드 코드 완벽 마스터)"
+```
+
+```
+AskUserQuestion:
+  "액센트 컬러를 선택해주세요.
+
+  [1] 블루 (#58a6ff)
+  [2] 레드 (#ff6b6b)
+  [3] 그린 (#7ee787)
+  [4] 퍼플 (#d2a8ff)"
+```
+
+### Save to preferences.json
+
+```json
+{
+  "brand": {
+    "name": "짐코딩",
+    "tagline": "#AI세컨드브레인",
+    "accent_color": "#58a6ff",
+    "theme": ""
+  }
+}
+```
+
+The `theme` field is intentionally left empty so that Step 2.8 runs on the first brand setup.
+
+---
+
+## Step 2.8. Visual Theme Selection (Instagram only)
+
+This step only runs when `platform = instagram`.
+
+### Skip Condition
+- If `brand.theme` is already set and non-empty in preferences.json → use that theme and skip.
+
+### Question
+
+```
+AskUserQuestion:
+  "디자인 테마를 선택해주세요.
+
+  [1] 다크 (어두운 배경) — 권장
+  [2] 라이트 (밝은 배경)"
+```
+
+### Processing
+- `1` → `theme = "dark"`
+- `2` → `theme = "light"`
+- Save to `preferences.json → brand.theme`
 
 ---
 
@@ -332,6 +433,7 @@ Load all required files according to the routing table in `reference.md`:
 - Score the generated content strictly according to the criteria in `rules/scoring.md`.
 - If the style file has scoring weight overrides, apply those priorities.
 - Write the score table in the output format specified by `rules/scoring.md`.
+- **For Instagram**: After rendering, evaluate BOTH text quality (`rules/scoring.md`) AND visual quality (`rules/scoring-visual.md`). Both averages must be 7.0+ to pass. Display both scorecards sequentially. See `scoring-visual.md` for the dual scoring protocol.
 
 ### Pass/Regenerate Decision
 - **All items 7+ points** → minimum PASS

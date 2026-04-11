@@ -2,8 +2,8 @@
 name: feed
 description: Generates interview-driven, platform-optimized SNS content and publishes it
 disable-model-invocation: true
-argument-hint: <스레드|트위터|레딧|데브투> <반전시|논쟁|공감|한줄반전|명언패러디|자조|인사이트|족보> <주제>
-allowed-tools: Read Write Glob Grep Bash AskUserQuestion WebSearch WebFetch
+argument-hint: <스레드|트위터|레딧|데브투|인스타> <반전시|논쟁|공감|한줄반전|명언패러디|자조|인사이트|족보> <주제>
+allowed-tools: Read Write Glob Grep Bash AskUserQuestion WebSearch WebFetch mcp__playwright__browser_navigate mcp__playwright__browser_take_screenshot mcp__playwright__browser_run_code mcp__playwright__browser_close mcp__playwright__browser_evaluate mcp__playwright__browser_snapshot
 ---
 
 # /feed
@@ -21,6 +21,8 @@ Parse `$ARGUMENTS` by fixed position:
 | 트위터 | x |
 | 레딧 | reddit |
 | 데브투 | devto |
+| 인스타 | instagram |
+| 인스타그램 | instagram |
 
 Example: `/feed 스레드 반전시 알람` → platform = `threads`
 - `$ARGUMENTS[1]` → style (English ID or Korean alias)

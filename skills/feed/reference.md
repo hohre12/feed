@@ -16,6 +16,10 @@
 | | `styles/{style}.md` | Selected style |
 | | `audiences/{audience}.md` | Selected target audience |
 | | `preferences.json → profiles.{platform}` | Author profile (persona + description) |
+| Visual scoring | `rules/scoring-visual.md` | When platform is `instagram` |
+| Render | `flows/render.md` | When platform is `instagram` (after generation) |
+| Render templates | `templates/cover.html`, `templates/content.html`, `templates/cta.html` | Loaded by `flows/render.md` |
+| Render styles | `templates/base.css`, `templates/components.css` | Loaded by `flows/render.md` |
 | Save | `flows/save.md` | After generation completes |
 | Publish | `flows/publish.md` | When publish is selected |
 
@@ -87,6 +91,7 @@ Create the following directories and default files when `~/.config/feed/` does n
 ~/.config/feed/config/
 ~/.config/feed/posts/
 ~/.config/feed/analytics/
+~/.config/feed/tmp/
 ```
 
 ### Default Files
@@ -97,6 +102,12 @@ Create the following directories and default files when `~/.config/feed/` does n
   "default_language": "ko",
   "default_platforms": {},
   "profiles": {},
+  "brand": {
+    "name": "",
+    "tagline": "",
+    "accent_color": "#58a6ff",
+    "theme": "dark"
+  },
   "interview": {
     "skip_language": false,
     "skip_style": false
@@ -123,7 +134,8 @@ The `profiles` field stores per-platform author profiles. Initially empty. Popul
   "threads": { "access_token": "", "enabled": false },
   "x": { "api_key": "", "api_secret": "", "access_token": "", "access_secret": "", "enabled": false },
   "reddit": { "client_id": "", "client_secret": "", "username": "", "password": "", "enabled": false },
-  "devto": { "api_key": "", "enabled": false }
+  "devto": { "api_key": "", "enabled": false },
+  "instagram": { "ig_user_id": "", "access_token": "", "facebook_page_id": "", "enabled": false }
 }
 ```
 

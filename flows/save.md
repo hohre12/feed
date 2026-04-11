@@ -8,9 +8,24 @@ All files MUST be written in UTF-8 encoding.
 
 ## File Path Convention
 
+### Text Posts (threads, x, reddit, devto)
+
 ```
 ~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/{HHMMSS}-{style}-{NNN}.md
 ```
+
+### Visual Posts (instagram — carousel / single image)
+
+```
+~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/{HHMMSS}-{style}-{NNN}/
+  post.md              <- Frontmatter + caption + slide text
+  slide-1.png          <- Cover slide
+  slide-2.png          <- Content slide
+  ...
+  slide-N.png          <- CTA slide
+```
+
+Visual posts use a **directory** instead of a single file. The directory name follows the same naming convention as text post filenames. The `post.md` inside contains frontmatter and the text content (caption + slide originals).
 
 ### Path Components
 
@@ -72,7 +87,9 @@ engagement:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `platform` | string | Target platform. One of `threads`, `x`, `reddit`, `devto`. |
+| `platform` | string | Target platform. One of `threads`, `x`, `reddit`, `devto`, `instagram`. |
+| `format` | string \| null | Output format. `null` for text posts. `carousel` or `single` for Instagram. |
+| `slides` | integer \| null | Number of slides. `null` for text posts. |
 | `style` | string | Style used. Style filename without `.md`. (e.g., `twist-poem`, `debate`) |
 | `topic` | string | Content topic. The topic keyword entered during the interview. |
 | `language` | string | Writing language. `ko` or `en`. |
@@ -105,6 +122,9 @@ engagement:
 | `engagement.likes` | integer \| null | Like count. `null` before collection. |
 | `engagement.comments` | integer \| null | Comment count. `null` before collection. |
 | `engagement.reposts` | integer \| null | Repost/share count. `null` before collection. |
+| `engagement.saves` | integer \| null | Save/bookmark count (Instagram only). `null` before collection. |
+| `engagement.reach` | integer \| null | Reach count (Instagram only). `null` before collection. |
+| `engagement.impressions` | integer \| null | Impression count (Instagram only). `null` before collection. |
 | `engagement.last_checked` | datetime \| null | Last engagement data collection time. ISO 8601 format. |
 
 ---
@@ -124,6 +144,36 @@ Example:
 mkdir -p ~/.config/feed/posts/threads/2026/04/09/
 ```
 
+### Step 1.5. Visual Post Directory (Instagram only)
+
+For visual posts (`format: carousel` or `format: single`), create a directory instead of a file:
+
+```bash
+mkdir -p ~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/{HHMMSS}-{style}-{NNN}/
+```
+
+The `post.md` file goes inside this directory. Slide PNG files are saved here by `flows/render.md`.
+
+**Visual post body structure (post.md):**
+
+```markdown
+---
+(frontmatter)
+---
+
+## Caption
+(caption text + hashtags — this is what gets copied to clipboard on publish)
+
+## Slide Text
+### Slide 1 (Cover)
+(cover slide text content)
+
+### Slide 2
+(slide 2 text content)
+
+...
+```
+
 ### Step 2. Determine Sequence Number (NNN)
 
 Check the number of existing files with the same style in the same date directory
@@ -137,9 +187,14 @@ Existing files:
 -> Next sequence number: 003
 ```
 
-- Glob pattern: `~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/*-{style}-*.md`
-- If no matching files exist, start from `001`
-- Otherwise, take the highest NNN among matched files + 1
+Search both text post files and visual post directories:
+
+- Text posts: `Glob ~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/*-{style}-*.md`
+- Visual posts: `Glob ~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/*-{style}-*/`
+
+Combine results from both patterns, extract the NNN from each match:
+- If no matching files or directories exist, start from `001`
+- Otherwise, take the highest NNN found across both patterns + 1
 
 #### Filename Collision Handling
 

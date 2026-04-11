@@ -93,6 +93,30 @@ Show a preview of the first 2-3 lines of the copied content.
 - **Note**: The `title` field is required. Confirm the title via interview at publish time.
 - **Rate Limit**: 30 requests per 30 seconds per API key. On HTTP 429, wait at least 30 seconds before retrying. Dev.to also enforces a limit of approximately 30 articles per day.
 
+### Instagram (V1 — Manual Upload Only)
+
+Instagram API publishing requires a Business/Creator account, Facebook Page link, and publicly hosted images. These barriers are too high for V1.
+
+**V1 workflow:**
+
+1. Extract the `## Caption` section from `post.md` and copy to clipboard via `pbcopy`.
+2. Open the post directory in Finder:
+   ```bash
+   open ~/.config/feed/posts/instagram/{YYYY}/{MM}/{DD}/{HHMMSS}-{style}-{NNN}/
+   ```
+3. Display instructions:
+   ```
+   캡션이 클립보드에 복사되었습니다.
+
+   1. 인스타그램 앱에서 새 게시물 → 캐러셀 선택
+   2. 아래 폴더에서 slide-1.png ~ slide-N.png를 순서대로 선택
+   3. 캡션에 붙여넣기 (Cmd+V)
+   4. 공유
+
+   폴더: ~/.config/feed/posts/instagram/...
+   ```
+4. Update frontmatter: `published: true`, `publish_method: clipboard`
+
 ---
 
 ## Failure Handling

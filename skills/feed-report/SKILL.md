@@ -48,6 +48,7 @@ Split `$ARGUMENTS` by whitespace to determine the **period** and **platform filt
 | `x` | x |
 | `reddit` | reddit |
 | `devto` | devto |
+| `instagram` | instagram |
 | *(none)* | All platforms |
 
 ### Combination Examples
@@ -119,16 +120,29 @@ Collect post files within the date range from `~/.config/feed/posts/`.
 Posts are stored in the `~/.config/feed/posts/{platform}/{YYYY}/{MM}/{DD}/` structure.
 Calculate the YYYY/MM/DD combinations that fall within the date range and traverse only those directories.
 
+Posts exist in two formats:
+- **Text posts**: single `.md` files (e.g., `143022-twist-poem-001.md`)
+- **Visual posts**: directories containing `post.md` (e.g., `143022-curated-list-001/post.md`)
+
 ```
 # Check platform list
 Glob ~/.config/feed/posts/*/
 
 # Collect post files within the date range (per platform)
-# Example: for the range 2026-04-07 ~ 2026-04-09
+# Text posts:
 Glob ~/.config/feed/posts/{platform}/2026/04/07/*.md
 Glob ~/.config/feed/posts/{platform}/2026/04/08/*.md
 Glob ~/.config/feed/posts/{platform}/2026/04/09/*.md
+
+# Visual posts:
+Glob ~/.config/feed/posts/{platform}/2026/04/07/*/post.md
+Glob ~/.config/feed/posts/{platform}/2026/04/08/*/post.md
+Glob ~/.config/feed/posts/{platform}/2026/04/09/*/post.md
 ```
+
+**Post identifier extraction:**
+- Text posts: identifier = filename without `.md`
+- Visual posts: identifier = parent directory name
 
 ### Read Frontmatter from Each Post File
 
@@ -184,7 +198,7 @@ For each style:
 ### 5.4 Top 3 Posts
 
 Ranking criteria:
-1. Posts with engagement data → rank by weighted sum: `likes + comments * 2 + reposts * 1.5`
+1. Posts with engagement data → rank by weighted sum: `likes + comments * 2 + reposts * 1.5 + saves * 3` (saves field applies to Instagram only; null saves are treated as 0)
 2. Posts without engagement data → rank by average of score items
 3. Posts with engagement data take priority (engagement data outranks score)
 
